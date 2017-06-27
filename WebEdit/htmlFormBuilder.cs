@@ -173,7 +173,7 @@ namespace htmlEditor
                                 break;
                             }
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                             MessageBox.Show("Type a number", "Please Type a number");
                         }
@@ -282,8 +282,6 @@ namespace htmlEditor
 
         private void finish_Click(object sender, EventArgs e)
         {
-            Dictionary<int, string> htmlText = new Dictionary<int, string>();
-            TextBox txtbxN1;
             int num = -2;
             int num2 = 0;
             int m = 0;
@@ -295,65 +293,89 @@ namespace htmlEditor
             {
                 for (int i = 0; i < formList.Count; i++)
                 {
-                    switch (formList[i])
-                    {
-                        case "Input Text":
-                            num = num + 3;
-                            num2 = num2 + 2;
-                            htmlText[i] = @" " + panel2.Controls[num].Text + @": <input type='text' name='" + panel2.Controls[num].Text + @"' placeholder='"+ panel2.Controls[num2].Text + @"'><br>";
-                            rtb1.Text += htmlText[i] + "\n";
-                            break;
-                        case "Input E-mail":
-                            num = num + 3;
-                            num2 = num2 + 3;
-                            htmlText[i] = @"  Email: <input type='email' name='" + panel2.Controls[num].Text + @"' placeholder='" + panel2.Controls[num2].Text + @"'><br>";
-                            rtb1.Text += htmlText[i];
-                            break;
-                        case "Input Address":
-                            num = num + 3;
-                            num2 = num2 + 2;
-                            htmlText[i] = @"";
-                            rtb1.Text += htmlText[i] + "\n";
-                            break;
-                        case "Number":
-                            num = num + 3;
-                            num2 = num2 + 2;
-                            htmlText[i] = @" " + panel2.Controls[num].Text + @": <input type='number' name='" + panel2.Controls[num].Text + @"' placeholder='" + panel2.Controls[num2].Text + @"'><br>";
-                            rtb1.Text += htmlText[i] + "\n";
-                            break;
-                        case "Range":
-                            num = num + 3;
-                            num2 = num2 + 2;
-                            htmlText[i] = @" " + panel2.Controls[num].Text + @": <input type='number' min='" + startRange[m] + "' max='" + endRange[m] + "' name='" + panel2.Controls[num].Text + @"' placeholder='" + panel2.Controls[num2].Text + @"'><br>";
-                            rtb1.Text += htmlText[i] + "\n";
-                            m++;
-                            break;
-                        case "Radio":
-                            num = num + 3;
-                            num2 = num2 + 2;
-                            htmlText[i] = @"<input type='radio' name='gender' value='" + panel2.Controls[num2].Text + "'> Male<br>";
-                            rtb1.Text += htmlText[i] + "\n";
-                            break;
-                        case "Check":
-                            num = num + 3;
-                            num2 = num2 + 2;
-                            htmlText[i] = @"";
-                            rtb1.Text += htmlText[i] + "\n";
-                            break;
-                        case "Select":
-                            num = num + 3;
-                            num2 = num2 + 2;
-                            htmlText[i] = @"";
-                            rtb1.Text += htmlText[i] + "\n";
-                            break;
-                        case "Textarea":
-                            num = num + 3;
-                            num2 = num2 + 2;
-                            htmlText[i] = @" " + panel2.Controls[num].Text + @": <textarea name='" + panel2.Controls[num].Text + @"' rows='10' cols='30'></textarea><br>";
-                            rtb1.Text += htmlText[i] + "\n";
-                            break;
-                    }
+                    htmlCode(i, num, num2, m);
                 }
+            }
+        }
+
+        void htmlCode(int i, int num, int num2, int m)
+        {
+            Dictionary<int, string> htmlText = new Dictionary<int, string>();
+            int r = 1;
+            int c = 1;
+            int s = 1;
+            switch (formList[i])
+            {
+                case "Input Text":
+                    num = num + 3;
+                    num2 = num2 + 2;
+                    htmlText[i] = @" " + panel2.Controls[num].Text + @": <input type='text' name='" + panel2.Controls[num].Text + @"' placeholder='" + panel2.Controls[num2].Text + @"'><br>";
+                    rtb1.Text += htmlText[i] + "\n";
+                    break;
+                case "Input E-mail":
+                    num = num + 3;
+                    num2 = num2 + 3;
+                    htmlText[i] = @"  Email: <input type='email' name='" + panel2.Controls[num].Text + @"' placeholder='" + panel2.Controls[num2].Text + @"'><br>";
+                    rtb1.Text += htmlText[i];
+                    break;
+                case "Input Address":
+                    num = num + 3;
+                    num2 = num2 + 2;
+                    htmlText[i] = @"";
+                    rtb1.Text += htmlText[i] + "\n";
+                    break;
+                case "Number":
+                    num = num + 3;
+                    num2 = num2 + 2;
+                    htmlText[i] = @" " + panel2.Controls[num].Text + @": <input type='number' name='" + panel2.Controls[num].Text + @"' placeholder='" + panel2.Controls[num2].Text + @"'><br>";
+                    rtb1.Text += htmlText[i] + "\n";
+                    break;
+                case "Range":
+                    num = num + 3;
+                    num2 = num2 + 2;
+                    htmlText[i] = @" " + panel2.Controls[num].Text + @": <input type='number' min='" + startRange[m] + "' max='" + endRange[m] + "' name='" + panel2.Controls[num].Text + @"' placeholder='" + panel2.Controls[num2].Text + @"'><br>";
+                    rtb1.Text += htmlText[i] + "\n";
+                    m++;
+                    break;
+                case "Radio":
+                    num = num + 3;
+                    num2 = num2 + 2;
+                    for (int index = 0; index < inpType["Radio" + r]; index++)
+                    {
+                        htmlText[i + index] = @"<input type='radio' name='" + panel2.Controls[num].Text + "' value='" + panel2.Controls[num2].Text + "'>Text<br>";
+                        rtb1.Text += htmlText[i] + "\n";
+                    }
+                    i = i + inpType["Radio" + r];
+                    r++;
+                    break;
+                case "Check":
+                    num = num + 3;
+                    num2 = num2 + 2;
+                    for (int index2 = 0; index2 < inpType["Check" + c]; index2++)
+                    {
+                        htmlText[i] = @"";
+                        rtb1.Text += htmlText[i] + "\n";
+                    }
+                    i = i + inpType["Check" + c];
+                    c++;
+                    break;
+                case "Select":
+                    num = num + 3;
+                    num2 = num2 + 2;
+                    for (int index3 = 0; index3 < inpType["Select" + s]; index3++)
+                    {
+                        htmlText[i + index3] = @"";
+                        rtb1.Text += htmlText[i + index3] + "\n";
+                    }
+                    i = i + inpType["Select" + s];
+                    s++;
+                    break;
+                case "Textarea":
+                    num = num + 3;
+                    num2 = num2 + 2;
+                    htmlText[i] = @" " + panel2.Controls[num].Text + @": <textarea name='" + panel2.Controls[num].Text + @"' rows='10' cols='30'></textarea><br>";
+                    rtb1.Text += htmlText[i] + "\n";
+                    break;
             }
         }
     }
