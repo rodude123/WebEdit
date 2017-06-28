@@ -282,100 +282,107 @@ namespace htmlEditor
 
         private void finish_Click(object sender, EventArgs e)
         {
-            int num = -2;
-            int num2 = 0;
-            int m = 0;
             if (yPos == 0)
             {
                 MessageBox.Show("Please Choose form elements before finsishing", "Choose some elements");
             }
             else
             {
-                for (int i = 0; i < formList.Count; i++)
-                {
-                    htmlCode(i, num, num2, m);
-                }
+                htmlCode();
             }
         }
 
-        void htmlCode(int i, int num, int num2, int m)
+        void htmlCode()
         {
             Dictionary<int, string> htmlText = new Dictionary<int, string>();
             int r = 1;
             int c = 1;
             int s = 1;
-            switch (formList[i])
+            int num = -2;
+            int num2 = 0;
+            int num3 = 0;
+            int m = 0;
+            rtb1.Text = "";
+            htmlText[0] = @"<form method='post' action='submit.php'>";
+            rtb1.Text += htmlText[0] + "\n";
+            for (int i = 1; i < formList.Count+1; i++)
             {
-                case "Input Text":
-                    num = num + 3;
-                    num2 = num2 + 2;
-                    htmlText[i] = @" " + panel2.Controls[num].Text + @": <input type='text' name='" + panel2.Controls[num].Text + @"' placeholder='" + panel2.Controls[num2].Text + @"'><br>";
-                    rtb1.Text += htmlText[i] + "\n";
-                    break;
-                case "Input E-mail":
-                    num = num + 3;
-                    num2 = num2 + 3;
-                    htmlText[i] = @"  Email: <input type='email' name='" + panel2.Controls[num].Text + @"' placeholder='" + panel2.Controls[num2].Text + @"'><br>";
-                    rtb1.Text += htmlText[i];
-                    break;
-                case "Input Address":
-                    num = num + 3;
-                    num2 = num2 + 2;
-                    htmlText[i] = @"";
-                    rtb1.Text += htmlText[i] + "\n";
-                    break;
-                case "Number":
-                    num = num + 3;
-                    num2 = num2 + 2;
-                    htmlText[i] = @" " + panel2.Controls[num].Text + @": <input type='number' name='" + panel2.Controls[num].Text + @"' placeholder='" + panel2.Controls[num2].Text + @"'><br>";
-                    rtb1.Text += htmlText[i] + "\n";
-                    break;
-                case "Range":
-                    num = num + 3;
-                    num2 = num2 + 2;
-                    htmlText[i] = @" " + panel2.Controls[num].Text + @": <input type='number' min='" + startRange[m] + "' max='" + endRange[m] + "' name='" + panel2.Controls[num].Text + @"' placeholder='" + panel2.Controls[num2].Text + @"'><br>";
-                    rtb1.Text += htmlText[i] + "\n";
-                    m++;
-                    break;
-                case "Radio":
-                    num = num + 3;
-                    num2 = num2 + 2;
-                    for (int index = 0; index < inpType["Radio" + r]; index++)
-                    {
-                        htmlText[i + index] = @"<input type='radio' name='" + panel2.Controls[num].Text + "' value='" + panel2.Controls[num2].Text + "'>Text<br>";
+                switch (formList[i-1])
+                {
+                    case "Input Text":
+                        num = num + 3;
+                        num2 = num2 + 2;
+                        htmlText[i] = "        " + panel2.Controls[num].Text + @": <input type='text' name='" + panel2.Controls[num].Text + @"' placeholder='" + panel2.Controls[num2].Text + @"'><br>";
                         rtb1.Text += htmlText[i] + "\n";
-                    }
-                    i = i + inpType["Radio" + r];
-                    r++;
-                    break;
-                case "Check":
-                    num = num + 3;
-                    num2 = num2 + 2;
-                    for (int index2 = 0; index2 < inpType["Check" + c]; index2++)
-                    {
+                        break;
+                    case "Input E-mail":
+                        num = num + 3;
+                        num2 = num2 + 3;
+                        htmlText[i] = "        Email: <input type='email' name='" + panel2.Controls[num].Text + @"' placeholder='" + panel2.Controls[num2].Text + @"'><br>";
+                        rtb1.Text += htmlText[i] + "\n";
+                        break;
+                    case "Input Address":
+                        num = num + 3;
+                        num2 = num2 + 3;
                         htmlText[i] = @"";
                         rtb1.Text += htmlText[i] + "\n";
-                    }
-                    i = i + inpType["Check" + c];
-                    c++;
-                    break;
-                case "Select":
-                    num = num + 3;
-                    num2 = num2 + 2;
-                    for (int index3 = 0; index3 < inpType["Select" + s]; index3++)
-                    {
-                        htmlText[i + index3] = @"";
-                        rtb1.Text += htmlText[i + index3] + "\n";
-                    }
-                    i = i + inpType["Select" + s];
-                    s++;
-                    break;
-                case "Textarea":
-                    num = num + 3;
-                    num2 = num2 + 2;
-                    htmlText[i] = @" " + panel2.Controls[num].Text + @": <textarea name='" + panel2.Controls[num].Text + @"' rows='10' cols='30'></textarea><br>";
-                    rtb1.Text += htmlText[i] + "\n";
-                    break;
+                        break;
+                    case "Number":
+                        num = num + 3;
+                        num2 = num2 + 3;
+                        htmlText[i] = "        " + panel2.Controls[num].Text + @": <input type='number' name='" + panel2.Controls[num].Text + @"' placeholder='" + panel2.Controls[num2].Text + @"'><br>";
+                        rtb1.Text += htmlText[i] + "\n";
+                        break;
+                    case "Range":
+                        num = num + 3;
+                        num2 = num2 + 3;
+                        htmlText[i] = "        " + panel2.Controls[num].Text + @": <input type='number' min='" + startRange[m] + "' max='" + endRange[m] + "' name='" + panel2.Controls[num].Text + @"' placeholder='" + panel2.Controls[num2].Text + @"'><br>";
+                        rtb1.Text += htmlText[i] + "\n";
+                        m++;
+                        break;
+                    case "Radio":
+                        num = num + 3;
+                        num2 = num2 + 3;
+                        num3 = i;
+                        for (int index = 0; index < inpType["Radio" + r]; index++)
+                        {
+                            htmlText[num3 + index] = "        <input type='radio' name='" + panel2.Controls[num].Text + "' value='Change Value'>Change Text<br>";
+                            rtb1.Text += htmlText[i] + "\n";
+                        }
+                        num3 = i + inpType["Radio" + r];
+                        r++;
+                        break;
+                    case "Check":
+                        num = num + 3;
+                        num2 = num2 + 3;
+                        num3 = i;
+                        for (int index2 = 0; index2 < inpType["Check" + c]; index2++)
+                        {
+                            htmlText[num3 + index2] = "        <input type='checkbox' name='" + panel2.Controls[num].Text + "' value='Change Value'>Change Text<br>";
+                            rtb1.Text += htmlText[i] + "\n";
+                        }
+                        num3 = i + inpType["Check" + c];
+                        c++;
+                        break;
+                    case "Select":
+                        num = num + 3;
+                        num2 = num2 + 3;
+                        
+                        for (int index3 = 1; index3 < inpType["Select" + s] + 1; index3++)
+                        {
+                            htmlText[i + index3] = "                <option></option";
+                            rtb1.Text += htmlText[i + index3] + "\n";
+                        }
+                        i = i + inpType["Select" + s];
+                        s++;
+                        break;
+                    case "Textarea":
+                        num = num + 3;
+                        num2 = num2 + 3;
+                        htmlText[i] = "        " + panel2.Controls[num].Text + @": <textarea name='" + panel2.Controls[num].Text + @"' rows='10' cols='30'></textarea><br>";
+                        rtb1.Text += htmlText[i] + "\n";
+                        break;
+                }
             }
         }
     }
