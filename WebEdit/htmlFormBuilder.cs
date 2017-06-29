@@ -367,13 +367,15 @@ namespace htmlEditor
                     case "Select":
                         num = num + 3;
                         num2 = num2 + 3;
-                        
+                        htmlText[i] = "    <select name='" + panel2.Controls[num2].Text + "'>";
+
                         for (int index3 = 1; index3 < inpType["Select" + s] + 1; index3++)
                         {
-                            htmlText[i + index3] = "                <option></option";
+                            htmlText[i + index3] = "                <option value='value " + index3 + "'>value " + index3 + "</option";
                             rtb1.Text += htmlText[i + index3] + "\n";
                         }
-                        i = i + inpType["Select" + s];
+                        num3 = i + inpType["Select" + s];
+                        htmlText[i] = "    </select>";
                         s++;
                         break;
                     case "Textarea":
