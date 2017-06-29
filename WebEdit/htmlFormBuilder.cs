@@ -299,7 +299,7 @@ namespace htmlEditor
             int c = 1;
             int s = 1;
             int num = -2;
-            int num2 = 0;
+            int num2 = -1;
             int num3 = 0;
             int m = 0;
             rtb1.Text = "";
@@ -311,7 +311,7 @@ namespace htmlEditor
                 {
                     case "Input Text":
                         num = num + 3;
-                        num2 = num2 + 2;
+                        num2 = num2 + 3;
                         htmlText[i] = "        " + panel2.Controls[num].Text + @": <input type='text' name='" + panel2.Controls[num].Text + @"' placeholder='" + panel2.Controls[num2].Text + @"'><br>";
                         rtb1.Text += htmlText[i] + "\n";
                         break;
@@ -367,15 +367,17 @@ namespace htmlEditor
                     case "Select":
                         num = num + 3;
                         num2 = num2 + 3;
-                        htmlText[i] = "    <select name='" + panel2.Controls[num2].Text + "'>";
+                        htmlText[i] = "    <select name='" + panel2.Controls[num].Text + "'>";
+                        rtb1.Text += htmlText[i] + "\n";
 
                         for (int index3 = 1; index3 < inpType["Select" + s] + 1; index3++)
                         {
-                            htmlText[i + index3] = "                <option value='value " + index3 + "'>value " + index3 + "</option";
+                            htmlText[i + index3] = "        <option value='value " + index3 + "'>value " + index3 + "</option";
                             rtb1.Text += htmlText[i + index3] + "\n";
                         }
                         num3 = i + inpType["Select" + s];
                         htmlText[i] = "    </select>";
+                        rtb1.Text += htmlText[i] + "\n";
                         s++;
                         break;
                     case "Textarea":

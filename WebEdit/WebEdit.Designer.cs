@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WebEdit));
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Folder");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Folder");
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -44,6 +44,7 @@
             this.section = new System.Windows.Forms.Button();
             this.div = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.htmlForm = new System.Windows.Forms.Button();
             this.mediaQuery = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -101,7 +102,10 @@
             this.phpWhileState = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.extScriptHelp = new System.Windows.Forms.ToolTip(this.components);
-            this.htmlForm = new System.Windows.Forms.Button();
+            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.connectToTeamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.syncWithTeamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sendAMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -125,10 +129,9 @@
             // 
             this.img.AutoSize = true;
             this.img.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.img.Location = new System.Drawing.Point(8, 25);
-            this.img.Margin = new System.Windows.Forms.Padding(4);
+            this.img.Location = new System.Drawing.Point(6, 20);
             this.img.Name = "img";
-            this.img.Size = new System.Drawing.Size(152, 36);
+            this.img.Size = new System.Drawing.Size(114, 29);
             this.img.TabIndex = 0;
             this.img.Text = "img tag";
             this.img.UseVisualStyleBackColor = true;
@@ -138,10 +141,9 @@
             // 
             this.script.AutoSize = true;
             this.script.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.script.Location = new System.Drawing.Point(8, 71);
-            this.script.Margin = new System.Windows.Forms.Padding(4);
+            this.script.Location = new System.Drawing.Point(6, 58);
             this.script.Name = "script";
-            this.script.Size = new System.Drawing.Size(152, 36);
+            this.script.Size = new System.Drawing.Size(114, 29);
             this.script.TabIndex = 1;
             this.script.Text = "external script tag";
             this.script.UseVisualStyleBackColor = true;
@@ -152,10 +154,9 @@
             // 
             this.standardHTML.AutoSize = true;
             this.standardHTML.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.standardHTML.Location = new System.Drawing.Point(8, 438);
-            this.standardHTML.Margin = new System.Windows.Forms.Padding(4);
+            this.standardHTML.Location = new System.Drawing.Point(6, 356);
             this.standardHTML.Name = "standardHTML";
-            this.standardHTML.Size = new System.Drawing.Size(152, 36);
+            this.standardHTML.Size = new System.Drawing.Size(114, 29);
             this.standardHTML.TabIndex = 2;
             this.standardHTML.Text = "stadard html layout";
             this.standardHTML.UseVisualStyleBackColor = true;
@@ -165,10 +166,9 @@
             // 
             this.h1.AutoSize = true;
             this.h1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.h1.Location = new System.Drawing.Point(8, 389);
-            this.h1.Margin = new System.Windows.Forms.Padding(4);
+            this.h1.Location = new System.Drawing.Point(6, 316);
             this.h1.Name = "h1";
-            this.h1.Size = new System.Drawing.Size(152, 36);
+            this.h1.Size = new System.Drawing.Size(114, 29);
             this.h1.TabIndex = 3;
             this.h1.Text = "h1 w/ class tag";
             this.h1.UseVisualStyleBackColor = true;
@@ -178,10 +178,9 @@
             // 
             this.header.AutoSize = true;
             this.header.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.header.Location = new System.Drawing.Point(8, 337);
-            this.header.Margin = new System.Windows.Forms.Padding(4);
+            this.header.Location = new System.Drawing.Point(6, 274);
             this.header.Name = "header";
-            this.header.Size = new System.Drawing.Size(152, 36);
+            this.header.Size = new System.Drawing.Size(114, 29);
             this.header.TabIndex = 4;
             this.header.Text = "header tag";
             this.header.UseVisualStyleBackColor = true;
@@ -191,10 +190,9 @@
             // 
             this.navMenu.AutoSize = true;
             this.navMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.navMenu.Location = new System.Drawing.Point(8, 231);
-            this.navMenu.Margin = new System.Windows.Forms.Padding(4);
+            this.navMenu.Location = new System.Drawing.Point(6, 188);
             this.navMenu.Name = "navMenu";
-            this.navMenu.Size = new System.Drawing.Size(152, 36);
+            this.navMenu.Size = new System.Drawing.Size(114, 29);
             this.navMenu.TabIndex = 5;
             this.navMenu.Text = "nav menu tags";
             this.navMenu.UseVisualStyleBackColor = true;
@@ -204,10 +202,9 @@
             // 
             this.paragrah.AutoSize = true;
             this.paragrah.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.paragrah.Location = new System.Drawing.Point(8, 177);
-            this.paragrah.Margin = new System.Windows.Forms.Padding(4);
+            this.paragrah.Location = new System.Drawing.Point(6, 144);
             this.paragrah.Name = "paragrah";
-            this.paragrah.Size = new System.Drawing.Size(152, 36);
+            this.paragrah.Size = new System.Drawing.Size(114, 29);
             this.paragrah.TabIndex = 6;
             this.paragrah.Text = "p with class tag";
             this.paragrah.UseVisualStyleBackColor = true;
@@ -217,10 +214,9 @@
             // 
             this.section.AutoSize = true;
             this.section.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.section.Location = new System.Drawing.Point(8, 124);
-            this.section.Margin = new System.Windows.Forms.Padding(4);
+            this.section.Location = new System.Drawing.Point(6, 101);
             this.section.Name = "section";
-            this.section.Size = new System.Drawing.Size(152, 36);
+            this.section.Size = new System.Drawing.Size(114, 29);
             this.section.TabIndex = 7;
             this.section.Text = "section w/ class tag";
             this.section.UseVisualStyleBackColor = true;
@@ -230,10 +226,9 @@
             // 
             this.div.AutoSize = true;
             this.div.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.div.Location = new System.Drawing.Point(8, 283);
-            this.div.Margin = new System.Windows.Forms.Padding(4);
+            this.div.Location = new System.Drawing.Point(6, 230);
             this.div.Name = "div";
-            this.div.Size = new System.Drawing.Size(152, 36);
+            this.div.Size = new System.Drawing.Size(114, 29);
             this.div.TabIndex = 8;
             this.div.Text = "div tag w/ class";
             this.div.UseVisualStyleBackColor = true;
@@ -255,18 +250,30 @@
             this.panel1.Controls.Add(this.standardHTML);
             this.panel1.Controls.Add(this.script);
             this.panel1.Controls.Add(this.img);
-            this.panel1.Location = new System.Drawing.Point(4, 4);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(169, 594);
+            this.panel1.Size = new System.Drawing.Size(126, 482);
             this.panel1.TabIndex = 3;
+            // 
+            // htmlForm
+            // 
+            this.htmlForm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.htmlForm.Location = new System.Drawing.Point(6, 400);
+            this.htmlForm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.htmlForm.Name = "htmlForm";
+            this.htmlForm.Size = new System.Drawing.Size(114, 29);
+            this.htmlForm.TabIndex = 12;
+            this.htmlForm.Text = "HTML Form builder";
+            this.htmlForm.UseVisualStyleBackColor = true;
+            this.htmlForm.Click += new System.EventHandler(this.htmlForm_Click);
             // 
             // mediaQuery
             // 
             this.mediaQuery.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.mediaQuery.Location = new System.Drawing.Point(6, 552);
+            this.mediaQuery.Location = new System.Drawing.Point(4, 448);
+            this.mediaQuery.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.mediaQuery.Name = "mediaQuery";
-            this.mediaQuery.Size = new System.Drawing.Size(160, 39);
+            this.mediaQuery.Size = new System.Drawing.Size(120, 32);
             this.mediaQuery.TabIndex = 11;
             this.mediaQuery.Text = "Standard media query";
             this.mediaQuery.UseVisualStyleBackColor = true;
@@ -275,9 +282,10 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 532);
+            this.label4.Location = new System.Drawing.Point(14, 432);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(123, 17);
+            this.label4.Size = new System.Drawing.Size(95, 13);
             this.label4.TabIndex = 10;
             this.label4.Text = "CSS quick buttons";
             this.label4.Click += new System.EventHandler(this.CSS_Click);
@@ -285,10 +293,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(15, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(122, 17);
+            this.label1.Size = new System.Drawing.Size(95, 13);
             this.label1.TabIndex = 9;
             this.label1.Text = "HTML Quick Tags";
             // 
@@ -309,6 +316,7 @@
             this.pasteToolStripButton,
             this.toolStripSeparator1,
             this.toolStripDropDownButton1,
+            this.toolStripDropDownButton2,
             this.toolStripTextBox1,
             this.toolStripSeparator3,
             this.findText,
@@ -319,7 +327,7 @@
             this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1529, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(1147, 27);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -445,42 +453,42 @@
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(88, 24);
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(72, 24);
             this.toolStripDropDownButton1.Text = "Language";
             this.toolStripDropDownButton1.ToolTipText = "Select Language";
             // 
             // hTMLToolStripMenuItem
             // 
             this.hTMLToolStripMenuItem.Name = "hTMLToolStripMenuItem";
-            this.hTMLToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.hTMLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.hTMLToolStripMenuItem.Text = "HTML";
             this.hTMLToolStripMenuItem.Click += new System.EventHandler(this.HTML_Click);
             // 
             // cSSToolStripMenuItem
             // 
             this.cSSToolStripMenuItem.Name = "cSSToolStripMenuItem";
-            this.cSSToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.cSSToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cSSToolStripMenuItem.Text = "CSS";
             this.cSSToolStripMenuItem.Click += new System.EventHandler(this.CSS_Click);
             // 
             // jSToolStripMenuItem
             // 
             this.jSToolStripMenuItem.Name = "jSToolStripMenuItem";
-            this.jSToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.jSToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.jSToolStripMenuItem.Text = "JS";
             this.jSToolStripMenuItem.Click += new System.EventHandler(this.JS_Click);
             // 
             // pHPToolStripMenuItem
             // 
             this.pHPToolStripMenuItem.Name = "pHPToolStripMenuItem";
-            this.pHPToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.pHPToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pHPToolStripMenuItem.Text = "PHP";
             this.pHPToolStripMenuItem.Click += new System.EventHandler(this.PHP_Click);
             // 
             // toolStripTextBox1
             // 
             this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(123, 24);
+            this.toolStripTextBox1.Size = new System.Drawing.Size(97, 24);
             this.toolStripTextBox1.Text = "Find and Replace";
             // 
             // toolStripSeparator3
@@ -491,7 +499,7 @@
             // findText
             // 
             this.findText.Name = "findText";
-            this.findText.Size = new System.Drawing.Size(132, 27);
+            this.findText.Size = new System.Drawing.Size(100, 27);
             // 
             // toolStripSeparator2
             // 
@@ -506,7 +514,7 @@
             // replaceText
             // 
             this.replaceText.Name = "replaceText";
-            this.replaceText.Size = new System.Drawing.Size(132, 27);
+            this.replaceText.Size = new System.Drawing.Size(100, 27);
             // 
             // toolStripSeparator5
             // 
@@ -527,25 +535,23 @@
             this.flowLayoutPanel1.Controls.Add(this.treeView1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 27);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(0, 907);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(0, 732);
             this.flowLayoutPanel1.TabIndex = 6;
             // 
             // treeView1
             // 
             this.treeView1.ImageIndex = 0;
             this.treeView1.ImageList = this.imageList1;
-            this.treeView1.Location = new System.Drawing.Point(4, 4);
-            this.treeView1.Margin = new System.Windows.Forms.Padding(4);
+            this.treeView1.Location = new System.Drawing.Point(3, 3);
             this.treeView1.Name = "treeView1";
-            treeNode2.ImageIndex = 0;
-            treeNode2.Name = "nodeProject";
-            treeNode2.Text = "Folder";
+            treeNode1.ImageIndex = 0;
+            treeNode1.Name = "nodeProject";
+            treeNode1.Text = "Folder";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode1});
             this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.Size = new System.Drawing.Size(257, 902);
+            this.treeView1.Size = new System.Drawing.Size(194, 734);
             this.treeView1.TabIndex = 0;
             this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeDoubleClick);
             // 
@@ -565,18 +571,16 @@
             this.flowLayoutPanel2.Controls.Add(this.tabControl1);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 27);
-            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(872, 907);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(654, 732);
             this.flowLayoutPanel2.TabIndex = 7;
             // 
             // tabControl1
             // 
-            this.tabControl1.Location = new System.Drawing.Point(4, 4);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(866, 900);
+            this.tabControl1.Size = new System.Drawing.Size(650, 731);
             this.tabControl1.TabIndex = 0;
             // 
             // flowLayoutPanel3
@@ -585,10 +589,9 @@
             this.flowLayoutPanel3.Controls.Add(this.panel2);
             this.flowLayoutPanel3.Controls.Add(this.panel3);
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(872, 27);
-            this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(4);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(654, 27);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(657, 907);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(493, 732);
             this.flowLayoutPanel3.TabIndex = 8;
             // 
             // panel2
@@ -604,18 +607,20 @@
             this.panel2.Controls.Add(this.ifState);
             this.panel2.Controls.Add(this.basicFunc);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(180, 3);
+            this.panel2.Location = new System.Drawing.Point(134, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(200, 550);
+            this.panel2.Size = new System.Drawing.Size(150, 447);
             this.panel2.TabIndex = 4;
             this.panel2.Tag = "";
             // 
             // documentName
             // 
             this.documentName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.documentName.Location = new System.Drawing.Point(20, 493);
+            this.documentName.Location = new System.Drawing.Point(15, 401);
+            this.documentName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.documentName.Name = "documentName";
-            this.documentName.Size = new System.Drawing.Size(158, 36);
+            this.documentName.Size = new System.Drawing.Size(118, 29);
             this.documentName.TabIndex = 10;
             this.documentName.Text = "Document Name";
             this.documentName.UseVisualStyleBackColor = true;
@@ -624,9 +629,10 @@
             // documentCSS
             // 
             this.documentCSS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.documentCSS.Location = new System.Drawing.Point(20, 439);
+            this.documentCSS.Location = new System.Drawing.Point(15, 357);
+            this.documentCSS.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.documentCSS.Name = "documentCSS";
-            this.documentCSS.Size = new System.Drawing.Size(158, 36);
+            this.documentCSS.Size = new System.Drawing.Size(118, 29);
             this.documentCSS.TabIndex = 9;
             this.documentCSS.Text = "Document CSS";
             this.documentCSS.UseVisualStyleBackColor = true;
@@ -635,9 +641,10 @@
             // forinState
             // 
             this.forinState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.forinState.Location = new System.Drawing.Point(20, 284);
+            this.forinState.Location = new System.Drawing.Point(15, 231);
+            this.forinState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.forinState.Name = "forinState";
-            this.forinState.Size = new System.Drawing.Size(158, 36);
+            this.forinState.Size = new System.Drawing.Size(118, 29);
             this.forinState.TabIndex = 6;
             this.forinState.Text = "For in statement";
             this.forinState.UseVisualStyleBackColor = true;
@@ -646,9 +653,10 @@
             // forState
             // 
             this.forState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.forState.Location = new System.Drawing.Point(20, 232);
+            this.forState.Location = new System.Drawing.Point(15, 188);
+            this.forState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.forState.Name = "forState";
-            this.forState.Size = new System.Drawing.Size(158, 36);
+            this.forState.Size = new System.Drawing.Size(118, 29);
             this.forState.TabIndex = 5;
             this.forState.Text = "For statement";
             this.forState.UseVisualStyleBackColor = true;
@@ -657,9 +665,10 @@
             // documentClass
             // 
             this.documentClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.documentClass.Location = new System.Drawing.Point(20, 390);
+            this.documentClass.Location = new System.Drawing.Point(15, 317);
+            this.documentClass.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.documentClass.Name = "documentClass";
-            this.documentClass.Size = new System.Drawing.Size(158, 36);
+            this.documentClass.Size = new System.Drawing.Size(118, 29);
             this.documentClass.TabIndex = 8;
             this.documentClass.Text = "Document Class";
             this.documentClass.UseVisualStyleBackColor = true;
@@ -668,9 +677,10 @@
             // documentID
             // 
             this.documentID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.documentID.Location = new System.Drawing.Point(20, 338);
+            this.documentID.Location = new System.Drawing.Point(15, 275);
+            this.documentID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.documentID.Name = "documentID";
-            this.documentID.Size = new System.Drawing.Size(158, 36);
+            this.documentID.Size = new System.Drawing.Size(118, 29);
             this.documentID.TabIndex = 8;
             this.documentID.Text = "Document id";
             this.documentID.UseVisualStyleBackColor = true;
@@ -679,9 +689,10 @@
             // switchState
             // 
             this.switchState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.switchState.Location = new System.Drawing.Point(20, 178);
+            this.switchState.Location = new System.Drawing.Point(15, 145);
+            this.switchState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.switchState.Name = "switchState";
-            this.switchState.Size = new System.Drawing.Size(158, 36);
+            this.switchState.Size = new System.Drawing.Size(118, 29);
             this.switchState.TabIndex = 4;
             this.switchState.Text = "Switch case statement";
             this.switchState.UseVisualStyleBackColor = true;
@@ -690,9 +701,10 @@
             // whileState
             // 
             this.whileState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.whileState.Location = new System.Drawing.Point(20, 125);
+            this.whileState.Location = new System.Drawing.Point(15, 102);
+            this.whileState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.whileState.Name = "whileState";
-            this.whileState.Size = new System.Drawing.Size(158, 36);
+            this.whileState.Size = new System.Drawing.Size(118, 29);
             this.whileState.TabIndex = 3;
             this.whileState.Text = "while statement";
             this.whileState.UseVisualStyleBackColor = true;
@@ -701,9 +713,10 @@
             // ifState
             // 
             this.ifState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ifState.Location = new System.Drawing.Point(20, 72);
+            this.ifState.Location = new System.Drawing.Point(15, 58);
+            this.ifState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ifState.Name = "ifState";
-            this.ifState.Size = new System.Drawing.Size(158, 36);
+            this.ifState.Size = new System.Drawing.Size(118, 29);
             this.ifState.TabIndex = 2;
             this.ifState.Text = "If statement";
             this.ifState.UseVisualStyleBackColor = true;
@@ -712,9 +725,10 @@
             // basicFunc
             // 
             this.basicFunc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.basicFunc.Location = new System.Drawing.Point(20, 26);
+            this.basicFunc.Location = new System.Drawing.Point(15, 21);
+            this.basicFunc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.basicFunc.Name = "basicFunc";
-            this.basicFunc.Size = new System.Drawing.Size(158, 36);
+            this.basicFunc.Size = new System.Drawing.Size(118, 29);
             this.basicFunc.TabIndex = 1;
             this.basicFunc.Text = "Function";
             this.basicFunc.UseVisualStyleBackColor = true;
@@ -723,9 +737,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(38, 1);
+            this.label2.Location = new System.Drawing.Point(28, 1);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(116, 17);
+            this.label2.Size = new System.Drawing.Size(89, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "JS Quick Buttons";
             // 
@@ -738,17 +753,19 @@
             this.panel3.Controls.Add(this.phpSwitchState);
             this.panel3.Controls.Add(this.phpIfState);
             this.panel3.Controls.Add(this.phpWhileState);
-            this.panel3.Location = new System.Drawing.Point(386, 3);
+            this.panel3.Location = new System.Drawing.Point(288, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(172, 550);
+            this.panel3.Size = new System.Drawing.Size(129, 447);
             this.panel3.TabIndex = 5;
             // 
             // phpForeachState
             // 
             this.phpForeachState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.phpForeachState.Location = new System.Drawing.Point(15, 284);
+            this.phpForeachState.Location = new System.Drawing.Point(11, 231);
+            this.phpForeachState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.phpForeachState.Name = "phpForeachState";
-            this.phpForeachState.Size = new System.Drawing.Size(136, 36);
+            this.phpForeachState.Size = new System.Drawing.Size(102, 29);
             this.phpForeachState.TabIndex = 15;
             this.phpForeachState.Text = "Foreach statement";
             this.phpForeachState.UseVisualStyleBackColor = true;
@@ -757,9 +774,10 @@
             // phpBasicFunc
             // 
             this.phpBasicFunc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.phpBasicFunc.Location = new System.Drawing.Point(15, 26);
+            this.phpBasicFunc.Location = new System.Drawing.Point(11, 21);
+            this.phpBasicFunc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.phpBasicFunc.Name = "phpBasicFunc";
-            this.phpBasicFunc.Size = new System.Drawing.Size(136, 35);
+            this.phpBasicFunc.Size = new System.Drawing.Size(102, 28);
             this.phpBasicFunc.TabIndex = 1;
             this.phpBasicFunc.Text = "Function";
             this.phpBasicFunc.UseVisualStyleBackColor = true;
@@ -768,9 +786,10 @@
             // phpForState
             // 
             this.phpForState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.phpForState.Location = new System.Drawing.Point(15, 232);
+            this.phpForState.Location = new System.Drawing.Point(11, 188);
+            this.phpForState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.phpForState.Name = "phpForState";
-            this.phpForState.Size = new System.Drawing.Size(136, 36);
+            this.phpForState.Size = new System.Drawing.Size(102, 29);
             this.phpForState.TabIndex = 14;
             this.phpForState.Text = "For statement";
             this.phpForState.UseVisualStyleBackColor = true;
@@ -779,18 +798,20 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 1);
+            this.label3.Location = new System.Drawing.Point(9, 1);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(128, 17);
+            this.label3.Size = new System.Drawing.Size(99, 13);
             this.label3.TabIndex = 0;
             this.label3.Text = "PHP Quick Buttons";
             // 
             // phpSwitchState
             // 
             this.phpSwitchState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.phpSwitchState.Location = new System.Drawing.Point(15, 178);
+            this.phpSwitchState.Location = new System.Drawing.Point(11, 145);
+            this.phpSwitchState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.phpSwitchState.Name = "phpSwitchState";
-            this.phpSwitchState.Size = new System.Drawing.Size(136, 36);
+            this.phpSwitchState.Size = new System.Drawing.Size(102, 29);
             this.phpSwitchState.TabIndex = 13;
             this.phpSwitchState.Text = "Switch case statement";
             this.phpSwitchState.UseVisualStyleBackColor = true;
@@ -799,9 +820,10 @@
             // phpIfState
             // 
             this.phpIfState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.phpIfState.Location = new System.Drawing.Point(15, 72);
+            this.phpIfState.Location = new System.Drawing.Point(11, 58);
+            this.phpIfState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.phpIfState.Name = "phpIfState";
-            this.phpIfState.Size = new System.Drawing.Size(136, 36);
+            this.phpIfState.Size = new System.Drawing.Size(102, 29);
             this.phpIfState.TabIndex = 11;
             this.phpIfState.Text = "If statement";
             this.phpIfState.UseVisualStyleBackColor = true;
@@ -810,9 +832,10 @@
             // phpWhileState
             // 
             this.phpWhileState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.phpWhileState.Location = new System.Drawing.Point(15, 125);
+            this.phpWhileState.Location = new System.Drawing.Point(11, 102);
+            this.phpWhileState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.phpWhileState.Name = "phpWhileState";
-            this.phpWhileState.Size = new System.Drawing.Size(136, 36);
+            this.phpWhileState.Size = new System.Drawing.Size(102, 29);
             this.phpWhileState.TabIndex = 12;
             this.phpWhileState.Text = "while statement";
             this.phpWhileState.UseVisualStyleBackColor = true;
@@ -823,27 +846,46 @@
             this.extScriptHelp.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.extScriptHelp.ToolTipTitle = "External Scripts";
             // 
-            // htmlForm
+            // toolStripDropDownButton2
             // 
-            this.htmlForm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.htmlForm.Location = new System.Drawing.Point(8, 492);
-            this.htmlForm.Name = "htmlForm";
-            this.htmlForm.Size = new System.Drawing.Size(152, 36);
-            this.htmlForm.TabIndex = 12;
-            this.htmlForm.Text = "HTML Form builder";
-            this.htmlForm.UseVisualStyleBackColor = true;
-            this.htmlForm.Click += new System.EventHandler(this.htmlForm_Click);
+            this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.connectToTeamToolStripMenuItem,
+            this.syncWithTeamToolStripMenuItem,
+            this.sendAMessageToolStripMenuItem});
+            this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
+            this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(94, 24);
+            this.toolStripDropDownButton2.Text = "Team Services";
+            // 
+            // connectToTeamToolStripMenuItem
+            // 
+            this.connectToTeamToolStripMenuItem.Name = "connectToTeamToolStripMenuItem";
+            this.connectToTeamToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.connectToTeamToolStripMenuItem.Text = "Connect to team";
+            // 
+            // syncWithTeamToolStripMenuItem
+            // 
+            this.syncWithTeamToolStripMenuItem.Name = "syncWithTeamToolStripMenuItem";
+            this.syncWithTeamToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.syncWithTeamToolStripMenuItem.Text = "Sync With Team";
+            // 
+            // sendAMessageToolStripMenuItem
+            // 
+            this.sendAMessageToolStripMenuItem.Name = "sendAMessageToolStripMenuItem";
+            this.sendAMessageToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.sendAMessageToolStripMenuItem.Text = "Send a message";
             // 
             // WebEdit
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1529, 934);
+            this.ClientSize = new System.Drawing.Size(1147, 759);
             this.Controls.Add(this.flowLayoutPanel3);
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.toolStrip1);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "WebEdit";
             this.Text = "WebEdit";
             this.Load += new System.EventHandler(this.WebEdit_Load);
@@ -937,6 +979,10 @@
         private System.Windows.Forms.Button phpIfState;
         private System.Windows.Forms.Button phpWhileState;
         private System.Windows.Forms.Button htmlForm;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
+        private System.Windows.Forms.ToolStripMenuItem connectToTeamToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem syncWithTeamToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sendAMessageToolStripMenuItem;
     }
 }
 
