@@ -456,7 +456,12 @@ namespace htmlEditor
                     case "Input Address":
                         num = num + 3;
                         num2 = num2 + 3;
-                        jsText[i] = @"";
+                        jsText[i] = @"        var line" + i + @" = document.forms['myForm']['line1'].value;
+        if (line" + i + @" == '')
+        {
+            alert('Adress Line 1 must be filled out');
+            return false;
+        }";
                         rtb2.Text += jsText[i] + "\n";
                         break;
                     case "Number":
