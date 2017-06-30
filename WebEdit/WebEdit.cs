@@ -814,7 +814,6 @@ else
             }
             if (lang == "PHP")
             {
-                //HTML_syntax(sender, e);
                 PHP_syntax(sender, e);
             }
         }

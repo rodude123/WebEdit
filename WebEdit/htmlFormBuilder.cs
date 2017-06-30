@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MsgBox;
+using System.Text.RegularExpressions;
 
 namespace htmlEditor
 {
@@ -24,6 +25,23 @@ namespace htmlEditor
         int k = 1;
         int l = 1;
         int flNum = 0;
+
+        public MatchCollection tagMatches;
+        public MatchCollection attributeMatches;
+        public MatchCollection commentMatches;
+        public MatchCollection htmlCommentMatches;
+        public MatchCollection stringMatches;
+        public MatchCollection selectorMatches;
+        public MatchCollection globalsMatches;
+        public MatchCollection hexValueMatches;
+        public MatchCollection keywordMatches;
+        public MatchCollection typesAMatches;
+        public MatchCollection typesBMatches;
+        public MatchCollection otherMatches;
+        public MatchCollection specialMatches;
+        public MatchCollection variableMatches;
+        public MatchCollection conditionMatches;
+
         public htmlFormBuilder()
         {
             InitializeComponent();
@@ -399,7 +417,6 @@ namespace htmlEditor
             Dictionary<int, string> jsText = new Dictionary<int, string>();
             int num = -2;
             int num2 = -1;
-            int m = 0;
             rtb2.Text = "";
             jsText[0] = @"function validateForm()
 {";
@@ -530,6 +547,314 @@ namespace htmlEditor
             }
             jsText[0] = @"}";
             rtb2.Text += jsText[0] + "\n";
+        }
+
+        void phpCode()
+        {
+
+        }
+
+        private void rtb1_TextChanged(object sender, EventArgs e)
+        {
+            RichTextBox rtb = (RichTextBox)sender;
+            // getting tags
+            //<TAG\b[^>]*>(.*?)</TAG>
+            //string kewords = @"\b(public|private|partial|static|namespace|class|using|void|foreach|in|while)\b";
+            string tags = @"<([/A-Za-z0-9]*)\b[^>]*>(.*?)";
+            tagMatches = Regex.Matches(rtb.Text, tags, RegexOptions.Multiline);
+
+            // getting attributes from the text
+            string attributes = @"[A-Za-z0-9-_]*=[A-Za-z0-9-_]*";
+            attributeMatches = Regex.Matches(rtb.Text, attributes);
+
+            // getting comments (inline or multiline)
+            string comments = @"(\<![ \r\n\t]*(--([^\-]|[\r\n]|-[^\-])*--[ \r\n\t]*)\>)";
+            commentMatches = Regex.Matches(rtb.Text, comments, RegexOptions.Multiline);
+
+            // getting strings
+            string strings = "\".+?\"";
+            stringMatches = Regex.Matches(rtb.Text, strings);
+
+            // saving the original caret position + forecolor
+            int originalIndex = rtb.SelectionStart;
+            int originalLength = rtb.SelectionLength;
+            Color originalColor = Color.Black;
+
+
+            // MANDATORY - focuses a label before highlighting (avoids blinking)
+            inpTxt.Focus();
+
+            // removes any previous highlighting (so modified words won't remain highlighted)
+            rtb.SelectionStart = 0;
+            rtb.SelectionLength = rtb.Text.Length;
+            rtb.SelectionColor = originalColor;
+
+            foreach (Match m in tagMatches)
+            {
+                rtb.SelectionStart = m.Index;
+                rtb.SelectionLength = m.Length;
+                rtb.SelectionColor = Color.Blue;
+            }
+
+            foreach (Match m in attributeMatches)
+            {
+                rtb.SelectionStart = m.Index;
+                rtb.SelectionLength = m.Length;
+                rtb.SelectionColor = Color.Red;
+            }
+
+            foreach (Match m in commentMatches)
+            {
+                rtb.SelectionStart = m.Index;
+                rtb.SelectionLength = m.Length;
+                rtb.SelectionColor = Color.Gray;
+            }
+
+            foreach (Match m in stringMatches)
+            {
+                rtb.SelectionStart = m.Index;
+                rtb.SelectionLength = m.Length;
+                rtb.SelectionColor = Color.DarkGreen;
+            }
+            // restoring the original colors, for further writing
+            rtb.SelectionStart = originalIndex;
+            rtb.SelectionLength = originalLength;
+            rtb.SelectionColor = originalColor;
+
+            // giving back the focus
+            rtb.Focus();
+        }
+
+        private void rtb2_TextChanged(object sender, EventArgs e)
+        {
+            RichTextBox rtb = (RichTextBox)sender;
+            // getting tags
+            string kewords = @"\b(new|var|if|do|function|while|switch|for|foreach|in|continue|break)\b";
+            keywordMatches = Regex.Matches(rtb.Text, kewords, RegexOptions.Multiline);
+
+            // getting types a from the text e.g. background-color
+            string globals = @"\b(document|window|Array|String|Object|Number|\$)\b";
+            globalsMatches = Regex.Matches(rtb.Text, globals);
+
+            string other = @"\b(getElementsBy(TagName|ClassName|Name)|getElementById|typeof|instanceof|querySelector)\b";
+            otherMatches = Regex.Matches(rtb.Text, other);
+
+            string special = @"\b(indexOf|match|replace|toString|length)\b";
+            specialMatches = Regex.Matches(rtb.Text, special);
+
+            // getting comments (inline or multiline)
+            string comments = @"(\/\/.+?$|\/\*.+?\*\/)";
+            commentMatches = Regex.Matches(rtb.Text, comments, RegexOptions.Multiline);
+
+            // getting strings
+            string strings = "\".+?\"";
+            stringMatches = Regex.Matches(rtb.Text, strings);
+
+            // saving the original caret position + forecolor
+            int originalIndex = rtb.SelectionStart;
+            int originalLength = rtb.SelectionLength;
+            Color originalColor = Color.Black;
+
+
+            // MANDATORY - focuses a label before highlighting (avoids blinking)
+            inpTxt.Focus();
+
+            // removes any previous highlighting (so modified words won't remain highlighted)
+            rtb.SelectionStart = 0;
+            rtb.SelectionLength = rtb.Text.Length;
+            rtb.SelectionColor = originalColor;
+
+            foreach (Match m in keywordMatches)
+            {
+                rtb.SelectionStart = m.Index;
+                rtb.SelectionLength = m.Length;
+                rtb.SelectionColor = Color.Red;
+            }
+
+            foreach (Match m in globalsMatches)
+            {
+                rtb.SelectionStart = m.Index;
+                rtb.SelectionLength = m.Length;
+                rtb.SelectionColor = Color.DarkCyan;
+            }
+
+            foreach (Match m in otherMatches)
+            {
+                rtb.SelectionStart = m.Index;
+                rtb.SelectionLength = m.Length;
+                rtb.SelectionColor = Color.DarkCyan;
+            }
+
+
+            foreach (Match m in specialMatches)
+            {
+                rtb.SelectionStart = m.Index;
+                rtb.SelectionLength = m.Length;
+                rtb.SelectionColor = Color.DarkOrange;
+            }
+
+            foreach (Match m in commentMatches)
+            {
+                rtb.SelectionStart = m.Index;
+                rtb.SelectionLength = m.Length;
+                rtb.SelectionColor = Color.Gray;
+            }
+
+            foreach (Match m in stringMatches)
+            {
+                rtb.SelectionStart = m.Index;
+                rtb.SelectionLength = m.Length;
+                rtb.SelectionColor = Color.DarkGreen;
+
+            }
+
+            // restoring the original colors, for further writing
+            rtb.SelectionStart = originalIndex;
+            rtb.SelectionLength = originalLength;
+            rtb.SelectionColor = originalColor;
+
+            // giving back the focus
+            rtb.Focus();
+        }
+
+        private void rtb3_TextChanged(object sender, EventArgs e)
+        {
+            RichTextBox rtb = (RichTextBox)sender;
+            // getting tags
+            string kewords = @"\b(and|or|xor|do|as|return|die|exit|then|
+                |new|delete|try|throw|catch|finally|class|function|string|
+                array|object|resource|bool|boolean|int|integer|float|double|
+                real|string|array|global|const|static|public|private|protected|
+                published|extends|true|false|null|void|this|self|struct|
+                char|signed|unsigned|short|long|echo)\b";
+            keywordMatches = Regex.Matches(rtb.Text, kewords, RegexOptions.Multiline);
+
+            // getting types a from the text e.g. background-color
+            string globals = @"([A-Za-z0-9_-]*\()";
+            globalsMatches = Regex.Matches(rtb.Text, globals);
+
+            string condition = @"((if|elseif|for|foreach|while|switch)\(|([.]|[+]|[*]|[-]|[/]|[=]|[|][|])|else|((if|elseif|for|foreach|while|switch) \(|([.]|[+]|[*]|[-]|[/]|[=]|[|][|])))";
+            conditionMatches = Regex.Matches(rtb.Text, condition);
+
+            string variables = @"(\$\w*)";
+            variableMatches = Regex.Matches(rtb.Text, variables);
+
+            string other = @"(\b(true|false)\b|\\n|\\r)";
+            otherMatches = Regex.Matches(rtb.Text, other);
+
+            // getting comments (inline or multiline)
+            string comments = @"(\/\/.+?$|\/\*.+?\*\/|#.*$)";
+            commentMatches = Regex.Matches(rtb.Text, comments, RegexOptions.Multiline);
+
+            // getting strings
+            string strings = "\".+?\"";
+            stringMatches = Regex.Matches(rtb.Text, strings);
+
+            //HTML Syntax
+
+            string tags = @"<([/A-Za-z0-9]*)\b[^>]*>(.*?)";
+            tagMatches = Regex.Matches(rtb.Text, tags, RegexOptions.Multiline);
+
+            // getting attributes from the text
+            string attributes = @"[A-Za-z0-9-_]*=[A-Za-z0-9-_]*";
+            attributeMatches = Regex.Matches(rtb.Text, attributes);
+
+            // getting comments (inline or multiline)
+            string htmlComments = @"(\<![ \r\n\t]*(--([^\-]|[\r\n]|-[^\-])*--[ \r\n\t]*)\>)";
+            htmlCommentMatches = Regex.Matches(rtb.Text, htmlComments, RegexOptions.Multiline);
+
+            // saving the original caret position + forecolor
+            int originalIndex = rtb.SelectionStart;
+            int originalLength = rtb.SelectionLength;
+            Color originalColor = Color.Black;
+
+
+            // MANDATORY - focuses a label before highlighting (avoids blinking)
+            inpTxt.Focus();
+
+            // removes any previous highlighting (so modified words won't remain highlighted)
+            rtb.SelectionStart = 0;
+            rtb.SelectionLength = rtb.Text.Length;
+            rtb.SelectionColor = originalColor;
+
+            foreach (Match m in keywordMatches)
+            {
+                rtb.SelectionStart = m.Index;
+                rtb.SelectionLength = m.Length;
+                rtb.SelectionColor = Color.Red;
+            }
+
+            foreach (Match m in globalsMatches)
+            {
+                rtb.SelectionStart = m.Index;
+                rtb.SelectionLength = m.Length;
+                rtb.SelectionColor = Color.DarkCyan;
+            }
+
+            foreach (Match m in conditionMatches)
+            {
+                rtb.SelectionStart = m.Index;
+                rtb.SelectionLength = m.Length;
+                rtb.SelectionColor = Color.Red;
+            }
+
+            foreach (Match m in otherMatches)
+            {
+                rtb.SelectionStart = m.Index;
+                rtb.SelectionLength = m.Length;
+                rtb.SelectionColor = Color.DarkOrchid;
+            }
+
+
+            foreach (Match m in variableMatches)
+            {
+                rtb.SelectionStart = m.Index;
+                rtb.SelectionLength = m.Length;
+                rtb.SelectionColor = Color.DarkOrange;
+            }
+
+            foreach (Match m in htmlCommentMatches)
+            {
+                rtb.SelectionStart = m.Index;
+                rtb.SelectionLength = m.Length;
+                rtb.SelectionColor = Color.Gray;
+            }
+
+            foreach (Match m in stringMatches)
+            {
+                rtb.SelectionStart = m.Index;
+                rtb.SelectionLength = m.Length;
+                rtb.SelectionColor = Color.DarkGreen;
+            }
+
+            foreach (Match m in tagMatches)
+            {
+                rtb.SelectionStart = m.Index;
+                rtb.SelectionLength = m.Length;
+                rtb.SelectionColor = Color.Blue;
+            }
+
+            foreach (Match m in attributeMatches)
+            {
+                rtb.SelectionStart = m.Index;
+                rtb.SelectionLength = m.Length;
+                rtb.SelectionColor = Color.Red;
+            }
+
+            foreach (Match m in commentMatches)
+            {
+                rtb.SelectionStart = m.Index;
+                rtb.SelectionLength = m.Length;
+                rtb.SelectionColor = Color.Gray;
+            }
+
+            // restoring the original colors, for further writing
+            rtb.SelectionStart = originalIndex;
+            rtb.SelectionLength = originalLength;
+            rtb.SelectionColor = originalColor;
+
+            // giving back the focus
+            rtb.Focus();
         }
     }
 }

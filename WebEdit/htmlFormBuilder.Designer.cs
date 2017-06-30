@@ -62,7 +62,7 @@
             this.panel1.Controls.Add(this.inpEmail);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(227, 451);
             this.panel1.TabIndex = 0;
@@ -71,7 +71,7 @@
             // 
             this.finish.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.finish.Location = new System.Drawing.Point(17, 276);
-            this.finish.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.finish.Margin = new System.Windows.Forms.Padding(2);
             this.finish.Name = "finish";
             this.finish.Size = new System.Drawing.Size(78, 24);
             this.finish.TabIndex = 9;
@@ -188,42 +188,45 @@
             this.panel3.Controls.Add(this.rtb1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel3.Location = new System.Drawing.Point(227, 276);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(449, 175);
+            this.panel3.Size = new System.Drawing.Size(1054, 175);
             this.panel3.TabIndex = 2;
             // 
             // rtb3
             // 
             this.rtb3.Dock = System.Windows.Forms.DockStyle.Left;
             this.rtb3.Location = new System.Drawing.Point(610, 0);
-            this.rtb3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rtb3.Margin = new System.Windows.Forms.Padding(2);
             this.rtb3.Name = "rtb3";
             this.rtb3.Size = new System.Drawing.Size(305, 175);
             this.rtb3.TabIndex = 2;
             this.rtb3.Text = "";
+            this.rtb3.TextChanged += new System.EventHandler(this.rtb3_TextChanged);
             // 
             // rtb2
             // 
             this.rtb2.Dock = System.Windows.Forms.DockStyle.Left;
             this.rtb2.Location = new System.Drawing.Point(305, 0);
-            this.rtb2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rtb2.Margin = new System.Windows.Forms.Padding(2);
             this.rtb2.Name = "rtb2";
             this.rtb2.Size = new System.Drawing.Size(305, 175);
             this.rtb2.TabIndex = 1;
             this.rtb2.Text = "";
+            this.rtb2.TextChanged += new System.EventHandler(this.rtb2_TextChanged);
             // 
             // rtb1
             // 
             this.rtb1.AcceptsTab = true;
             this.rtb1.Dock = System.Windows.Forms.DockStyle.Left;
             this.rtb1.Location = new System.Drawing.Point(0, 0);
-            this.rtb1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rtb1.Margin = new System.Windows.Forms.Padding(2);
             this.rtb1.Name = "rtb1";
             this.rtb1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.rtb1.Size = new System.Drawing.Size(305, 175);
             this.rtb1.TabIndex = 0;
             this.rtb1.Text = "";
+            this.rtb1.TextChanged += new System.EventHandler(this.rtb1_TextChanged);
             // 
             // panel2
             // 
@@ -233,10 +236,10 @@
             this.panel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.panel2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.panel2.Location = new System.Drawing.Point(227, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.panel2.Size = new System.Drawing.Size(449, 276);
+            this.panel2.Size = new System.Drawing.Size(1054, 276);
             this.panel2.TabIndex = 3;
             this.panel2.DragDrop += new System.Windows.Forms.DragEventHandler(this.panel2_DragDrop);
             this.panel2.DragEnter += new System.Windows.Forms.DragEventHandler(this.panel2_DragEnter);
@@ -249,7 +252,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "htmlFormBuilder";
             this.Text = "htmlFormBuilder";
             this.Load += new System.EventHandler(this.htmlFormBuilder_Load);
