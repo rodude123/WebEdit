@@ -344,7 +344,12 @@ namespace htmlEditor
                     case "Input Address":
                         num = num + 3;
                         num2 = num2 + 3;
-                        htmlText[i] = @"        Address Line 1: <input type='text' name='line1' placeholder='Address Line 1'>";
+                        htmlText[i] = @"        Address Line 1: <input type='text' name='line1' placeholder='Address Line 1'>" + "\n" +
+                            @"        Address Line 2: <input type='text' name='line2' placeholder='Address Line 2'>" + "\n" +
+                             @"        City: <input type='text' name='city' placeholder='City e.g. London'>" + "\n" +
+                             @"        State/County/Region: <input type='text' name='SCR' placeholder='State/County/Region'>" + "\n" +
+                             @"        Zip/Postal Code: <input type='text' name='ZPC' placeholder='e.g. NG9 6LL'>" + "\n" +
+                             @"        Country: <input type='text' name='Country' placeholder='United Kingdom'>" + "\n";
                         rtb1.Text += htmlText[i] + "\n";
                         break;
                     case "Number":
