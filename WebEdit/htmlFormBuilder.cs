@@ -289,6 +289,7 @@ namespace htmlEditor
             else
             {
                 htmlCode();
+                jsCode();
             }
         }
 
@@ -303,7 +304,7 @@ namespace htmlEditor
             int num3 = 0;
             int m = 0;
             rtb1.Text = "";
-            htmlText[0] = @"<form method='post' action='submit.php'>";
+            htmlText[0] = @"<form name='myForm' method='post' action='submit.php'>";
             rtb1.Text += htmlText[0] + "\n";
             for (int i = 1; i < formList.Count+1; i++)
             {
@@ -388,6 +389,147 @@ namespace htmlEditor
                         break;
                 }
             }
+            htmlText[htmlText.Count] = @"</form>";
+            rtb1.Text += htmlText[htmlText.Count - 1] + "\n";
+
+        }
+
+        void jsCode()
+        {
+            Dictionary<int, string> jsText = new Dictionary<int, string>();
+            int num = -2;
+            int num2 = -1;
+            int m = 0;
+            rtb2.Text = "";
+            jsText[0] = @"function validateForm()
+{";
+            rtb2.Text += jsText[0] + "\n";
+            for (int i = 1; i < formList.Count + 1; i++)
+            {
+                switch (formList[i - 1])
+                {
+                    case "Input Text":
+                        num = num + 3;
+                        num2 = num2 + 3;
+                        jsText[i] = @"        var num" + i + @" = document.forms['myForm']['" + panel2.Controls[num].Text + @"'].value;
+        if (num" + i + @" == '')
+        {
+            alert('" + panel2.Controls[num].Text + @" must be filled out');
+            return false;
+        }";
+                        rtb2.Text += jsText[i] + "\n";
+                        break;
+                    case "Input E-mail":
+                        num = num + 3;
+                        num2 = num2 + 3;
+                        jsText[i] = @"        var num" + i + @" = document.forms['myForm']['" + panel2.Controls[num].Text + @"'].value;
+        if (num" + i + @" == '')
+        {
+            alert('" + panel2.Controls[num].Text + @" must be filled out');
+            return false;
+        }";
+                        rtb2.Text += jsText[i] + "\n";
+                        break;
+                    case "Input Address":
+                        num = num + 3;
+                        num2 = num2 + 3;
+                        jsText[i] = @"";
+                        rtb2.Text += jsText[i] + "\n";
+                        break;
+                    case "Number":
+                        num = num + 3;
+                        num2 = num2 + 3;
+                        jsText[i] = @"        var num" + i + @" = document.forms['myForm']['" + panel2.Controls[num].Text + @"'].value;
+        if (num" + i + @" == '')
+        {
+            alert('" + panel2.Controls[num].Text + @" must be filled out');
+            return false;
+        }";
+                        rtb2.Text += jsText[i] + "\n";
+                        break;
+                    case "Range":
+                        num = num + 3;
+                        num2 = num2 + 3;
+                        jsText[i] = @"        var text" + i + @" = document.forms['myForm']['" + panel2.Controls[num].Text + @"'].value;
+        if (text" + i + @" == '')
+        { 
+            alert('" + panel2.Controls[num].Text + @" must be filled out');
+            return false;
+        }";
+                        rtb2.Text += jsText[i] + "\n";
+                        break;
+                    case "Radio":
+                        num = num + 3;
+                        num2 = num2 + 3;
+                        jsText[i] = @"        var radios = document.getElementsByName('" + panel2.Controls[num].Text + @"');
+        var formValid = false;
+
+        var i = 0;
+        while (!formValid && i < radios.length)
+        {
+            if (radios[i].checked) formValid = true;
+            i++;
+         }
+        
+         if (!formValid)
+         { 
+             alert('option must be chosen');​
+         }";
+                        rtb2.Text += jsText[i] + "\n";
+                        break;
+                    case "Check":
+                        num = num + 3;
+                        num2 = num2 + 3;
+                        jsText[i] = @"        var checks = document.getElementsByName('" + panel2.Controls[num].Text + @"');
+        var formValid = false;
+
+        var i = 0;
+        while (!formValid && i < checks.length)
+        {
+            if (checks[i].checked) formValid = true;
+            i++;
+         }
+        
+         if (!formValid)
+         { 
+             alert('Must check some option');​
+         }";
+                        rtb2.Text += jsText[i] + "\n";
+                        break;
+                    case "Select":
+                        num = num + 3;
+                        num2 = num2 + 3;
+                        jsText[i] = @"        var checks = document.getElementsByName('" + panel2.Controls[num].Text + @"');
+        var formValid = false;
+
+        var i = 0;
+        while (!formValid && i < checks.length)
+        {
+            if (checks[i].checked) formValid = true;
+            i++;
+         }
+        
+         if (!formValid)
+         { 
+             alert('Must select an option');​
+         }";
+                        rtb2.Text += jsText[i] + "\n";
+                        break;
+                    case "Textarea":
+                        num = num + 3;
+                        num2 = num2 + 3;
+                        jsText[i] = @"var text" + i + @" = document.forms['myForm']['" + panel2.Controls[num].Text + @"'].value;
+        if (text" + i + @" == '')
+        {
+            alert('[' " + panel2.Controls[num].Text + @" must have some text');
+            return false;
+        }";
+                        rtb2.Text += jsText[i] + "\n";
+                        break;
+                }
+            }
+            jsText[0] = @"}";
+            rtb2.Text += jsText[0] + "\n";
         }
     }
 }
