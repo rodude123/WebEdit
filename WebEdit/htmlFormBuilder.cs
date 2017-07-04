@@ -308,7 +308,7 @@ namespace htmlEditor
             {
                 htmlCode();
                 jsCode();
-                //phpCode();
+                phpCode();
             }
         }
 
@@ -344,12 +344,12 @@ namespace htmlEditor
                     case "Input Address":
                         num = num + 3;
                         num2 = num2 + 3;
-                        htmlText[i] = @"        Address Line 1: <input type='text' name='line1' placeholder='Address Line 1'>" + "\n" +
-                            @"        Address Line 2: <input type='text' name='line2' placeholder='Address Line 2'>" + "\n" +
-                             @"        City: <input type='text' name='city' placeholder='City e.g. London'>" + "\n" +
-                             @"        State/County/Region: <input type='text' name='SCR' placeholder='State/County/Region'>" + "\n" +
-                             @"        Zip/Postal Code: <input type='text' name='ZPC' placeholder='e.g. NG9 6LL'>" + "\n" +
-                             @"        Country: <input type='text' name='Country' placeholder='United Kingdom'>" + "\n";
+                        htmlText[i] = @"        Address Line 1: <input type='text' name='line1' placeholder='Address Line 1'> <br>" + "\n" +
+                            @"        Address Line 2: <input type='text' name='line2' placeholder='Address Line 2'> <br>" + "\n" +
+                             @"        City: <input type='text' name='city' placeholder='City e.g. London'> <br>" + "\n" +
+                             @"        State/County/Region: <input type='text' name='SCR' placeholder='State/County/Region'> <br>" + "\n" +
+                             @"        Zip/Postal Code: <input type='text' maxlength='8' name='ZPC' placeholder='e.g. NG9 6LL'> <br>" + "\n" +
+                             @"        Country: <input type='text' name='Country' placeholder='United Kingdom'> <br>" + "\n";
                         rtb1.Text += htmlText[i] + "\n";
                         break;
                     case "Number":
@@ -413,7 +413,9 @@ namespace htmlEditor
                         break;
                 }
             }
-            htmlText[htmlText.Count] = @"</form>";
+            htmlText[htmlText.Count] = @"
+        <input type='submit'>
+    </form>";
             rtb1.Text += htmlText[htmlText.Count - 1] + "\n";
 
         }
@@ -461,7 +463,31 @@ namespace htmlEditor
         {
             alert('Adress Line 1 must be filled out');
             return false;
-        }";
+        }" + "\n" +
+        @"        var line" + i + @" = document.forms['myForm']['city'].value;
+        if (line" + i + @" == '')
+        {
+            alert('City must be filled out');
+            return false;
+        }" + "\n" +
+         @"        var line" + i + @" = document.forms['myForm']['SCR'].value;
+        if (line" + i + @" == '')
+        {
+            alert('State/County/Region must be filled out');
+            return false;
+        }" + "\n" +
+        @"        var line" + i + @" = document.forms['myForm']['ZPC'].value;
+        if (line" + i + @" == '')
+        {
+            alert('Zip/Postal Code must be filled out');
+            return false;
+        }" + "\n" +
+        @"        var line" + i + @" = document.forms['myForm']['Country'].value;
+        if (line" + i + @" == '')
+        {
+            alert('Country must be filled out');
+            return false;
+        }" + "\n";
                         rtb2.Text += jsText[i] + "\n";
                         break;
                     case "Number":
@@ -500,11 +526,14 @@ namespace htmlEditor
                     case "Check":
                         num = num + 3;
                         num2 = num2 + 3;
-                        jsText[i] = @"        var check" + i + @" = document.forms['myForm']['" + panel2.Controls[num].Text + @"'].value;
-        if (check" + i + @" == '')
+                        jsText[i] = @"			var check" + i + @" = document.getElementsByName('checkBox');
+        for (var i = 0; i < check" + i + @".length; i++)
         {
-            alert('" + panel2.Controls[num].Text + @" must be chosen');
-            return false;
+            if (check" + i + @"[i].checked == false) 
+    		{
+                alert('please select an option');
+                break;
+            }
         }";
                         rtb2.Text += jsText[i] + "\n";
                         break;
@@ -532,19 +561,19 @@ namespace htmlEditor
                         break;
                 }
             }
-            jsText[0] = @"}";
-            rtb2.Text += jsText[0] + "\n";
+            jsText[jsText.Count] = @"}";
+            rtb2.Text += jsText[jsText.Count - 1] + "\n";
         }
 
- /*       void phpCode()
+        void phpCode()
         {
-            Dictionary<int, string> jsText = new Dictionary<int, string>();
+            Dictionary<int, string> phpText = new Dictionary<int, string>();
             int num = -2;
             int num2 = -1;
-            rtb2.Text = "";
-            jsText[0] = @"function validateForm()
-{";
-            rtb2.Text += jsText[0] + "\n";
+            rtb3.Text = "";
+            phpText[0] = @"if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+            {" + "\n";
+            rtb3.Text = phpText[0];
             for (int i = 1; i < formList.Count + 1; i++)
             {
                 switch (formList[i - 1])
@@ -552,120 +581,112 @@ namespace htmlEditor
                     case "Input Text":
                         num = num + 3;
                         num2 = num2 + 3;
-                        
-                        break;
-                    case "Input E-mail":
-                        num = num + 3;
-                        num2 = num2 + 3;
-                        jsText[i] = @"        var num" + i + @" = document.forms['myForm']['" + panel2.Controls[num].Text + @"'].value;
-        if (num" + i + @" == '')
-        {
-            alert('" + panel2.Controls[num].Text + @" must be filled out');
-            return false;
-        }";
-                        rtb2.Text += jsText[i] + "\n";
+                        phpText[i] = @"            $text" + i + @" = strip($_POST['" + panel2.Controls[num].Text + @"']);
+    // check if the text only contains letters, whitespace and numbers
+    if (!preg_match('/^[a-zA-Z0-9 ]*$/',$text" + i + @"))
+    {
+        $text" + i + @"Err = 'Only letters, white space and numbers allowed in"+ panel2.Controls[num].Text + @"';
+    }";
+                        rtb3.Text += phpText[i] + "\n";
                         break;
                     case "Input Address":
                         num = num + 3;
                         num2 = num2 + 3;
-                        jsText[i] = @"";
-                        rtb2.Text += jsText[i] + "\n";
-                        break;
-                    case "Number":
-                        num = num + 3;
-                        num2 = num2 + 3;
-                        jsText[i] = @"        var num" + i + @" = document.forms['myForm']['" + panel2.Controls[num].Text + @"'].value;
-        if (num" + i + @" == '')
+                        phpText[i] = @"            $line" + i + @" = strip($_POST['line1']);
+    // check if the address is a valid format
+    if (!preg_match('/^(([1-9][0-9]*, )?([A-Z][a-z]*, )?)?(([1-9][0-9]*, )?([1-9][0-9]* )?([A-Za-z][a-z]* )*([A-Za-z][a-z]*))$/',$line" + i + @")) 
+    {
+        $line" + i + @"Err = 'Address Line 1 is an invalid format';
+    }" + "\n" +
+    @"            $line" + i + @" = strip($_POST['line2']);
+    // check if the address is a valid format
+    if($line" + i + @" != '')
+    {
+        if (!preg_match('/^(([1-9][0-9]*, )?([A-Z][a-z]*, )?)?(([1-9][0-9]*, )?([1-9][0-9]* )?([A-Za-z][a-z]* )*([A-Za-z][a-z]*))$/',$line" + i + @")) 
         {
-            alert('" + panel2.Controls[num].Text + @" must be filled out');
-            return false;
-        }";
-                        rtb2.Text += jsText[i] + "\n";
-                        break;
-                    case "Range":
-                        num = num + 3;
-                        num2 = num2 + 3;
-                        jsText[i] = @"        var text" + i + @" = document.forms['myForm']['" + panel2.Controls[num].Text + @"'].value;
-        if (text" + i + @" == '')
-        { 
-            alert('" + panel2.Controls[num].Text + @" must be filled out');
-            return false;
-        }";
-                        rtb2.Text += jsText[i] + "\n";
-                        break;
-                    case "Radio":
-                        num = num + 3;
-                        num2 = num2 + 3;
-                        jsText[i] = @"        var radios = document.getElementsByName('" + panel2.Controls[num].Text + @"');
-        var formValid = false;
-
-        var i = 0;
-        while (!formValid && i < radios.length)
-        {
-            if (radios[i].checked) formValid = true;
-            i++;
-         }
-        
-         if (!formValid)
-         { 
-             alert('option must be chosen');​
-         }";
-                        rtb2.Text += jsText[i] + "\n";
-                        break;
-                    case "Check":
-                        num = num + 3;
-                        num2 = num2 + 3;
-                        jsText[i] = @"        var checks = document.getElementsByName('" + panel2.Controls[num].Text + @"');
-        var formValid = false;
-
-        var i = 0;
-        while (!formValid && i < checks.length)
-        {
-            if (checks[i].checked) formValid = true;
-            i++;
-         }
-        
-         if (!formValid)
-         { 
-             alert('Must check some option');​
-         }";
-                        rtb2.Text += jsText[i] + "\n";
-                        break;
-                    case "Select":
-                        num = num + 3;
-                        num2 = num2 + 3;
-                        jsText[i] = @"        var checks = document.getElementsByName('" + panel2.Controls[num].Text + @"');
-        var formValid = false;
-
-        var i = 0;
-        while (!formValid && i < checks.length)
-        {
-            if (checks[i].checked) formValid = true;
-            i++;
-         }
-        
-         if (!formValid)
-         { 
-             alert('Must select an option');​
-         }";
-                        rtb2.Text += jsText[i] + "\n";
+            $line" + i + @"Err = 'Address Line 2 is an invalid format';
+        }
+    }" + "\n" +
+    @"            $city" + i + @" = strip($_POST['city']);
+    // check if the city only contains letters, whitespace and numbers
+    if (!preg_match('/^[a-zA-Z- ]*$/',$city" + i + @"))
+    {
+        $city" + i + @"Err = 'Only letters, white space and dashes allowed in city';
+    }" + "\n" +
+    @"            $SRC" + i + @" = strip($_POST['SRC']);
+    // check if the Zip Code/Postal Code only contains letters, whitespace and numbers
+    if (!preg_match('/^[a-zA-Z0-9 ]*$/',$SRC" + i + @")) 
+    {
+        $SRC" + i + @"Err = 'Only letters, white space and numbers allowed in Zip Code/Postal Code';
+    }" + "\n" +
+    @"            $Country" + i + @" = strip($_POST['Country']);
+    // check if the text only contains letters, whitespace and numbers
+    if (!preg_match('/^[a-zA-Z]*$/',$Country" + i + @")) 
+    {
+        $Country" + i + @"Err = 'Only letters, white space and numbers allowed in Country';
+    }";
+                        rtb3.Text += phpText[i] + "\n";
                         break;
                     case "Textarea":
                         num = num + 3;
                         num2 = num2 + 3;
-                        jsText[i] = @"var text" + i + @" = document.forms['myForm']['" + panel2.Controls[num].Text + @"'].value;
-        if (text" + i + @" == '')
-        {
-            alert('[' " + panel2.Controls[num].Text + @" must have some text');
-            return false;
-        }";
-                        rtb2.Text += jsText[i] + "\n";
+                        phpText[i] = @"            $textarea" + i + "= strip($_POST['" + panel2.Controls[num].Text + "'});";
+                        rtb3.Text += phpText[i] + "\n";
                         break;
+                    case "Number":
+                        num = num + 3;
+                        num2 = num2 + 3;
+                        phpText[i] = @"            $number" + i + "= strip($_POST['" + panel2.Controls[num].Text + "'});";
+                        rtb3.Text += phpText[i] + "\n";
+                        break;
+                    case "Range":
+                        num = num + 3;
+                        num2 = num2 + 3;
+                        phpText[i] = @"            $range" + i + "= strip($_POST['" + panel2.Controls[num].Text + "'});";
+                        rtb3.Text += phpText[i] + "\n";
+                        break;
+                    case "Radio":
+                        num = num + 3;
+                        num2 = num2 + 3;
+                        phpText[i] = @"            $radio" + i + "= strip($_POST['" + panel2.Controls[num].Text + "'});";
+                        rtb3.Text += phpText[i] + "\n";
+                        break;
+                    case "Input E-mail":
+                        num = num + 3;
+                        num2 = num2 + 3;
+                        phpText[i] = @"            $email" + i + "= strip($_POST['" + panel2.Controls[num].Text + "'});";
+                        rtb3.Text += phpText[i] + "\n";
+                        break;
+                    case "Check":
+                        num = num + 3;
+                        num2 = num2 + 3;
+                        phpText[i] = @"            $Check" + i + "= strip($_POST['" + panel2.Controls[num].Text + "'});";
+                        rtb3.Text += phpText[i] + "\n";
+                        break;
+                    case "Select":
+                        num = num + 3;
+                        num2 = num2 + 3;
+                        phpText[i] = @"            $Select" + i + "= strip($_POST['" + panel2.Controls[num].Text + "'});";
+                        rtb3.Text += phpText[i] + "\n";
+                        break;
+
                 }
             }
-            jsText[0] = @"}";
-            rtb2.Text += jsText[0] + "\n";
-        }*/
+            phpText[phpText.Count] = @"}";
+            rtb3.Text += phpText[phpText.Count - 1] + "\n";
+            phpText[phpText.Count] = @"function strip($data) 
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+    // remeber to echo out the error messages.
+    // e.g. echo $city1Err for outputing the error message for city input box
+    // Advanced Users only: You could use an if statement to see if there are any errors i.e. checking if the variables are equal to nothing
+    // and if so use headers to redirect to a thank you page or other page on your website else output the error messaes with a link to go back.";
+            rtb3.Text += phpText[phpText.Count - 1] + "\n";
+        }
 
         private void rtb1_TextChanged(object sender, EventArgs e)
         {
