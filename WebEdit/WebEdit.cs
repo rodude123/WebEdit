@@ -65,7 +65,6 @@ namespace htmlEditor
                 rtb.TextChanged += rtb_TextChanged;
                 rtb.AcceptsTab = true;
                 rtb.SelectionTabs = new int[] { 100, 200, 300, 400 };
-
             }
             return rtb;
 
@@ -1256,6 +1255,50 @@ else
         private void WebEdit_Load(object sender, EventArgs e)
         {
            
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case (Keys.Control | Keys.S):
+                    saveToolStripButton.PerformClick();
+                    break;
+                case (Keys.Control | Keys.O):
+                    openToolStripButton.PerformClick();
+                    break;
+                case (Keys.Control | Keys.N):
+                    newToolStripButton.PerformClick();
+                    break;
+                case (Keys.Control | Keys.Shift | Keys.S):
+                    saveProj.PerformClick();
+                    break;
+                case (Keys.Control | Keys.Shift | Keys.O):
+                    openFolderToolStripButton.PerformClick();
+                    break;
+                case (Keys.Control | Keys.W):
+                    Remove.PerformClick();
+                    break;
+                case (Keys.Control | Keys.X):
+                    cutToolStripButton.PerformClick();
+                    break;
+                case (Keys.Control | Keys.C):
+                    copyToolStripButton.PerformClick();
+                    break;
+                case (Keys.Control | Keys.V):
+                    pasteToolStripButton.PerformClick();
+                    break;
+                case (Keys.Control | Keys.Z):
+                    GetRichTextBox().Undo();
+                    break;
+                case (Keys.Control | Keys.Y):
+                    GetRichTextBox().Redo();
+                    break;
+                case (Keys.Control | Keys.Shift | Keys.P):
+                    openProj.PerformClick();
+                    break;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
     }
