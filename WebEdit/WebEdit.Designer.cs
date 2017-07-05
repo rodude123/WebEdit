@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WebEdit));
             System.Windows.Forms.ToolStripMenuItem sendAMessageToolStripMenuItem;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WebEdit));
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Folder");
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -68,6 +68,7 @@
             this.jSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pHPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectToTeamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.syncWithTeamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripLabel();
@@ -116,6 +117,13 @@
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
+            // sendAMessageToolStripMenuItem
+            // 
+            sendAMessageToolStripMenuItem.Enabled = false;
+            sendAMessageToolStripMenuItem.Name = "sendAMessageToolStripMenuItem";
+            sendAMessageToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            sendAMessageToolStripMenuItem.Text = "Send a message";
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -131,7 +139,7 @@
             this.img.AutoSize = true;
             this.img.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.img.Location = new System.Drawing.Point(8, 25);
-            this.img.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.img.Margin = new System.Windows.Forms.Padding(4);
             this.img.Name = "img";
             this.img.Size = new System.Drawing.Size(152, 36);
             this.img.TabIndex = 0;
@@ -144,7 +152,7 @@
             this.script.AutoSize = true;
             this.script.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.script.Location = new System.Drawing.Point(8, 71);
-            this.script.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.script.Margin = new System.Windows.Forms.Padding(4);
             this.script.Name = "script";
             this.script.Size = new System.Drawing.Size(153, 36);
             this.script.TabIndex = 1;
@@ -158,7 +166,7 @@
             this.standardHTML.AutoSize = true;
             this.standardHTML.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.standardHTML.Location = new System.Drawing.Point(8, 438);
-            this.standardHTML.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.standardHTML.Margin = new System.Windows.Forms.Padding(4);
             this.standardHTML.Name = "standardHTML";
             this.standardHTML.Size = new System.Drawing.Size(157, 36);
             this.standardHTML.TabIndex = 2;
@@ -171,7 +179,7 @@
             this.h1.AutoSize = true;
             this.h1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.h1.Location = new System.Drawing.Point(8, 389);
-            this.h1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.h1.Margin = new System.Windows.Forms.Padding(4);
             this.h1.Name = "h1";
             this.h1.Size = new System.Drawing.Size(152, 36);
             this.h1.TabIndex = 3;
@@ -184,7 +192,7 @@
             this.header.AutoSize = true;
             this.header.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.header.Location = new System.Drawing.Point(8, 337);
-            this.header.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.header.Margin = new System.Windows.Forms.Padding(4);
             this.header.Name = "header";
             this.header.Size = new System.Drawing.Size(152, 36);
             this.header.TabIndex = 4;
@@ -197,7 +205,7 @@
             this.navMenu.AutoSize = true;
             this.navMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.navMenu.Location = new System.Drawing.Point(8, 231);
-            this.navMenu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.navMenu.Margin = new System.Windows.Forms.Padding(4);
             this.navMenu.Name = "navMenu";
             this.navMenu.Size = new System.Drawing.Size(152, 36);
             this.navMenu.TabIndex = 5;
@@ -210,7 +218,7 @@
             this.paragrah.AutoSize = true;
             this.paragrah.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.paragrah.Location = new System.Drawing.Point(8, 177);
-            this.paragrah.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.paragrah.Margin = new System.Windows.Forms.Padding(4);
             this.paragrah.Name = "paragrah";
             this.paragrah.Size = new System.Drawing.Size(155, 36);
             this.paragrah.TabIndex = 6;
@@ -223,7 +231,7 @@
             this.section.AutoSize = true;
             this.section.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.section.Location = new System.Drawing.Point(8, 124);
-            this.section.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.section.Margin = new System.Windows.Forms.Padding(4);
             this.section.Name = "section";
             this.section.Size = new System.Drawing.Size(153, 36);
             this.section.TabIndex = 7;
@@ -236,7 +244,7 @@
             this.div.AutoSize = true;
             this.div.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.div.Location = new System.Drawing.Point(8, 283);
-            this.div.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.div.Margin = new System.Windows.Forms.Padding(4);
             this.div.Name = "div";
             this.div.Size = new System.Drawing.Size(153, 36);
             this.div.TabIndex = 8;
@@ -261,7 +269,7 @@
             this.panel1.Controls.Add(this.script);
             this.panel1.Controls.Add(this.img);
             this.panel1.Location = new System.Drawing.Point(4, 4);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(169, 592);
             this.panel1.TabIndex = 3;
@@ -350,7 +358,7 @@
             this.newToolStripButton.Name = "newToolStripButton";
             this.newToolStripButton.Size = new System.Drawing.Size(24, 24);
             this.newToolStripButton.Text = "&New";
-            this.newToolStripButton.ToolTipText = "New (ctrl+n)";
+            this.newToolStripButton.ToolTipText = "New (Ctrl+N)";
             this.newToolStripButton.Click += new System.EventHandler(this.newToolStripButton_Click);
             // 
             // Remove
@@ -361,7 +369,7 @@
             this.Remove.Name = "Remove";
             this.Remove.Size = new System.Drawing.Size(24, 24);
             this.Remove.Text = "toolStripButton3";
-            this.Remove.ToolTipText = "Remove Selected Tab (ctrl+w)";
+            this.Remove.ToolTipText = "Remove Selected Tab (Ctrl+W)";
             this.Remove.Click += new System.EventHandler(this.Remove_Click);
             // 
             // openToolStripButton
@@ -372,7 +380,7 @@
             this.openToolStripButton.Name = "openToolStripButton";
             this.openToolStripButton.Size = new System.Drawing.Size(24, 24);
             this.openToolStripButton.Text = "&Open";
-            this.openToolStripButton.ToolTipText = "Open (ctrl+o)";
+            this.openToolStripButton.ToolTipText = "Open (Ctrl+O)";
             this.openToolStripButton.Click += new System.EventHandler(this.openToolStripButton_Click);
             // 
             // openProj
@@ -383,7 +391,7 @@
             this.openProj.Name = "openProj";
             this.openProj.Size = new System.Drawing.Size(24, 24);
             this.openProj.Text = "Open Project";
-            this.openProj.ToolTipText = "Open Project (ctrl+shift+alt+o)";
+            this.openProj.ToolTipText = "Open Project (Ctrl+Shift+P)";
             this.openProj.Click += new System.EventHandler(this.openProj_Click);
             // 
             // openFolderToolStripButton
@@ -393,8 +401,8 @@
             this.openFolderToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openFolderToolStripButton.Name = "openFolderToolStripButton";
             this.openFolderToolStripButton.Size = new System.Drawing.Size(24, 24);
-            this.openFolderToolStripButton.Text = "Open Folder";
-            this.openFolderToolStripButton.ToolTipText = "Open Folder (ctrl+shift+o)";
+            this.openFolderToolStripButton.Text = "Open Folder ";
+            this.openFolderToolStripButton.ToolTipText = "Open Folder (Ctrl+Shift+O)";
             this.openFolderToolStripButton.Click += new System.EventHandler(this.openFolderToolStripButton_Click);
             // 
             // saveToolStripButton
@@ -405,7 +413,7 @@
             this.saveToolStripButton.Name = "saveToolStripButton";
             this.saveToolStripButton.Size = new System.Drawing.Size(24, 24);
             this.saveToolStripButton.Text = "&Save";
-            this.saveToolStripButton.ToolTipText = "Save (ctrl+s)";
+            this.saveToolStripButton.ToolTipText = "Save (Ctrl+S)";
             this.saveToolStripButton.Click += new System.EventHandler(this.saveToolStripButton_Click);
             // 
             // saveProj
@@ -416,7 +424,7 @@
             this.saveProj.Name = "saveProj";
             this.saveProj.Size = new System.Drawing.Size(24, 24);
             this.saveProj.Text = "Save Project";
-            this.saveProj.ToolTipText = "Save Project (ctrl+shift+s)";
+            this.saveProj.ToolTipText = "Save Project (Ctrl+Shift+S)";
             this.saveProj.Click += new System.EventHandler(this.saveProj_Click);
             // 
             // toolStripSeparator
@@ -432,7 +440,7 @@
             this.cutToolStripButton.Name = "cutToolStripButton";
             this.cutToolStripButton.Size = new System.Drawing.Size(24, 24);
             this.cutToolStripButton.Text = "C&ut";
-            this.cutToolStripButton.ToolTipText = "Cut (ctrl+x)";
+            this.cutToolStripButton.ToolTipText = "Cut (Ctrl+X)";
             this.cutToolStripButton.Click += new System.EventHandler(this.cutToolStripButton_Click);
             // 
             // copyToolStripButton
@@ -443,7 +451,7 @@
             this.copyToolStripButton.Name = "copyToolStripButton";
             this.copyToolStripButton.Size = new System.Drawing.Size(24, 24);
             this.copyToolStripButton.Text = "&Copy";
-            this.copyToolStripButton.ToolTipText = "Copy (ctrl+c) ";
+            this.copyToolStripButton.ToolTipText = "Copy (Ctrl+C) ";
             this.copyToolStripButton.Click += new System.EventHandler(this.copyToolStripButton_Click);
             // 
             // pasteToolStripButton
@@ -454,7 +462,7 @@
             this.pasteToolStripButton.Name = "pasteToolStripButton";
             this.pasteToolStripButton.Size = new System.Drawing.Size(24, 24);
             this.pasteToolStripButton.Text = "&Paste";
-            this.pasteToolStripButton.ToolTipText = "Paste (ctrl+v)";
+            this.pasteToolStripButton.ToolTipText = "Paste (Ctrl+V)";
             this.pasteToolStripButton.Click += new System.EventHandler(this.pasteToolStripButton_Click);
             // 
             // toolStripSeparator1
@@ -509,6 +517,7 @@
             // 
             this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loginToolStripMenuItem,
             this.connectToTeamToolStripMenuItem,
             this.syncWithTeamToolStripMenuItem,
             sendAMessageToolStripMenuItem});
@@ -517,6 +526,12 @@
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
             this.toolStripDropDownButton2.Size = new System.Drawing.Size(116, 24);
             this.toolStripDropDownButton2.Text = "Team Services";
+            // 
+            // loginToolStripMenuItem
+            // 
+            this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
+            this.loginToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.loginToolStripMenuItem.Text = "Login";
             // 
             // connectToTeamToolStripMenuItem
             // 
@@ -531,13 +546,6 @@
             this.syncWithTeamToolStripMenuItem.Name = "syncWithTeamToolStripMenuItem";
             this.syncWithTeamToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.syncWithTeamToolStripMenuItem.Text = "Sync With Team";
-            // 
-            // sendAMessageToolStripMenuItem
-            // 
-            sendAMessageToolStripMenuItem.Enabled = false;
-            sendAMessageToolStripMenuItem.Name = "sendAMessageToolStripMenuItem";
-            sendAMessageToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
-            sendAMessageToolStripMenuItem.Text = "Send a message";
             // 
             // toolStripTextBox1
             // 
@@ -589,7 +597,7 @@
             this.flowLayoutPanel1.Controls.Add(this.treeView1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 27);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(0, 907);
             this.flowLayoutPanel1.TabIndex = 6;
@@ -599,7 +607,7 @@
             this.treeView1.ImageIndex = 0;
             this.treeView1.ImageList = this.imageList1;
             this.treeView1.Location = new System.Drawing.Point(4, 4);
-            this.treeView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.treeView1.Margin = new System.Windows.Forms.Padding(4);
             this.treeView1.Name = "treeView1";
             treeNode1.ImageIndex = 0;
             treeNode1.Name = "nodeProject";
@@ -627,7 +635,7 @@
             this.flowLayoutPanel2.Controls.Add(this.tabControl1);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 27);
-            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(872, 907);
             this.flowLayoutPanel2.TabIndex = 7;
@@ -635,7 +643,7 @@
             // tabControl1
             // 
             this.tabControl1.Location = new System.Drawing.Point(4, 4);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(867, 900);
@@ -648,7 +656,7 @@
             this.flowLayoutPanel3.Controls.Add(this.panel3);
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel3.Location = new System.Drawing.Point(872, 27);
-            this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(657, 907);
             this.flowLayoutPanel3.TabIndex = 8;
@@ -912,7 +920,7 @@
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.toolStrip1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "WebEdit";
             this.Text = "WebEdit";
             this.Load += new System.EventHandler(this.WebEdit_Load);
@@ -1009,6 +1017,7 @@
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
         private System.Windows.Forms.ToolStripMenuItem connectToTeamToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem syncWithTeamToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
     }
 }
 
