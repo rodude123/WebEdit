@@ -16,7 +16,7 @@ namespace htmlEditor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new htmlFormBuilder());
+            Application.Run(new WebEdit());
         }
     }
 }

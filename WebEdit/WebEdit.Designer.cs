@@ -66,6 +66,10 @@
             this.cSSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.jSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pHPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.connectToTeamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.syncWithTeamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sendAMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.findText = new System.Windows.Forms.ToolStripTextBox();
@@ -102,10 +106,6 @@
             this.phpWhileState = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.extScriptHelp = new System.Windows.Forms.ToolTip(this.components);
-            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.connectToTeamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.syncWithTeamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sendAMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -259,7 +259,7 @@
             // 
             this.htmlForm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.htmlForm.Location = new System.Drawing.Point(6, 400);
-            this.htmlForm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.htmlForm.Margin = new System.Windows.Forms.Padding(2);
             this.htmlForm.Name = "htmlForm";
             this.htmlForm.Size = new System.Drawing.Size(114, 29);
             this.htmlForm.TabIndex = 12;
@@ -271,7 +271,7 @@
             // 
             this.mediaQuery.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.mediaQuery.Location = new System.Drawing.Point(4, 448);
-            this.mediaQuery.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.mediaQuery.Margin = new System.Windows.Forms.Padding(2);
             this.mediaQuery.Name = "mediaQuery";
             this.mediaQuery.Size = new System.Drawing.Size(120, 32);
             this.mediaQuery.TabIndex = 11;
@@ -327,7 +327,7 @@
             this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1147, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(1098, 27);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -460,30 +460,61 @@
             // hTMLToolStripMenuItem
             // 
             this.hTMLToolStripMenuItem.Name = "hTMLToolStripMenuItem";
-            this.hTMLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hTMLToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.hTMLToolStripMenuItem.Text = "HTML";
             this.hTMLToolStripMenuItem.Click += new System.EventHandler(this.HTML_Click);
             // 
             // cSSToolStripMenuItem
             // 
             this.cSSToolStripMenuItem.Name = "cSSToolStripMenuItem";
-            this.cSSToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cSSToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.cSSToolStripMenuItem.Text = "CSS";
             this.cSSToolStripMenuItem.Click += new System.EventHandler(this.CSS_Click);
             // 
             // jSToolStripMenuItem
             // 
             this.jSToolStripMenuItem.Name = "jSToolStripMenuItem";
-            this.jSToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.jSToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.jSToolStripMenuItem.Text = "JS";
             this.jSToolStripMenuItem.Click += new System.EventHandler(this.JS_Click);
             // 
             // pHPToolStripMenuItem
             // 
             this.pHPToolStripMenuItem.Name = "pHPToolStripMenuItem";
-            this.pHPToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pHPToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.pHPToolStripMenuItem.Text = "PHP";
             this.pHPToolStripMenuItem.Click += new System.EventHandler(this.PHP_Click);
+            // 
+            // toolStripDropDownButton2
+            // 
+            this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.connectToTeamToolStripMenuItem,
+            this.syncWithTeamToolStripMenuItem,
+            this.sendAMessageToolStripMenuItem});
+            this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
+            this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(94, 24);
+            this.toolStripDropDownButton2.Text = "Team Services";
+            // 
+            // connectToTeamToolStripMenuItem
+            // 
+            this.connectToTeamToolStripMenuItem.Name = "connectToTeamToolStripMenuItem";
+            this.connectToTeamToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.connectToTeamToolStripMenuItem.Text = "Connect to team";
+            // 
+            // syncWithTeamToolStripMenuItem
+            // 
+            this.syncWithTeamToolStripMenuItem.Name = "syncWithTeamToolStripMenuItem";
+            this.syncWithTeamToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.syncWithTeamToolStripMenuItem.Text = "Sync With Team";
+            // 
+            // sendAMessageToolStripMenuItem
+            // 
+            this.sendAMessageToolStripMenuItem.Name = "sendAMessageToolStripMenuItem";
+            this.sendAMessageToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.sendAMessageToolStripMenuItem.Text = "Send a message";
             // 
             // toolStripTextBox1
             // 
@@ -591,7 +622,7 @@
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel3.Location = new System.Drawing.Point(654, 27);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(493, 732);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(444, 732);
             this.flowLayoutPanel3.TabIndex = 8;
             // 
             // panel2
@@ -608,7 +639,7 @@
             this.panel2.Controls.Add(this.basicFunc);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Location = new System.Drawing.Point(134, 2);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(150, 447);
             this.panel2.TabIndex = 4;
@@ -618,7 +649,7 @@
             // 
             this.documentName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.documentName.Location = new System.Drawing.Point(15, 401);
-            this.documentName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.documentName.Margin = new System.Windows.Forms.Padding(2);
             this.documentName.Name = "documentName";
             this.documentName.Size = new System.Drawing.Size(118, 29);
             this.documentName.TabIndex = 10;
@@ -630,7 +661,7 @@
             // 
             this.documentCSS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.documentCSS.Location = new System.Drawing.Point(15, 357);
-            this.documentCSS.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.documentCSS.Margin = new System.Windows.Forms.Padding(2);
             this.documentCSS.Name = "documentCSS";
             this.documentCSS.Size = new System.Drawing.Size(118, 29);
             this.documentCSS.TabIndex = 9;
@@ -642,7 +673,7 @@
             // 
             this.forinState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.forinState.Location = new System.Drawing.Point(15, 231);
-            this.forinState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.forinState.Margin = new System.Windows.Forms.Padding(2);
             this.forinState.Name = "forinState";
             this.forinState.Size = new System.Drawing.Size(118, 29);
             this.forinState.TabIndex = 6;
@@ -654,7 +685,7 @@
             // 
             this.forState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.forState.Location = new System.Drawing.Point(15, 188);
-            this.forState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.forState.Margin = new System.Windows.Forms.Padding(2);
             this.forState.Name = "forState";
             this.forState.Size = new System.Drawing.Size(118, 29);
             this.forState.TabIndex = 5;
@@ -666,7 +697,7 @@
             // 
             this.documentClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.documentClass.Location = new System.Drawing.Point(15, 317);
-            this.documentClass.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.documentClass.Margin = new System.Windows.Forms.Padding(2);
             this.documentClass.Name = "documentClass";
             this.documentClass.Size = new System.Drawing.Size(118, 29);
             this.documentClass.TabIndex = 8;
@@ -678,7 +709,7 @@
             // 
             this.documentID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.documentID.Location = new System.Drawing.Point(15, 275);
-            this.documentID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.documentID.Margin = new System.Windows.Forms.Padding(2);
             this.documentID.Name = "documentID";
             this.documentID.Size = new System.Drawing.Size(118, 29);
             this.documentID.TabIndex = 8;
@@ -690,7 +721,7 @@
             // 
             this.switchState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.switchState.Location = new System.Drawing.Point(15, 145);
-            this.switchState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.switchState.Margin = new System.Windows.Forms.Padding(2);
             this.switchState.Name = "switchState";
             this.switchState.Size = new System.Drawing.Size(118, 29);
             this.switchState.TabIndex = 4;
@@ -702,7 +733,7 @@
             // 
             this.whileState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.whileState.Location = new System.Drawing.Point(15, 102);
-            this.whileState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.whileState.Margin = new System.Windows.Forms.Padding(2);
             this.whileState.Name = "whileState";
             this.whileState.Size = new System.Drawing.Size(118, 29);
             this.whileState.TabIndex = 3;
@@ -714,7 +745,7 @@
             // 
             this.ifState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ifState.Location = new System.Drawing.Point(15, 58);
-            this.ifState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ifState.Margin = new System.Windows.Forms.Padding(2);
             this.ifState.Name = "ifState";
             this.ifState.Size = new System.Drawing.Size(118, 29);
             this.ifState.TabIndex = 2;
@@ -726,7 +757,7 @@
             // 
             this.basicFunc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.basicFunc.Location = new System.Drawing.Point(15, 21);
-            this.basicFunc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.basicFunc.Margin = new System.Windows.Forms.Padding(2);
             this.basicFunc.Name = "basicFunc";
             this.basicFunc.Size = new System.Drawing.Size(118, 29);
             this.basicFunc.TabIndex = 1;
@@ -754,7 +785,7 @@
             this.panel3.Controls.Add(this.phpIfState);
             this.panel3.Controls.Add(this.phpWhileState);
             this.panel3.Location = new System.Drawing.Point(288, 2);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(129, 447);
             this.panel3.TabIndex = 5;
@@ -763,7 +794,7 @@
             // 
             this.phpForeachState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.phpForeachState.Location = new System.Drawing.Point(11, 231);
-            this.phpForeachState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.phpForeachState.Margin = new System.Windows.Forms.Padding(2);
             this.phpForeachState.Name = "phpForeachState";
             this.phpForeachState.Size = new System.Drawing.Size(102, 29);
             this.phpForeachState.TabIndex = 15;
@@ -775,7 +806,7 @@
             // 
             this.phpBasicFunc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.phpBasicFunc.Location = new System.Drawing.Point(11, 21);
-            this.phpBasicFunc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.phpBasicFunc.Margin = new System.Windows.Forms.Padding(2);
             this.phpBasicFunc.Name = "phpBasicFunc";
             this.phpBasicFunc.Size = new System.Drawing.Size(102, 28);
             this.phpBasicFunc.TabIndex = 1;
@@ -787,7 +818,7 @@
             // 
             this.phpForState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.phpForState.Location = new System.Drawing.Point(11, 188);
-            this.phpForState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.phpForState.Margin = new System.Windows.Forms.Padding(2);
             this.phpForState.Name = "phpForState";
             this.phpForState.Size = new System.Drawing.Size(102, 29);
             this.phpForState.TabIndex = 14;
@@ -809,7 +840,7 @@
             // 
             this.phpSwitchState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.phpSwitchState.Location = new System.Drawing.Point(11, 145);
-            this.phpSwitchState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.phpSwitchState.Margin = new System.Windows.Forms.Padding(2);
             this.phpSwitchState.Name = "phpSwitchState";
             this.phpSwitchState.Size = new System.Drawing.Size(102, 29);
             this.phpSwitchState.TabIndex = 13;
@@ -821,7 +852,7 @@
             // 
             this.phpIfState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.phpIfState.Location = new System.Drawing.Point(11, 58);
-            this.phpIfState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.phpIfState.Margin = new System.Windows.Forms.Padding(2);
             this.phpIfState.Name = "phpIfState";
             this.phpIfState.Size = new System.Drawing.Size(102, 29);
             this.phpIfState.TabIndex = 11;
@@ -833,7 +864,7 @@
             // 
             this.phpWhileState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.phpWhileState.Location = new System.Drawing.Point(11, 102);
-            this.phpWhileState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.phpWhileState.Margin = new System.Windows.Forms.Padding(2);
             this.phpWhileState.Name = "phpWhileState";
             this.phpWhileState.Size = new System.Drawing.Size(102, 29);
             this.phpWhileState.TabIndex = 12;
@@ -846,42 +877,11 @@
             this.extScriptHelp.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.extScriptHelp.ToolTipTitle = "External Scripts";
             // 
-            // toolStripDropDownButton2
-            // 
-            this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.connectToTeamToolStripMenuItem,
-            this.syncWithTeamToolStripMenuItem,
-            this.sendAMessageToolStripMenuItem});
-            this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
-            this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
-            this.toolStripDropDownButton2.Size = new System.Drawing.Size(94, 24);
-            this.toolStripDropDownButton2.Text = "Team Services";
-            // 
-            // connectToTeamToolStripMenuItem
-            // 
-            this.connectToTeamToolStripMenuItem.Name = "connectToTeamToolStripMenuItem";
-            this.connectToTeamToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.connectToTeamToolStripMenuItem.Text = "Connect to team";
-            // 
-            // syncWithTeamToolStripMenuItem
-            // 
-            this.syncWithTeamToolStripMenuItem.Name = "syncWithTeamToolStripMenuItem";
-            this.syncWithTeamToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.syncWithTeamToolStripMenuItem.Text = "Sync With Team";
-            // 
-            // sendAMessageToolStripMenuItem
-            // 
-            this.sendAMessageToolStripMenuItem.Name = "sendAMessageToolStripMenuItem";
-            this.sendAMessageToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.sendAMessageToolStripMenuItem.Text = "Send a message";
-            // 
             // WebEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1147, 759);
+            this.ClientSize = new System.Drawing.Size(1098, 759);
             this.Controls.Add(this.flowLayoutPanel3);
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.flowLayoutPanel1);

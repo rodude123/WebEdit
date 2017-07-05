@@ -258,7 +258,7 @@ namespace htmlEditor
         private void htmlForm_Click(object sender, EventArgs e)
         {
             htmlFormBuilder HFB = new htmlFormBuilder();
-            HFB.ShowDialog();
+            HFB.Show();
         }
         #endregion
 
