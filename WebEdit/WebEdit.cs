@@ -689,6 +689,12 @@ else
             sr.Close();
         }
 
+        private void loginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            teamLogin tl = new teamLogin();
+            tl.ShowDialog();
+        }
+
         //find and replace
         private void toolStripButton1_Click_1(object sender, EventArgs e)
         {
