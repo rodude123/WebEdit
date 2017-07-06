@@ -16,5 +16,14 @@ namespace htmlEditor
         {
             InitializeComponent();
         }
+
+        private void signUpBtn_Click(object sender, EventArgs e)
+        {
+            string username = usernameSTxt.Text;
+            string email = emailSTxt.Text;
+            string password = passwordSTxt.Text;
+            string rePassword = rePassSTxt.Text;
+            string company = companySTxt.Text;
+        }
     }
 }

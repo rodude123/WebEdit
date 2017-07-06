@@ -1309,7 +1309,7 @@ else
 
         private void WebEdit_Resize(object sender, EventArgs e)
         {
-            treeView1.Height = ActiveForm.Height;
+            treeView1.Height = Height;
         }
 
         private void flowLayoutPanel3_Paint(object sender, PaintEventArgs e)
