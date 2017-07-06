@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace htmlEditor
 {
-    public partial class WebEdit : Form
+    public partial class WebEditForm : Form
     {
         string filepath = null;
         public string path = @"";
@@ -38,12 +38,12 @@ namespace htmlEditor
         Dictionary<int, string> openSaveDict = new Dictionary<int, string>();
         bool js = false;
 
-        public WebEdit()
+        public WebEditForm()
         {
             InitializeComponent();
         }
 
-        public WebEdit(string[] file)
+        public WebEditForm(string[] file)
         {
             if (file.Length != 0)
             {
@@ -257,7 +257,7 @@ namespace htmlEditor
         private void htmlForm_Click(object sender, EventArgs e)
         {
             htmlFormBuilder HFB = new htmlFormBuilder();
-            HFB.ShowDialog();
+            HFB.Show();
         }
         #endregion
 
@@ -1301,5 +1301,14 @@ else
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
+        private void WebEdit_Resize(object sender, EventArgs e)
+        {
+            treeView1.Height = ActiveForm.Height;
+        }
+
+        private void flowLayoutPanel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
