@@ -63,8 +63,7 @@ namespace htmlEditor
                 rtb = newTP.Controls[0] as RichTextBox;
                 rtb.Name = "rtb" + tabControl1.SelectedIndex.ToString();
                 rtb.TextChanged += rtb_TextChanged;
-                rtb.AcceptsTab = true;
-                rtb.SelectionTabs = new int[] { 100, 200, 300, 400 };
+                //rtb.AcceptsTab = true;
             }
             return rtb;
 
@@ -222,8 +221,8 @@ namespace htmlEditor
                 string text = @"<!DOCTYPE html>
 <html lang='en'>
 <head>
-	<meta charset='UTF-8'>
-	<title>My Site</title>
+        <meta charset='UTF-8'>
+        <title>My Site</title>
 </head>
 <body>
 	
@@ -1259,8 +1258,8 @@ else
         }
 
         private void WebEdit_Load(object sender, EventArgs e)
-        {
-           
+        { 
+
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
