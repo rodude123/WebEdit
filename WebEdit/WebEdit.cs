@@ -322,8 +322,6 @@ else
             insertText(@"document.getElementById('idName');");
         }
 
-        
-
         private void documentClass_Click(object sender, EventArgs e)
         {
             insertText(@"document.getElementsByClassName(className');");
