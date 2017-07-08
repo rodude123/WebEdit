@@ -121,5 +121,11 @@ namespace htmlEditor
         {
             passHelp.Show("The password should contain: atleast 8 characters, 1 capital letter and 1 numbner e.g. London1968 ", label9);
         }
+
+        private void loginBtn_Click(object sender, EventArgs e)
+        {
+            string username = usernameSTxt.Text;
+            string password = passwordSTxt.Text;
+        }
     }
 }
