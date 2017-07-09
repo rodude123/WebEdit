@@ -63,6 +63,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.passHelp = new System.Windows.Forms.ToolTip(this.components);
+            this.keepMeSignedIn = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.mainControl.SuspendLayout();
@@ -113,6 +114,7 @@
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tabPage1.Controls.Add(this.keepMeSignedIn);
             this.tabPage1.Controls.Add(this.maskedTextBox1);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.label2);
@@ -171,7 +173,7 @@
             // 
             // loginBtn
             // 
-            this.loginBtn.Location = new System.Drawing.Point(139, 148);
+            this.loginBtn.Location = new System.Drawing.Point(139, 165);
             this.loginBtn.Name = "loginBtn";
             this.loginBtn.Size = new System.Drawing.Size(75, 23);
             this.loginBtn.TabIndex = 0;
@@ -412,6 +414,17 @@
             this.passHelp.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.passHelp.ToolTipTitle = "Password complexity";
             // 
+            // keepMeSignedIn
+            // 
+            this.keepMeSignedIn.AutoSize = true;
+            this.keepMeSignedIn.Location = new System.Drawing.Point(58, 142);
+            this.keepMeSignedIn.Name = "keepMeSignedIn";
+            this.keepMeSignedIn.Size = new System.Drawing.Size(112, 17);
+            this.keepMeSignedIn.TabIndex = 7;
+            this.keepMeSignedIn.TabStop = true;
+            this.keepMeSignedIn.Text = "Keep me signed in";
+            this.keepMeSignedIn.UseVisualStyleBackColor = true;
+            // 
             // teamLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -470,5 +483,6 @@
         private System.Windows.Forms.Label emailErr;
         private System.Windows.Forms.Label usernameErr;
         private System.Windows.Forms.ToolTip passHelp;
+        private System.Windows.Forms.RadioButton keepMeSignedIn;
     }
 }

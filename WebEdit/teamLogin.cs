@@ -107,25 +107,38 @@ namespace htmlEditor
                 }
                 else
                 {
+                    //if password is valid
                     passwordErr.Text = "";
                 }
+            }
+            if (string.IsNullOrWhiteSpace(usernameErr.Text) || string.IsNullOrWhiteSpace(emailErr.Text) || string.IsNullOrWhiteSpace(passwordErr.Text) || string.IsNullOrWhiteSpace(rePasswordErr.Text))
+            {
+                //connect to the MySQL database and store the information in a row of the table
+                //but before I should have checked if the username is already in the datahbase or not
+                //and checked if the email address is in the database already too
+                //omly then add the inforamtion to the database
             }
         }
 
         private void rePassSTxt_MouseHover(object sender, EventArgs e)
         {
-            passHelp.Show("The password should contain: atleast 8 characters, 1 capital letter and 1 numbner e.g. London1968 ", rePassSTxt);
+            //show a help screen for the password strength
+            passHelp.Show("The password should contain: atleast 8 characters, 1 capital letter and 1 numbner e.g. London1968 ", passwordSTxt);
         }
 
         private void label9_MouseHover(object sender, EventArgs e)
         {
-            passHelp.Show("The password should contain: atleast 8 characters, 1 capital letter and 1 numbner e.g. London1968 ", label9);
+            //show a help screen for the passwo strength
+            passHelp.Show("The password should contain: atleast 8 characters, 1 capital letter and 1 numbner e.g. London1968 ", label6);
         }
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
+            //grab the user info from the login screen
             string username = usernameSTxt.Text;
             string password = passwordSTxt.Text;
+            //to do:
+            //- check if it matches with the database and if so go back to webEdit and enable the buttons.  
         }
     }
 }
