@@ -34,6 +34,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.mainControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.keepMeSignedIn = new System.Windows.Forms.RadioButton();
             this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -41,29 +42,28 @@
             this.usernameTxt = new System.Windows.Forms.TextBox();
             this.loginBtn = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.passwordSText = new System.Windows.Forms.MaskedTextBox();
+            this.emailSText = new System.Windows.Forms.TextBox();
             this.rePasswordErr = new System.Windows.Forms.Label();
             this.passwordErr = new System.Windows.Forms.Label();
             this.emailErr = new System.Windows.Forms.Label();
             this.usernameErr = new System.Windows.Forms.Label();
-            this.signUpBtn = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.companySTxt = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.rePassSTxt = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.emailSTxt = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.passwordSTxt = new System.Windows.Forms.MaskedTextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.usernameSTxt = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.passHelp = new System.Windows.Forms.ToolTip(this.components);
-            this.keepMeSignedIn = new System.Windows.Forms.RadioButton();
+            this.rePassSTxt = new System.Windows.Forms.MaskedTextBox();
+            this.companySTxt = new System.Windows.Forms.TextBox();
+            this.signUpBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.mainControl.SuspendLayout();
@@ -128,6 +128,17 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Login";
             // 
+            // keepMeSignedIn
+            // 
+            this.keepMeSignedIn.AutoSize = true;
+            this.keepMeSignedIn.Location = new System.Drawing.Point(58, 142);
+            this.keepMeSignedIn.Name = "keepMeSignedIn";
+            this.keepMeSignedIn.Size = new System.Drawing.Size(112, 17);
+            this.keepMeSignedIn.TabIndex = 7;
+            this.keepMeSignedIn.TabStop = true;
+            this.keepMeSignedIn.Text = "Keep me signed in";
+            this.keepMeSignedIn.UseVisualStyleBackColor = true;
+            // 
             // maskedTextBox1
             // 
             this.maskedTextBox1.Location = new System.Drawing.Point(102, 110);
@@ -184,22 +195,22 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.signUpBtn);
+            this.tabPage2.Controls.Add(this.companySTxt);
+            this.tabPage2.Controls.Add(this.rePassSTxt);
+            this.tabPage2.Controls.Add(this.passwordSText);
+            this.tabPage2.Controls.Add(this.emailSText);
             this.tabPage2.Controls.Add(this.rePasswordErr);
             this.tabPage2.Controls.Add(this.passwordErr);
             this.tabPage2.Controls.Add(this.emailErr);
             this.tabPage2.Controls.Add(this.usernameErr);
-            this.tabPage2.Controls.Add(this.signUpBtn);
             this.tabPage2.Controls.Add(this.label14);
             this.tabPage2.Controls.Add(this.label13);
             this.tabPage2.Controls.Add(this.label12);
             this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.companySTxt);
             this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.rePassSTxt);
             this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.emailSTxt);
             this.tabPage2.Controls.Add(this.label8);
-            this.tabPage2.Controls.Add(this.passwordSTxt);
             this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.usernameSTxt);
@@ -211,6 +222,22 @@
             this.tabPage2.Size = new System.Drawing.Size(473, 360);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Sign Up";
+            // 
+            // passwordSText
+            // 
+            this.passwordSText.Location = new System.Drawing.Point(133, 160);
+            this.passwordSText.Name = "passwordSText";
+            this.passwordSText.PasswordChar = '*';
+            this.passwordSText.Size = new System.Drawing.Size(146, 20);
+            this.passwordSText.TabIndex = 27;
+            this.passwordSText.MouseHover += new System.EventHandler(this.passwordSTxt_MouseHover);
+            // 
+            // emailSText
+            // 
+            this.emailSText.Location = new System.Drawing.Point(133, 124);
+            this.emailSText.Name = "emailSText";
+            this.emailSText.Size = new System.Drawing.Size(147, 20);
+            this.emailSText.TabIndex = 26;
             // 
             // rePasswordErr
             // 
@@ -251,16 +278,6 @@
             this.usernameErr.Name = "usernameErr";
             this.usernameErr.Size = new System.Drawing.Size(0, 13);
             this.usernameErr.TabIndex = 22;
-            // 
-            // signUpBtn
-            // 
-            this.signUpBtn.Location = new System.Drawing.Point(166, 264);
-            this.signUpBtn.Name = "signUpBtn";
-            this.signUpBtn.Size = new System.Drawing.Size(81, 21);
-            this.signUpBtn.TabIndex = 21;
-            this.signUpBtn.Text = "Sign Up";
-            this.signUpBtn.UseVisualStyleBackColor = true;
-            this.signUpBtn.Click += new System.EventHandler(this.signUpBtn_Click);
             // 
             // label14
             // 
@@ -306,13 +323,6 @@
             this.label11.TabIndex = 17;
             this.label11.Text = "*";
             // 
-            // companySTxt
-            // 
-            this.companySTxt.Location = new System.Drawing.Point(133, 227);
-            this.companySTxt.Name = "companySTxt";
-            this.companySTxt.Size = new System.Drawing.Size(147, 20);
-            this.companySTxt.TabIndex = 16;
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -322,14 +332,6 @@
             this.label10.TabIndex = 15;
             this.label10.Text = "Company:";
             // 
-            // rePassSTxt
-            // 
-            this.rePassSTxt.Location = new System.Drawing.Point(133, 193);
-            this.rePassSTxt.Name = "rePassSTxt";
-            this.rePassSTxt.Size = new System.Drawing.Size(147, 20);
-            this.rePassSTxt.TabIndex = 14;
-            this.rePassSTxt.MouseHover += new System.EventHandler(this.rePassSTxt_MouseHover);
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -338,14 +340,6 @@
             this.label9.Size = new System.Drawing.Size(95, 13);
             this.label9.TabIndex = 13;
             this.label9.Text = "Re-type password:";
-            this.label9.MouseHover += new System.EventHandler(this.label9_MouseHover);
-            // 
-            // emailSTxt
-            // 
-            this.emailSTxt.Location = new System.Drawing.Point(133, 124);
-            this.emailSTxt.Name = "emailSTxt";
-            this.emailSTxt.Size = new System.Drawing.Size(147, 20);
-            this.emailSTxt.TabIndex = 12;
             // 
             // label8
             // 
@@ -356,14 +350,6 @@
             this.label8.TabIndex = 11;
             this.label8.Text = "E-mail:";
             // 
-            // passwordSTxt
-            // 
-            this.passwordSTxt.Location = new System.Drawing.Point(133, 160);
-            this.passwordSTxt.Name = "passwordSTxt";
-            this.passwordSTxt.PasswordChar = '*';
-            this.passwordSTxt.Size = new System.Drawing.Size(147, 20);
-            this.passwordSTxt.TabIndex = 10;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -372,6 +358,7 @@
             this.label6.Size = new System.Drawing.Size(59, 13);
             this.label6.TabIndex = 9;
             this.label6.Text = "Password: ";
+            this.label6.MouseHover += new System.EventHandler(this.label6_MouseHover);
             // 
             // label7
             // 
@@ -414,16 +401,31 @@
             this.passHelp.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.passHelp.ToolTipTitle = "Password complexity";
             // 
-            // keepMeSignedIn
+            // rePassSTxt
             // 
-            this.keepMeSignedIn.AutoSize = true;
-            this.keepMeSignedIn.Location = new System.Drawing.Point(58, 142);
-            this.keepMeSignedIn.Name = "keepMeSignedIn";
-            this.keepMeSignedIn.Size = new System.Drawing.Size(112, 17);
-            this.keepMeSignedIn.TabIndex = 7;
-            this.keepMeSignedIn.TabStop = true;
-            this.keepMeSignedIn.Text = "Keep me signed in";
-            this.keepMeSignedIn.UseVisualStyleBackColor = true;
+            this.rePassSTxt.Location = new System.Drawing.Point(133, 193);
+            this.rePassSTxt.Name = "rePassSTxt";
+            this.rePassSTxt.PasswordChar = '*';
+            this.rePassSTxt.Size = new System.Drawing.Size(147, 20);
+            this.rePassSTxt.TabIndex = 28;
+            this.rePassSTxt.MouseHover += new System.EventHandler(this.passwordSTxt_MouseHover);
+            // 
+            // companySTxt
+            // 
+            this.companySTxt.Location = new System.Drawing.Point(133, 227);
+            this.companySTxt.Name = "companySTxt";
+            this.companySTxt.Size = new System.Drawing.Size(146, 20);
+            this.companySTxt.TabIndex = 29;
+            // 
+            // signUpBtn
+            // 
+            this.signUpBtn.Location = new System.Drawing.Point(170, 273);
+            this.signUpBtn.Name = "signUpBtn";
+            this.signUpBtn.Size = new System.Drawing.Size(69, 23);
+            this.signUpBtn.TabIndex = 30;
+            this.signUpBtn.Text = "Sign Up";
+            this.signUpBtn.UseVisualStyleBackColor = true;
+            this.signUpBtn.Click += new System.EventHandler(this.signUpBtn_Click);
             // 
             // teamLogin
             // 
@@ -464,25 +466,25 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.MaskedTextBox maskedTextBox1;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox emailSTxt;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.MaskedTextBox passwordSTxt;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox usernameSTxt;
-        private System.Windows.Forms.TextBox rePassSTxt;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox companySTxt;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button signUpBtn;
         private System.Windows.Forms.Label rePasswordErr;
         private System.Windows.Forms.Label passwordErr;
         private System.Windows.Forms.Label emailErr;
         private System.Windows.Forms.Label usernameErr;
         private System.Windows.Forms.ToolTip passHelp;
         private System.Windows.Forms.RadioButton keepMeSignedIn;
+        private System.Windows.Forms.MaskedTextBox passwordSText;
+        private System.Windows.Forms.TextBox emailSText;
+        private System.Windows.Forms.MaskedTextBox rePassSTxt;
+        private System.Windows.Forms.Button signUpBtn;
+        private System.Windows.Forms.TextBox companySTxt;
     }
 }

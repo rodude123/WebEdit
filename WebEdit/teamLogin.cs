@@ -8,11 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace htmlEditor
 {
     public partial class teamLogin : Form
     {
+
+        MySqlConnection connection;
+        string server;
+        string database;
+        string uid;
+        string dbPassword;
+
         public teamLogin()
         {
             InitializeComponent();
@@ -22,8 +30,8 @@ namespace htmlEditor
         {
             // grab the user input and store in respective variables
             string username = usernameSTxt.Text;
-            string email = emailSTxt.Text;
-            string password = passwordSTxt.Text;
+            string email = emailSText.Text;
+            string password = passwordSText.Text;
             string rePassword = rePassSTxt.Text;
             string company = companySTxt.Text;
             //validation
@@ -38,7 +46,7 @@ namespace htmlEditor
                 string userReg = @"^[_a-zA-Z0-9]+$";
                 Match userMatch = Regex.Match(username, userReg);
                 //checks if it matches the criteria
-                if (!userMatch.Success)
+                if (string.IsNullOrWhiteSpace(userMatch.ToString()))
                 {
                     // if username is invalid
                     usernameErr.Text = "Invalid username";
@@ -60,7 +68,7 @@ namespace htmlEditor
                 string emailReg = @"^(([^<>()\[\]\\.,;:\s@""]+(\.[^<>()\[\]\\.,;:\s@""]+)*)|("".+""))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$";
                 Match emailMatch = Regex.Match(email, emailReg);
                 //checks if matches the criteria 
-                if (!emailMatch.Success)
+                if (string.IsNullOrWhiteSpace(emailMatch.ToString()))
                 {
                     // if email address is invalid
                     emailErr.Text = "Invalid email address";
@@ -82,7 +90,7 @@ namespace htmlEditor
                 string passReg = @"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9@#$%^&+=*.\-_]){8,}$";
                 Match passMatch = Regex.Match(password, passReg);
                 // checks if it matches the criteria
-                if (!passMatch.Success)
+                if (string.IsNullOrWhiteSpace(passMatch.ToString()))
                 {
                     //if password is invalid
                     passwordErr.Text = "Invalid password";
@@ -100,7 +108,7 @@ namespace htmlEditor
             }
             else
             {
-                if (rePassword != password)
+                if (rePassword.Trim() != password.Trim())
                 {
                     //if passwords don't match
                     rePasswordErr.Text = "Passwords don't match";
@@ -108,25 +116,52 @@ namespace htmlEditor
                 else
                 {
                     //if password is valid
-                    passwordErr.Text = "";
+                    rePasswordErr.Text = "";
                 }
             }
-            if (string.IsNullOrWhiteSpace(usernameErr.Text) || string.IsNullOrWhiteSpace(emailErr.Text) || string.IsNullOrWhiteSpace(passwordErr.Text) || string.IsNullOrWhiteSpace(rePasswordErr.Text))
+            if (string.IsNullOrWhiteSpace(usernameErr.Text) && string.IsNullOrWhiteSpace(emailErr.Text) && string.IsNullOrWhiteSpace(passwordErr.Text) && string.IsNullOrWhiteSpace(rePasswordErr.Text))
             {
                 //connect to the MySQL database and store the information in a row of the table
                 //but before I should have checked if the username is already in the datahbase or not
                 //and checked if the email address is in the database already too
                 //omly then add the inforamtion to the database
+                MySqlConnection conn =  makeConnection();
+                conn.Close();
             }
         }
 
-        private void rePassSTxt_MouseHover(object sender, EventArgs e)
+        MySqlConnection makeConnection()
         {
-            //show a help screen for the password strength
-            passHelp.Show("The password should contain: atleast 8 characters, 1 capital letter and 1 numbner e.g. London1968 ", passwordSTxt);
+            try
+            {
+                //connection information
+                server = "rodude.heliohost.org";
+                database = "rodude_WebEdit";
+                uid = "rodude_webEdit";
+                dbPassword = "Gangolli123";
+                string connectionString = "SERVER=" + server + ";" + "DATABASE=" +
+                database + ";" + "UID=" + uid + ";" + "PASSWORD=" + dbPassword + ";";
+                //connect to the database
+                connection = new MySqlConnection();
+                connection.ConnectionString = connectionString;
+                connection.Open();
+                return connection;
+            }
+            catch (MySqlException)
+            {
+                MessageBox.Show(@"Make sure you have a working internet connection.
+If you do then please contact the developer for isseus.", "You cannot sign up right now");
+                return connection;
+            }
         }
 
-        private void label9_MouseHover(object sender, EventArgs e)
+        private void passwordSTxt_MouseHover(object sender, EventArgs e)
+        {
+            //show a help screen for the password strength
+            passHelp.Show("The password should contain: atleast 8 characters, 1 capital letter and 1 numbner e.g. London1968 ", passwordSText);
+        }
+
+        private void label6_MouseHover(object sender, EventArgs e)
         {
             //show a help screen for the passwo strength
             passHelp.Show("The password should contain: atleast 8 characters, 1 capital letter and 1 numbner e.g. London1968 ", label6);
@@ -136,7 +171,7 @@ namespace htmlEditor
         {
             //grab the user info from the login screen
             string username = usernameSTxt.Text;
-            string password = passwordSTxt.Text;
+            string password = emailSText.Text;
             //to do:
             //- check if it matches with the database and if so go back to webEdit and enable the buttons.  
         }
