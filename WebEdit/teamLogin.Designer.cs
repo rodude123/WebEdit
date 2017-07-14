@@ -34,14 +34,19 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.mainControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.keepMeSignedIn = new System.Windows.Forms.RadioButton();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.passwordTxt = new System.Windows.Forms.MaskedTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.usernameTxt = new System.Windows.Forms.TextBox();
             this.loginBtn = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.signUpBtn = new System.Windows.Forms.Button();
+            this.companySTxt = new System.Windows.Forms.TextBox();
+            this.rePassSTxt = new System.Windows.Forms.MaskedTextBox();
             this.passwordSText = new System.Windows.Forms.MaskedTextBox();
             this.emailSText = new System.Windows.Forms.TextBox();
             this.rePasswordErr = new System.Windows.Forms.Label();
@@ -60,15 +65,33 @@
             this.usernameSTxt = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.fpSuhmit = new System.Windows.Forms.Button();
+            this.fpEmailErr = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.fpEmail = new System.Windows.Forms.TextBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.rCodeErr = new System.Windows.Forms.Label();
+            this.rePassRTxt = new System.Windows.Forms.MaskedTextBox();
+            this.passwordRText = new System.Windows.Forms.MaskedTextBox();
+            this.rePassRErr = new System.Windows.Forms.Label();
+            this.passErr = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.rpCode = new System.Windows.Forms.TextBox();
             this.passHelp = new System.Windows.Forms.ToolTip(this.components);
-            this.rePassSTxt = new System.Windows.Forms.MaskedTextBox();
-            this.companySTxt = new System.Windows.Forms.TextBox();
-            this.signUpBtn = new System.Windows.Forms.Button();
+            this.usernameLogin = new System.Windows.Forms.Label();
+            this.passwordLogin = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.mainControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // login
@@ -103,6 +126,8 @@
             // 
             this.mainControl.Controls.Add(this.tabPage1);
             this.mainControl.Controls.Add(this.tabPage2);
+            this.mainControl.Controls.Add(this.tabPage3);
+            this.mainControl.Controls.Add(this.tabPage4);
             this.mainControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainControl.Location = new System.Drawing.Point(0, 0);
             this.mainControl.Name = "mainControl";
@@ -114,8 +139,12 @@
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tabPage1.Controls.Add(this.passwordLogin);
+            this.tabPage1.Controls.Add(this.usernameLogin);
+            this.tabPage1.Controls.Add(this.label20);
+            this.tabPage1.Controls.Add(this.label17);
             this.tabPage1.Controls.Add(this.keepMeSignedIn);
-            this.tabPage1.Controls.Add(this.maskedTextBox1);
+            this.tabPage1.Controls.Add(this.passwordTxt);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.label1);
@@ -128,6 +157,28 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Login";
             // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.ForeColor = System.Drawing.Color.Red;
+            this.label20.Location = new System.Drawing.Point(255, 110);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(15, 20);
+            this.label20.TabIndex = 19;
+            this.label20.Text = "*";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.Red;
+            this.label17.Location = new System.Drawing.Point(255, 66);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(15, 20);
+            this.label17.TabIndex = 18;
+            this.label17.Text = "*";
+            // 
             // keepMeSignedIn
             // 
             this.keepMeSignedIn.AutoSize = true;
@@ -139,13 +190,13 @@
             this.keepMeSignedIn.Text = "Keep me signed in";
             this.keepMeSignedIn.UseVisualStyleBackColor = true;
             // 
-            // maskedTextBox1
+            // passwordTxt
             // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(102, 110);
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.PasswordChar = '*';
-            this.maskedTextBox1.Size = new System.Drawing.Size(147, 20);
-            this.maskedTextBox1.TabIndex = 6;
+            this.passwordTxt.Location = new System.Drawing.Point(102, 110);
+            this.passwordTxt.Name = "passwordTxt";
+            this.passwordTxt.PasswordChar = '*';
+            this.passwordTxt.Size = new System.Drawing.Size(147, 20);
+            this.passwordTxt.TabIndex = 6;
             // 
             // label5
             // 
@@ -160,7 +211,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 113);
+            this.label2.Location = new System.Drawing.Point(17, 110);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 13);
             this.label2.TabIndex = 4;
@@ -222,6 +273,32 @@
             this.tabPage2.Size = new System.Drawing.Size(473, 360);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Sign Up";
+            // 
+            // signUpBtn
+            // 
+            this.signUpBtn.Location = new System.Drawing.Point(170, 273);
+            this.signUpBtn.Name = "signUpBtn";
+            this.signUpBtn.Size = new System.Drawing.Size(69, 23);
+            this.signUpBtn.TabIndex = 30;
+            this.signUpBtn.Text = "Sign Up";
+            this.signUpBtn.UseVisualStyleBackColor = true;
+            this.signUpBtn.Click += new System.EventHandler(this.signUpBtn_Click);
+            // 
+            // companySTxt
+            // 
+            this.companySTxt.Location = new System.Drawing.Point(133, 227);
+            this.companySTxt.Name = "companySTxt";
+            this.companySTxt.Size = new System.Drawing.Size(146, 20);
+            this.companySTxt.TabIndex = 29;
+            // 
+            // rePassSTxt
+            // 
+            this.rePassSTxt.Location = new System.Drawing.Point(133, 193);
+            this.rePassSTxt.Name = "rePassSTxt";
+            this.rePassSTxt.PasswordChar = '*';
+            this.rePassSTxt.Size = new System.Drawing.Size(147, 20);
+            this.rePassSTxt.TabIndex = 28;
+            this.rePassSTxt.MouseHover += new System.EventHandler(this.passwordSTxt_MouseHover);
             // 
             // passwordSText
             // 
@@ -306,7 +383,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Red;
-            this.label12.Location = new System.Drawing.Point(286, 124);
+            this.label12.Location = new System.Drawing.Point(286, 122);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(15, 20);
             this.label12.TabIndex = 18;
@@ -396,36 +473,200 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Sign Up";
             // 
+            // tabPage3
+            // 
+            this.tabPage3.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage3.Controls.Add(this.fpSuhmit);
+            this.tabPage3.Controls.Add(this.fpEmailErr);
+            this.tabPage3.Controls.Add(this.label16);
+            this.tabPage3.Controls.Add(this.label15);
+            this.tabPage3.Controls.Add(this.fpEmail);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(473, 360);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Forgot Password?";
+            // 
+            // fpSuhmit
+            // 
+            this.fpSuhmit.Location = new System.Drawing.Point(151, 132);
+            this.fpSuhmit.Name = "fpSuhmit";
+            this.fpSuhmit.Size = new System.Drawing.Size(78, 22);
+            this.fpSuhmit.TabIndex = 19;
+            this.fpSuhmit.Text = "Submit";
+            this.fpSuhmit.UseVisualStyleBackColor = true;
+            this.fpSuhmit.Click += new System.EventHandler(this.fpSuhmit_Click);
+            // 
+            // fpEmailErr
+            // 
+            this.fpEmailErr.AutoSize = true;
+            this.fpEmailErr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fpEmailErr.ForeColor = System.Drawing.Color.Red;
+            this.fpEmailErr.Location = new System.Drawing.Point(253, 89);
+            this.fpEmailErr.Name = "fpEmailErr";
+            this.fpEmailErr.Size = new System.Drawing.Size(15, 20);
+            this.fpEmailErr.TabIndex = 18;
+            this.fpEmailErr.Text = "*";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(71, 89);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(35, 13);
+            this.label16.TabIndex = 2;
+            this.label16.Text = "Email:";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(169, 40);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(92, 13);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "Forgot Password?";
+            // 
+            // fpEmail
+            // 
+            this.fpEmail.Location = new System.Drawing.Point(126, 89);
+            this.fpEmail.Name = "fpEmail";
+            this.fpEmail.Size = new System.Drawing.Size(121, 20);
+            this.fpEmail.TabIndex = 0;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage4.Controls.Add(this.rCodeErr);
+            this.tabPage4.Controls.Add(this.rePassRTxt);
+            this.tabPage4.Controls.Add(this.passwordRText);
+            this.tabPage4.Controls.Add(this.rePassRErr);
+            this.tabPage4.Controls.Add(this.passErr);
+            this.tabPage4.Controls.Add(this.label22);
+            this.tabPage4.Controls.Add(this.label23);
+            this.tabPage4.Controls.Add(this.label19);
+            this.tabPage4.Controls.Add(this.label18);
+            this.tabPage4.Controls.Add(this.rpCode);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(473, 360);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Reset Password";
+            // 
+            // rCodeErr
+            // 
+            this.rCodeErr.AutoSize = true;
+            this.rCodeErr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rCodeErr.ForeColor = System.Drawing.Color.Red;
+            this.rCodeErr.Location = new System.Drawing.Point(308, 77);
+            this.rCodeErr.Name = "rCodeErr";
+            this.rCodeErr.Size = new System.Drawing.Size(15, 20);
+            this.rCodeErr.TabIndex = 35;
+            this.rCodeErr.Text = "*";
+            // 
+            // rePassRTxt
+            // 
+            this.rePassRTxt.Location = new System.Drawing.Point(155, 143);
+            this.rePassRTxt.Name = "rePassRTxt";
+            this.rePassRTxt.PasswordChar = '*';
+            this.rePassRTxt.Size = new System.Drawing.Size(147, 20);
+            this.rePassRTxt.TabIndex = 34;
+            // 
+            // passwordRText
+            // 
+            this.passwordRText.Location = new System.Drawing.Point(155, 110);
+            this.passwordRText.Name = "passwordRText";
+            this.passwordRText.PasswordChar = '*';
+            this.passwordRText.Size = new System.Drawing.Size(146, 20);
+            this.passwordRText.TabIndex = 33;
+            // 
+            // rePassRErr
+            // 
+            this.rePassRErr.AutoSize = true;
+            this.rePassRErr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rePassRErr.ForeColor = System.Drawing.Color.Red;
+            this.rePassRErr.Location = new System.Drawing.Point(308, 143);
+            this.rePassRErr.Name = "rePassRErr";
+            this.rePassRErr.Size = new System.Drawing.Size(15, 20);
+            this.rePassRErr.TabIndex = 32;
+            this.rePassRErr.Text = "*";
+            // 
+            // passErr
+            // 
+            this.passErr.AutoSize = true;
+            this.passErr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passErr.ForeColor = System.Drawing.Color.Red;
+            this.passErr.Location = new System.Drawing.Point(308, 110);
+            this.passErr.Name = "passErr";
+            this.passErr.Size = new System.Drawing.Size(15, 20);
+            this.passErr.TabIndex = 31;
+            this.passErr.Text = "*";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(56, 143);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(95, 13);
+            this.label22.TabIndex = 30;
+            this.label22.Text = "Re-type password:";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(56, 110);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(59, 13);
+            this.label23.TabIndex = 29;
+            this.label23.Text = "Password: ";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(56, 77);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(65, 13);
+            this.label19.TabIndex = 2;
+            this.label19.Text = "Reset code:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(165, 31);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(84, 13);
+            this.label18.TabIndex = 1;
+            this.label18.Text = "Reset Password";
+            // 
+            // rpCode
+            // 
+            this.rpCode.Location = new System.Drawing.Point(155, 77);
+            this.rpCode.Name = "rpCode";
+            this.rpCode.Size = new System.Drawing.Size(146, 20);
+            this.rpCode.TabIndex = 0;
+            // 
             // passHelp
             // 
             this.passHelp.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.passHelp.ToolTipTitle = "Password complexity";
             // 
-            // rePassSTxt
+            // usernameLogin
             // 
-            this.rePassSTxt.Location = new System.Drawing.Point(133, 193);
-            this.rePassSTxt.Name = "rePassSTxt";
-            this.rePassSTxt.PasswordChar = '*';
-            this.rePassSTxt.Size = new System.Drawing.Size(147, 20);
-            this.rePassSTxt.TabIndex = 28;
-            this.rePassSTxt.MouseHover += new System.EventHandler(this.passwordSTxt_MouseHover);
+            this.usernameLogin.ForeColor = System.Drawing.Color.Red;
+            this.usernameLogin.Location = new System.Drawing.Point(269, 67);
+            this.usernameLogin.Name = "usernameLogin";
+            this.usernameLogin.Size = new System.Drawing.Size(140, 12);
+            this.usernameLogin.TabIndex = 20;
             // 
-            // companySTxt
+            // passwordLogin
             // 
-            this.companySTxt.Location = new System.Drawing.Point(133, 227);
-            this.companySTxt.Name = "companySTxt";
-            this.companySTxt.Size = new System.Drawing.Size(146, 20);
-            this.companySTxt.TabIndex = 29;
-            // 
-            // signUpBtn
-            // 
-            this.signUpBtn.Location = new System.Drawing.Point(170, 273);
-            this.signUpBtn.Name = "signUpBtn";
-            this.signUpBtn.Size = new System.Drawing.Size(69, 23);
-            this.signUpBtn.TabIndex = 30;
-            this.signUpBtn.Text = "Sign Up";
-            this.signUpBtn.UseVisualStyleBackColor = true;
-            this.signUpBtn.Click += new System.EventHandler(this.signUpBtn_Click);
+            this.passwordLogin.AutoSize = true;
+            this.passwordLogin.ForeColor = System.Drawing.Color.Red;
+            this.passwordLogin.Location = new System.Drawing.Point(269, 110);
+            this.passwordLogin.Name = "passwordLogin";
+            this.passwordLogin.Size = new System.Drawing.Size(0, 13);
+            this.passwordLogin.TabIndex = 21;
             // 
             // teamLogin
             // 
@@ -445,6 +686,10 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -464,7 +709,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.MaskedTextBox passwordTxt;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label6;
@@ -486,5 +731,26 @@
         private System.Windows.Forms.MaskedTextBox rePassSTxt;
         private System.Windows.Forms.Button signUpBtn;
         private System.Windows.Forms.TextBox companySTxt;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button fpSuhmit;
+        private System.Windows.Forms.Label fpEmailErr;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox fpEmail;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Label rCodeErr;
+        private System.Windows.Forms.MaskedTextBox rePassRTxt;
+        private System.Windows.Forms.MaskedTextBox passwordRText;
+        private System.Windows.Forms.Label rePassRErr;
+        private System.Windows.Forms.Label passErr;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox rpCode;
+        private System.Windows.Forms.Label usernameLogin;
+        private System.Windows.Forms.Label passwordLogin;
     }
 }

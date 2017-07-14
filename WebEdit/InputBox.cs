@@ -89,9 +89,9 @@ namespace MsgBox
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOK.Location = new System.Drawing.Point(340, 83);
+            this.buttonOK.Location = new System.Drawing.Point(372, 89);
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(90, 27);
+            this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 2;
             this.buttonOK.Text = "OK";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
@@ -101,18 +101,18 @@ namespace MsgBox
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.CausesValidation = false;
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(445, 83);
+            this.buttonCancel.Location = new System.Drawing.Point(464, 89);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(90, 27);
+            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 3;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // textBoxText
             // 
-            this.textBoxText.Location = new System.Drawing.Point(19, 37);
+            this.textBoxText.Location = new System.Drawing.Point(18, 46);
             this.textBoxText.Name = "textBoxText";
-            this.textBoxText.Size = new System.Drawing.Size(499, 22);
+            this.textBoxText.Size = new System.Drawing.Size(416, 20);
             this.textBoxText.TabIndex = 1;
             this.textBoxText.TextChanged += new System.EventHandler(this.textBoxText_TextChanged);
             this.textBoxText.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxText_Validating);
@@ -120,9 +120,9 @@ namespace MsgBox
             // labelPrompt
             // 
             this.labelPrompt.AutoSize = true;
-            this.labelPrompt.Location = new System.Drawing.Point(18, 17);
+            this.labelPrompt.Location = new System.Drawing.Point(15, 15);
             this.labelPrompt.Name = "labelPrompt";
-            this.labelPrompt.Size = new System.Drawing.Size(52, 17);
+            this.labelPrompt.Size = new System.Drawing.Size(39, 13);
             this.labelPrompt.TabIndex = 0;
             this.labelPrompt.Text = "prompt";
             // 
@@ -134,9 +134,9 @@ namespace MsgBox
             // InputBox
             // 
             this.AcceptButton = this.buttonOK;
-            this.AutoScaleBaseSize = new System.Drawing.Size(6, 15);
+            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(551, 124);
+            this.ClientSize = new System.Drawing.Size(551, 133);
             this.Controls.Add(this.labelPrompt);
             this.Controls.Add(this.textBoxText);
             this.Controls.Add(this.buttonCancel);

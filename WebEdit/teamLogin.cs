@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Net.Mail;
+using MsgBox;
 
 namespace htmlEditor
 {
@@ -20,6 +22,7 @@ namespace htmlEditor
         string database;
         string uid;
         string dbPassword;
+        bool conResult;
 
         public teamLogin()
         {
@@ -53,8 +56,24 @@ namespace htmlEditor
                 }
                 else
                 {
-                    //before error message becomes blank check if it is in the MySQL db
-                    usernameErr.Text = "";
+                    //connects to database
+                    MySqlConnection usernameConn = makeConnection();
+                    string usernameQuery = @"SELECT count(username) from webEditUsers WHERE username = '" + username + "' LIMIT 1";
+                    MySqlCommand usernameComand = new MySqlCommand(usernameQuery, usernameConn);
+                    //executes SQL code getting single string answer
+                    string usernameResult = usernameComand.ExecuteScalar().ToString();
+                    if (usernameResult.Trim() == "1")
+                    {
+                        //if username is in the database
+                        usernameErr.Text = "Username already exists";
+                    }
+                    else
+                    {
+                        //if username is not in the databse
+                        usernameErr.Text = "";
+                    }
+                    //closes connection as not needed for this execution of code
+                    usernameConn.Close();
                 }
             }
             //email address
@@ -75,8 +94,24 @@ namespace htmlEditor
                 }
                 else
                 {
-                    //before error message becomes blank check if it is in the MySQL db
-                    emailErr.Text = "";
+                    //connects to database
+                    MySqlConnection emailConn = makeConnection();
+                    string emailQuery = @"SELECT count(email) from webEditUsers WHERE email = '" + email + "' LIMIT 1";
+                    MySqlCommand emailComand = new MySqlCommand(emailQuery, emailConn);
+                    //executes SQL code getting single string answer
+                    string emailResult = emailComand.ExecuteScalar().ToString();
+                    if (emailResult.Trim() == "1")
+                    {
+                        //checks if email is in the database
+                        emailErr.Text = "Email Already exists";
+                    }
+                    else
+                    {
+                        //if email isn't in the database
+                        emailErr.Text = "";
+                    }
+                    //closes connection as not needed for this execution of code
+                    emailConn.Close();
                 }
             }
             //password
@@ -121,12 +156,88 @@ namespace htmlEditor
             }
             if (string.IsNullOrWhiteSpace(usernameErr.Text) && string.IsNullOrWhiteSpace(emailErr.Text) && string.IsNullOrWhiteSpace(passwordErr.Text) && string.IsNullOrWhiteSpace(rePasswordErr.Text))
             {
-                //connect to the MySQL database and store the information in a row of the table
                 //but before I should have checked if the username is already in the datahbase or not
                 //and checked if the email address is in the database already too
                 //omly then add the inforamtion to the database
-                MySqlConnection conn =  makeConnection();
-                conn.Close();
+                try
+                {
+                    //setup mail client with details
+                    SmtpClient client = new SmtpClient();
+                    client.Port = 587;
+                    client.Host = "smtp.gmail.com";
+                    client.EnableSsl = true;
+                    client.Timeout = 10000;
+                    client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    client.UseDefaultCredentials = false;
+                    client.Credentials = new System.Net.NetworkCredential("no.reply.webedit@gmail.com", "gangolli");
+                    //create email with confirmation code
+                    Random rnd = new Random(); 
+                    int conCode = rnd.Next(1,999999); //generate confirmation code
+                    int conCodeLen = conCode.ToString().Length;
+                    int conCodeFinal = 0;
+                    switch (conCodeLen)
+                    {
+                        case 1:
+                            conCodeFinal = Convert.ToInt32(conCode.ToString("D" + 5));
+                            break;
+                        case 2:
+                            conCodeFinal = Convert.ToInt32(conCode.ToString("D" + 4));
+                            break;
+                        case 3:
+                            conCodeFinal = Convert.ToInt32(conCode.ToString("D" + 3));
+                            break;
+                        case 4:
+                            conCodeFinal = Convert.ToInt32(conCode.ToString("D" + 2));
+                            break;
+                        case 5:
+                            conCodeFinal = Convert.ToInt32(conCode.ToString("D" + 1));
+                            break;
+                    }
+                    MailMessage mm = new MailMessage("no.reply.webedit@gmail.com", email, "Webedit Sign Up Confirmation", "Here is the confirmation code required to sign up to WebEdit: " + conCodeFinal + "\n Sorry about the email address, this application is still in development, Thank you for downloading it and trying it out.");
+                    mm.BodyEncoding = UTF8Encoding.UTF8;
+                    mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+                    //send email
+                    client.Send(mm);
+
+                    for (int i = 0; i < 3; i++)
+                    {
+                        int tries = 3;
+                        tries = tries - i;
+                        try
+                        {
+                            InputBoxResult result = InputBox.Show("Type your Confirmation code provided in your emails. \n You have " + tries + " tries left if it reaches 0 you will have sign up again.", "Confirmation Code", "0", null);
+                            if (conCodeFinal == Convert.ToInt32(result.Text))
+                            {
+                                conResult = true;
+                                break;
+                            }
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+
+                    }
+
+                    if (conResult == true)
+                    {
+                        MySqlConnection insConn = makeConnection();
+                        string insQuery = "INSERT INTO webEditUsers(username, email, password, company) VALUES('" + username + "', '" + email + "','" + password + "','" + company + "')";
+                        MySqlCommand insCommand = new MySqlCommand(insQuery, insConn);
+                        insCommand.ExecuteNonQuery();
+                        insConn.Close();
+                        MessageBox.Show("You have signed up successfully", "Signed up");
+                    }
+                    usernameSTxt.Text = "";
+                    emailSText.Text = "";
+                    passwordSText.Text = "";
+                    rePassSTxt.Text = "";
+                    companySTxt.Text = "";
+                }
+                catch (Exception)
+                {
+                    
+                }
             }
         }
 
@@ -135,9 +246,9 @@ namespace htmlEditor
             try
             {
                 //connection information
-                server = "rodude.heliohost.org";
-                database = "rodude_WebEdit";
-                uid = "rodude_webEdit";
+                server = "webedit.heliohost.org";
+                database = "webedit_WebEdit";
+                uid = "webedit_webEdit";
                 dbPassword = "Gangolli123";
                 string connectionString = "SERVER=" + server + ";" + "DATABASE=" +
                 database + ";" + "UID=" + uid + ";" + "PASSWORD=" + dbPassword + ";";
@@ -147,7 +258,7 @@ namespace htmlEditor
                 connection.Open();
                 return connection;
             }
-            catch (MySqlException)
+            catch (MySqlException e)
             {
                 MessageBox.Show(@"Make sure you have a working internet connection.
 If you do then please contact the developer for isseus.", "You cannot sign up right now");
@@ -169,11 +280,94 @@ If you do then please contact the developer for isseus.", "You cannot sign up ri
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
-            //grab the user info from the login screen
-            string username = usernameSTxt.Text;
-            string password = emailSText.Text;
-            //to do:
-            //- check if it matches with the database and if so go back to webEdit and enable the buttons.  
+            try
+            {
+                //grab the user info from the login screen
+                string username = usernameTxt.Text;
+                string password = passwordTxt.Text;
+                //connects to database
+                MySqlConnection usernameConn = makeConnection();
+                string usernameQuery = @"SELECT count(username) from webEditUsers WHERE username = '" + username + "' LIMIT 1";
+                MySqlCommand usernameComand = new MySqlCommand(usernameQuery, usernameConn);
+                //executes SQL code getting single string answer
+                string usernameResult = usernameComand.ExecuteScalar().ToString();
+                if (usernameResult.Trim() != "1")
+                {
+                    //if username doesn't exist
+                    usernameLogin.Text = "Username doesn't exist";
+                }
+                else
+                {
+                    //if username does exist
+                    usernameLogin.Text = "";
+                }
+
+                //connects to database
+                MySqlConnection passwordConn = makeConnection();
+                string passwordQuery = @"SELECT count(username) from webEditUsers WHERE username = '" + username + "' and password = '" + password + "' LIMIT 1";
+                MySqlCommand passwordComand = new MySqlCommand(passwordQuery, passwordConn);
+                //executes SQL code getting single string answer
+                string passwordResult = passwordComand.ExecuteScalar().ToString();
+                if (usernameResult.Trim() != "1")
+                {
+                    //if username doesn't exists
+                    passwordLogin.Text = "";
+                }
+                else if (passwordResult.Trim() != "1")
+                {
+                    //if username does exist but password is wrong
+                    passwordLogin.Text = "Password is incorect";
+                }
+                else
+                {
+                    //if username and password are both correct
+                    passwordLogin.Text = "";
+                }
+
+                if (usernameLogin.Text == "" && passwordLogin.Text == "")
+                {
+                    // if username and password are both correct
+                    MessageBox.Show("Login Successful");
+                    Application.Exit();
+                }
+            }
+            catch (Exception)
+            {
+               
+            }
+        }
+
+        private void fpSuhmit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string email = fpEmail.Text;
+                //connects to database
+                MySqlConnection emailConn = makeConnection();
+                string emailQuery = @"SELECT count(email) from webEditUsers WHERE email = '" + email + "' LIMIT 1";
+                MySqlCommand emailComand = new MySqlCommand(emailQuery, emailConn);
+                //executes SQL code getting single string answer
+                string emailResult = emailComand.ExecuteScalar().ToString();
+                if (emailResult.Trim() != "1")
+                {
+                    //checks if the email isn't in the database
+                    fpEmailErr.Text = "Email doesn't exist";
+                }
+                else
+                {
+                    //if email is in the database
+                    fpEmailErr.Text = "";
+                }
+                //closes connection as not needed for this execution of code
+                emailConn.Close();
+
+            }
+            catch (Exception)
+            {
+                
+            }
+            //todo: 
+            //- send an email to user with reset code if working NEED TO GET EMAIL WORKING SOMEHOW
         }
     }
 }
