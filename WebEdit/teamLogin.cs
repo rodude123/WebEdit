@@ -29,6 +29,13 @@ namespace htmlEditor
             InitializeComponent();
         }
 
+        public bool isLoggedIn
+        {
+            get
+            {
+                return loggedIn;
+            }
+        }
         private void signUpBtn_Click(object sender, EventArgs e)
         {
             // grab the user input and store in respective variables
