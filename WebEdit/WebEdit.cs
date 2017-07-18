@@ -32,6 +32,7 @@ namespace htmlEditor
         public MatchCollection conditionMatches;
         public DirectoryInfo[] directories;
         int DL = 0;
+        int nfCount = 0;
         string lang = "";
         string[] pathSplit;
         string[] toSplit = new string[] { @"\" }; // split string
@@ -110,8 +111,11 @@ namespace htmlEditor
         {
             try
             {
+                //creates variable text with the script tag
                 string text = "<script src=' '></script>";
                 insertText(text);
+                //creates a new file with the title "new JS file"
+                //sets js syntax highlighting
                 js = true;
                 newToolStripButton_Click(sender, e);
                 tabControl1.SelectedIndex = tabControl1.SelectedIndex + 1;
@@ -128,13 +132,14 @@ namespace htmlEditor
 
         private void script_MouseHover(object sender, EventArgs e)
         {
-            extScriptHelp.Show("External Scripts are more efficient than ones inside the HTML file", script);
+            extScriptHelp.Show("External Scripts are more efficient than ones inside the HTML file", script); //shows help screen for the button
         }
 
         private void section_Click(object sender, EventArgs e)
         {
             try
             {
+                //inserts section tag 
                 string text = @"<section class=' '></section>";
                 insertText(text);
             }
@@ -255,6 +260,7 @@ namespace htmlEditor
 
         private void htmlForm_Click(object sender, EventArgs e)
         {
+            //opens HTML Form Builder window
             htmlFormBuilder HFB = new htmlFormBuilder();
             HFB.Show();
         }
@@ -263,6 +269,7 @@ namespace htmlEditor
         #region Quick Buttons JS
         private void basicFunc_Click(object sender, EventArgs e)
         {
+            //inserts a function snipit
             insertText(@"function myFunction()
 {
    
@@ -410,13 +417,13 @@ else
         {
             try
             {
-                //while statement stored in text
-                GetRichTextBox().Text = GetRichTextBox().Text.Insert(GetRichTextBox().SelectionStart, text); //inserts the text in the rtb based on cursor position
+                //the text stored in text variable gets inserted at the cursor position 
+                GetRichTextBox().Text = GetRichTextBox().Text.Insert(GetRichTextBox().SelectionStart, text);
             }
             catch (Exception)
             {
 
-                MessageBox.Show("Make sure a new file is open before selecting a quick JS", "Open a new file"); //outputs a message box if there is an error e.g. no file is open
+                MessageBox.Show("Make sure a new file is open before selecting a quick button", "Open a new file"); //outputs a message box if there is an error e.g. no file is open
             }
         }
 
@@ -425,41 +432,58 @@ else
         #region Nav Bar
         private void newToolStripButton_Click(object sender, EventArgs e)
         {
+            //makes string varaible title
             string title = "";
             if (js == true)
             {
+                // sets title to new JS file if js == true
                 title = " new JS file";
             }
             else
             {
                 title = " new file";
             }
+            // creates new tabpage with title then adds rtb to it with its properties 
             TabPage newTP = new TabPage(title);
             RichTextBox rtb = new RichTextBox();
             rtb.Dock = DockStyle.Fill;
             newTP.Controls.Add(rtb);
-            tabControl1.TabPages.Add(newTP);
+            if (nfCount > 0)
+            {
+                //oponed project with new files inside it
+                tabControl1.TabPages.Insert(0, newTP);
+            }
+            else
+            {
+                //just open a new file as normal
+                tabControl1.TabPages.Add(newTP);
+            }
+            //inserts blank just to make sure there is a new file opened and no errors
             string text = "";
             rtb.Text = rtb.Text.Insert(rtb.SelectionStart, text);
         }
 
         private void openToolStripButton_Click(object sender, EventArgs e)
         {
+            //creates an open file dialog
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.FileName = "untitled";
             ofd.Filter = "HTML (*.html)|*.html|CSS (*.css)|*.css|JS (*.js)|*.js|PHP (*.php)|*.php|Plain Text (*.txt)|*.txt";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
+                //shows it and if the result is ok go to openFile with the path
                 openFile(ofd.FileName);
             }
         }
 
         private void openFolderToolStripButton_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog obd = new FolderBrowserDialog();
-            if (obd.ShowDialog() == DialogResult.OK)
+            //creates a folder browser dialog
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == DialogResult.OK)
             {
-                path = obd.SelectedPath;
+                //sets path and runs openFolder function
+                path = fbd.SelectedPath;
                 openFolder();
             }
         }
@@ -468,22 +492,31 @@ else
         {
             try
             {
+                //tries to save file if file is already saved. 
+                //creates new stream writer for writing to
                 StreamWriter sw = new StreamWriter(openSaveDict[tabControl1.SelectedIndex]);
+                //gets file name
                 string fileName = Path.GetFileName(openSaveDict[tabControl1.SelectedIndex]);
+                //sets tab name to the file name
                 tabControl1.SelectedTab.Text = fileName;
+                //writes the current text to the file
                 sw.Write(GetRichTextBox().Text);
                 sw.Close();
                 MessageBox.Show("File Saved");
             }
             catch (Exception)
             {
-                SaveFileDialog svd = new SaveFileDialog();
-                svd.FileName = "untitled";
-                svd.Filter = "Plain Text (*.txt)|*.txt|HTML (*.html)|*.html|CSS (*.css)|*.css|JS (*.js)|*.js|PHP (*.php)|*.php";
-                if (svd.ShowDialog() == DialogResult.OK)
+                //if file not saved already
+                // creates new save file dialog
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.FileName = "untitled";
+                sfd.Filter = "Plain Text (*.txt)|*.txt|HTML (*.html)|*.html|CSS (*.css)|*.css|JS (*.js)|*.js|PHP (*.php)|*.php";
+                if (sfd.ShowDialog() == DialogResult.OK)
                 {
-                    StreamWriter sw = new StreamWriter(svd.FileName);
-                    string fileName = Path.GetFileName(svd.FileName);
+                    //writes to the new file in the new location
+                    StreamWriter sw = new StreamWriter(sfd.FileName);
+                    string fileName = Path.GetFileName(sfd.FileName);
+                    //sets the new file name to the tab name
                     tabControl1.SelectedTab.Text = fileName;
                     sw.Write(GetRichTextBox().Text);
                     sw.Close();
@@ -511,11 +544,12 @@ else
         {
             try
             {
+                //tries to close selected tab
                 tabControl1.TabPages.Remove(tabControl1.SelectedTab);
             }
             catch (Exception)
             {
-
+                // if not tab to close
                 MessageBox.Show("No file to close");
             }
         }
@@ -525,33 +559,44 @@ else
             string[] pathSplit = path.Split(toSplit, StringSplitOptions.None); // splitted path
             if (pathSplit.Last() == "" || pathSplit.Last() == null)
             {
+                //if no folder is open
                 MessageBox.Show("To get started open a folder and then save project", "Open a folder");
             }
-            try
+            else
             {
-                using (StreamWriter file = new StreamWriter(path + @"\" + pathSplit.Last() + ".weproji", false)) //making new file with folder name as file name
+                try
                 {
-                    string ePath = "path = " + path;
-                    file.WriteLine(ePath);
-                    
-                    if (tabControl1.TabCount != 0)
+                    //tries to write to the new temp file
+                    using (StreamWriter file = new StreamWriter(path + @"\" + pathSplit.Last() + ".weproji", false)) //making new file with folder name as file name
                     {
-                        for (int i = 0; i < tabControl1.TabCount; i++)
+                        string ePath = "path = " + path;
+                        file.WriteLine(ePath);
+
+                        //gets the tab count i.e. the number of tabs open
+                        if (tabControl1.TabCount != 0)
                         {
-                            string eTab = "tab = " + tabControl1.TabPages[i].Text.ToString();
-                            file.Write(eTab + "\n");
+                            // iterates till the last tab
+                            for (int i = 0; i < tabControl1.TabCount; i++)
+                            {
+                                //writes the tab name to the file
+                                string eTab = "tab = " + tabControl1.TabPages[i].Text.ToString();
+                                file.Write(eTab + "\n");
+                            }
                         }
+                        //shows message that project is saved
+                        MessageBox.Show("Project Saved");
                     }
-                    MessageBox.Show("Project Saved");
+                    //encrypts file with the desired password for security reasons
+                    encDecFile.EncryptFile("jKBuGvXJ", path + @"\" + pathSplit.Last() + ".weproji", path + @"\" + pathSplit.Last() + ".weproj");
+                    //deletes temp file for security reasons
+                    File.Delete(path + @"\" + pathSplit.Last() + ".weproji");
                 }
-                
-                encDecFile.EncryptFile("jKBuGvXJ", path + @"\" + pathSplit.Last() + ".weproji", path + @"\" + pathSplit.Last() + ".weproj");
-                File.Delete(path + @"\" + pathSplit.Last() + ".weproji");               
-            }
-            catch (Exception n)
-            {
-                MessageBox.Show("This application requires adminstrator access for some features. Are you sure you have run with adminstrator access", "Requires Administrator Acess");
-                MessageBox.Show(n.ToString());
+                catch (Exception n)
+                {
+                    // if anything goes wrong then it shows the error and error message
+                    MessageBox.Show("This application requires adminstrator access for some features. Are you sure you have run with adminstrator access", "Requires Administrator Acess");
+                    MessageBox.Show(n.ToString());
+                }
             }
         }
 
@@ -592,36 +637,47 @@ else
                             }
                             if (equalSplit[0].Trim() == "tab")
                             {
-                                openFile(path + @"\" + equalSplit.Last().Trim());
+                                if (equalSplit[1].Trim() != "new file")
+                                {
+                                    openFile(path + @"\" + equalSplit.Last().Trim());
+                                }
+                                else
+                                {
+                                    nfCount++;
+                                    newToolStripButton_Click(sender, e);
+                                }
                             }
                             i++;
                         }
 
                     }
-
+                    
                     using (StreamWriter tempFileRe = new StreamWriter(tempLoc + @"temp\" + tempFile.Last() + ".temp", false))
                     {
                         tempFileRe.WriteLine("");
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 MessageBox.Show("This application requires adminstrator access for some features. Are you sure you have run with adminstrator access", "Requires Administrator Acess");
+                MessageBox.Show(ex.ToString());
             }
         }
 
+        //Languages
         private void HTML_Click(object sender, EventArgs e)
         {
             try
             {
+                //sets language to HTML and inserts lang to tell the user that they have chosen HTML
                 lang = "HTML";
-                GetRichTextBox().Text = GetRichTextBox().Text.Insert(GetRichTextBox().SelectionStart, lang); //inserts the img tag in the rtb based on cursor position
+                GetRichTextBox().Text = GetRichTextBox().Text.Insert(GetRichTextBox().SelectionStart, lang);
             }
             catch (Exception)
             {
-
+                //if no file is open
                 MessageBox.Show("Make sure a new file is open before selecting the language", "Open a new file");
             }
         }
@@ -630,12 +686,13 @@ else
         {
             try
             {
+                //sets language to JS and inserts lang to tell the user that they have chosen JS
                 lang = "JS";
-                GetRichTextBox().Text = GetRichTextBox().Text.Insert(GetRichTextBox().SelectionStart, lang); //inserts the img tag in the rtb based on cursor position
+                GetRichTextBox().Text = GetRichTextBox().Text.Insert(GetRichTextBox().SelectionStart, lang);
             }
             catch (Exception)
             {
-
+                //if no file is open
                 MessageBox.Show("Make sure a new file is open before selecting the language", "Open a new file");
             }
         }
@@ -644,12 +701,13 @@ else
         {
             try
             {
+                //sets language to CSS and inserts lang to tell the user that they have chosen CSS
                 lang = "CSS";
                 GetRichTextBox().Text = GetRichTextBox().Text.Insert(GetRichTextBox().SelectionStart, lang); //inserts the img tag in the rtb based on cursor position
             }
             catch (Exception)
             {
-
+                //if no file is open
                 MessageBox.Show("Make sure a new file is open before selecting the language", "Open a new file");
             }
 
@@ -659,15 +717,54 @@ else
         {
             try
             {
+                //sets language to PHP and inserts lang to tell the user that they have chosen PHP
                 lang = "PHP";
                 GetRichTextBox().Text = GetRichTextBox().Text.Insert(GetRichTextBox().SelectionStart, lang); //inserts the img tag in the rtb based on cursor position
             }
             catch (Exception)
             {
-
+                //if no file is open
                 MessageBox.Show("Make sure a new file is open before selecting the language", "Open a new file");
             }
 
+        }
+
+        private void loginBtn_Click(object sender, EventArgs e)
+        {
+            teamLogin tl = new teamLogin(); //create new instance of teamLogin form
+            tl.ShowDialog(); //show it as a dialog not window
+            if (tl.stayLoggedIn == true)
+            {
+                //write username and password to temp file if stayLoggedIn == true
+                using (StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + @"\settings.wei", false))
+                {
+                    sw.WriteLine("username = " + tl.username); //username
+                    sw.WriteLine("\n"); // new line (gap)
+                    sw.WriteLine("password = " + tl.password); //password
+                }
+
+                //encrypt file
+                encDecFile.EncryptFile("jKBuGvXJ", AppDomain.CurrentDomain.BaseDirectory + @"\settings.wei", AppDomain.CurrentDomain.BaseDirectory + @"\settings.we");
+                //deletes temp file
+                File.Delete(AppDomain.CurrentDomain.BaseDirectory + @"\settings.wei");
+
+                //enable new features and disable login
+                connectBtn.Enabled = true;
+                logOutBtn.Enabled = true;
+                loginBtn.Enabled = false;
+            }
+
+
+        }
+
+        //team services
+        private void connectBtn_Click(object sender, EventArgs e)
+        {
+           //todo: generates new pin code for team 
+           //add new member to the team if accepted
+           //or join a team
+           
+           
         }
 
         void openFile(string file)
@@ -686,21 +783,22 @@ else
             sr.Close();
         }
 
-        private void loginToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            teamLogin tl = new teamLogin();
-            tl.ShowDialog();
-        }
-
         //find and replace
-        private void toolStripButton1_Click_1(object sender, EventArgs e)
+        private void findReplaceBtn_Click(object sender, EventArgs e)
         {
+            //sets variables 
             string textToSearch = GetRichTextBox().Text;
             string findT = findText.Text;
             string replaceT = replaceText.Text;
+            
+            //makes all text black
+            GetRichTextBox().SelectionStart = 0;
+            GetRichTextBox().SelectionLength = GetRichTextBox().Text.Length;
+            GetRichTextBox().SelectionColor = Color.Black;
 
             if (findT != "" && replaceT == "")
             {
+                //finds new text and colours orange-red
                 MatchCollection findTR = Regex.Matches(GetRichTextBox().Text, findT);
                 foreach (Match m in findTR)
                 {
@@ -708,17 +806,6 @@ else
                     GetRichTextBox().SelectionLength = m.Length;
                     GetRichTextBox().SelectionColor = Color.OrangeRed;
                 }
-            }
-            else
-            {
-                /*MatchCollection findTR = Regex.Matches(GetRichTextBox().Text, findT);
-                foreach (Match m in findTR)
-                {
-                    GetRichTextBox().SelectionStart = m.Index;
-                    GetRichTextBox().SelectionLength = m.Length;
-                    GetRichTextBox().SelectionColor = Color.OrangeRed;
-                   
-                }*/
             }
         }
 

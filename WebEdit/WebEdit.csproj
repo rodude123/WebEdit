@@ -65,6 +65,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="connectTeam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="connectTeam.Designer.cs">
+      <DependentUpon>connectTeam.cs</DependentUpon>
+    </Compile>
     <Compile Include="encDec.cs" />
     <Compile Include="htmlFormBuilder.cs">
       <SubType>Form</SubType>
@@ -89,6 +95,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="connectTeam.resx">
+      <DependentUpon>connectTeam.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="htmlFormBuilder.resx">
       <DependentUpon>htmlFormBuilder.cs</DependentUpon>
     </EmbeddedResource>

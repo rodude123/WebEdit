@@ -34,9 +34,11 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.mainControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.staySignedIn = new System.Windows.Forms.CheckBox();
+            this.passwordLogin = new System.Windows.Forms.Label();
+            this.usernameLogin = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.keepMeSignedIn = new System.Windows.Forms.RadioButton();
             this.passwordTxt = new System.Windows.Forms.MaskedTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -83,8 +85,6 @@
             this.label18 = new System.Windows.Forms.Label();
             this.rpCode = new System.Windows.Forms.TextBox();
             this.passHelp = new System.Windows.Forms.ToolTip(this.components);
-            this.usernameLogin = new System.Windows.Forms.Label();
-            this.passwordLogin = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.mainControl.SuspendLayout();
@@ -139,11 +139,11 @@
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tabPage1.Controls.Add(this.staySignedIn);
             this.tabPage1.Controls.Add(this.passwordLogin);
             this.tabPage1.Controls.Add(this.usernameLogin);
             this.tabPage1.Controls.Add(this.label20);
             this.tabPage1.Controls.Add(this.label17);
-            this.tabPage1.Controls.Add(this.keepMeSignedIn);
             this.tabPage1.Controls.Add(this.passwordTxt);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.label2);
@@ -156,6 +156,33 @@
             this.tabPage1.Size = new System.Drawing.Size(473, 360);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Login";
+            // 
+            // staySignedIn
+            // 
+            this.staySignedIn.AutoSize = true;
+            this.staySignedIn.Location = new System.Drawing.Point(55, 143);
+            this.staySignedIn.Name = "staySignedIn";
+            this.staySignedIn.Size = new System.Drawing.Size(113, 17);
+            this.staySignedIn.TabIndex = 22;
+            this.staySignedIn.Text = "Keep me signed in";
+            this.staySignedIn.UseVisualStyleBackColor = true;
+            // 
+            // passwordLogin
+            // 
+            this.passwordLogin.AutoSize = true;
+            this.passwordLogin.ForeColor = System.Drawing.Color.Red;
+            this.passwordLogin.Location = new System.Drawing.Point(269, 110);
+            this.passwordLogin.Name = "passwordLogin";
+            this.passwordLogin.Size = new System.Drawing.Size(0, 13);
+            this.passwordLogin.TabIndex = 21;
+            // 
+            // usernameLogin
+            // 
+            this.usernameLogin.ForeColor = System.Drawing.Color.Red;
+            this.usernameLogin.Location = new System.Drawing.Point(269, 67);
+            this.usernameLogin.Name = "usernameLogin";
+            this.usernameLogin.Size = new System.Drawing.Size(140, 12);
+            this.usernameLogin.TabIndex = 20;
             // 
             // label20
             // 
@@ -178,17 +205,6 @@
             this.label17.Size = new System.Drawing.Size(15, 20);
             this.label17.TabIndex = 18;
             this.label17.Text = "*";
-            // 
-            // keepMeSignedIn
-            // 
-            this.keepMeSignedIn.AutoSize = true;
-            this.keepMeSignedIn.Location = new System.Drawing.Point(58, 142);
-            this.keepMeSignedIn.Name = "keepMeSignedIn";
-            this.keepMeSignedIn.Size = new System.Drawing.Size(112, 17);
-            this.keepMeSignedIn.TabIndex = 7;
-            this.keepMeSignedIn.TabStop = true;
-            this.keepMeSignedIn.Text = "Keep me signed in";
-            this.keepMeSignedIn.UseVisualStyleBackColor = true;
             // 
             // passwordTxt
             // 
@@ -651,23 +667,6 @@
             this.passHelp.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.passHelp.ToolTipTitle = "Password complexity";
             // 
-            // usernameLogin
-            // 
-            this.usernameLogin.ForeColor = System.Drawing.Color.Red;
-            this.usernameLogin.Location = new System.Drawing.Point(269, 67);
-            this.usernameLogin.Name = "usernameLogin";
-            this.usernameLogin.Size = new System.Drawing.Size(140, 12);
-            this.usernameLogin.TabIndex = 20;
-            // 
-            // passwordLogin
-            // 
-            this.passwordLogin.AutoSize = true;
-            this.passwordLogin.ForeColor = System.Drawing.Color.Red;
-            this.passwordLogin.Location = new System.Drawing.Point(269, 110);
-            this.passwordLogin.Name = "passwordLogin";
-            this.passwordLogin.Size = new System.Drawing.Size(0, 13);
-            this.passwordLogin.TabIndex = 21;
-            // 
             // teamLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -676,6 +675,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "teamLogin";
             this.Text = "teamLogin";
             this.panel1.ResumeLayout(false);
@@ -725,7 +725,6 @@
         private System.Windows.Forms.Label emailErr;
         private System.Windows.Forms.Label usernameErr;
         private System.Windows.Forms.ToolTip passHelp;
-        private System.Windows.Forms.RadioButton keepMeSignedIn;
         private System.Windows.Forms.MaskedTextBox passwordSText;
         private System.Windows.Forms.TextBox emailSText;
         private System.Windows.Forms.MaskedTextBox rePassSTxt;
@@ -752,5 +751,6 @@
         private System.Windows.Forms.TextBox rpCode;
         private System.Windows.Forms.Label usernameLogin;
         private System.Windows.Forms.Label passwordLogin;
+        private System.Windows.Forms.CheckBox staySignedIn;
     }
 }

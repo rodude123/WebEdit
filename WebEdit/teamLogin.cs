@@ -16,24 +16,52 @@ namespace htmlEditor
 {
     public partial class teamLogin : Form
     {
-
+        //creating variables to be used in this form
         MySqlConnection connection;
         string server;
         string database;
         string uid;
         string dbPassword;
+        string userSender;
+        string passSender;
         bool conResult;
+        bool loggedIn;
 
         public teamLogin()
         {
             InitializeComponent();
         }
 
+        //getting loggedIn variable to be used in previous form to enable new functions.
         public bool isLoggedIn
         {
             get
             {
                 return loggedIn;
+            }
+        }
+        //getting staySignedIn input
+        public bool stayLoggedIn
+        {
+            get
+            {
+                return staySignedIn.Checked;
+            }
+        }
+        //getting usrename
+        public string username
+        {
+            get
+            {
+                return userSender;
+            }
+        }
+        //getting password
+        public string password
+        {
+            get
+            {
+                return passSender;
             }
         }
         private void signUpBtn_Click(object sender, EventArgs e)
@@ -161,6 +189,7 @@ namespace htmlEditor
                     rePasswordErr.Text = "";
                 }
             }
+            //check for errors else check for confirmation code, if correct add to database
             if (string.IsNullOrWhiteSpace(usernameErr.Text) && string.IsNullOrWhiteSpace(emailErr.Text) && string.IsNullOrWhiteSpace(passwordErr.Text) && string.IsNullOrWhiteSpace(rePasswordErr.Text))
             {
                 //but before I should have checked if the username is already in the datahbase or not
@@ -185,19 +214,22 @@ namespace htmlEditor
                     switch (conCodeLen)
                     {
                         case 1:
-                            conCodeFinal = Convert.ToInt32(conCode.ToString("D" + 5));
+                            conCodeFinal = Convert.ToInt32(conCode.ToString("D5"));
                             break;
                         case 2:
-                            conCodeFinal = Convert.ToInt32(conCode.ToString("D" + 4));
+                            conCodeFinal = Convert.ToInt32(conCode.ToString("D4"));
                             break;
                         case 3:
-                            conCodeFinal = Convert.ToInt32(conCode.ToString("D" + 3));
+                            conCodeFinal = Convert.ToInt32(conCode.ToString("D3"));
                             break;
                         case 4:
-                            conCodeFinal = Convert.ToInt32(conCode.ToString("D" + 2));
+                            conCodeFinal = Convert.ToInt32(conCode.ToString("D2"));
                             break;
                         case 5:
-                            conCodeFinal = Convert.ToInt32(conCode.ToString("D" + 1));
+                            conCodeFinal = Convert.ToInt32(conCode.ToString("D1"));
+                            break;
+                        case 6:
+                            conCodeFinal = conCode;
                             break;
                     }
                     MailMessage mm = new MailMessage("no.reply.webedit@gmail.com", email, "Webedit Sign Up Confirmation", "Here is the confirmation code required to sign up to WebEdit: " + conCodeFinal + "\n Sorry about the email address, this application is still in development, Thank you for downloading it and trying it out.");
@@ -335,7 +367,13 @@ If you do then please contact the developer for isseus.", "You cannot sign up ri
                 {
                     // if username and password are both correct
                     MessageBox.Show("Login Successful");
-                    Application.Exit();
+                    loggedIn = true;
+                    if (staySignedIn.Checked == true)
+                    {
+                        userSender = username;
+                        passSender = password;
+                    }
+                    Close();
                 }
             }
             catch (Exception)

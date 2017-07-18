@@ -64,7 +64,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(227, 451);
+            this.panel1.Size = new System.Drawing.Size(227, 569);
             this.panel1.TabIndex = 0;
             // 
             // finish
@@ -187,10 +187,10 @@
             this.panel3.Controls.Add(this.rtb2);
             this.panel3.Controls.Add(this.rtb1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(227, 276);
+            this.panel3.Location = new System.Drawing.Point(227, 394);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1054, 175);
+            this.panel3.Size = new System.Drawing.Size(914, 175);
             this.panel3.TabIndex = 2;
             // 
             // rtb3
@@ -239,7 +239,7 @@
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.panel2.Size = new System.Drawing.Size(1054, 276);
+            this.panel2.Size = new System.Drawing.Size(914, 394);
             this.panel2.TabIndex = 3;
             this.panel2.DragDrop += new System.Windows.Forms.DragEventHandler(this.panel2_DragDrop);
             this.panel2.DragEnter += new System.Windows.Forms.DragEventHandler(this.panel2_DragEnter);
@@ -248,11 +248,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(676, 451);
+            this.ClientSize = new System.Drawing.Size(1141, 569);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "htmlFormBuilder";
             this.Text = "htmlFormBuilder";
             this.Load += new System.EventHandler(this.htmlFormBuilder_Load);
