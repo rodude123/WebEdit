@@ -34,6 +34,8 @@ namespace htmlEditor
         int DL = 0;
         int nfCount = 0;
         string lang = "";
+        public string username;
+        public string password;
         string[] pathSplit;
         string[] toSplit = new string[] { @"\" }; // split string
         Dictionary<int, string> openSaveDict = new Dictionary<int, string>();
@@ -731,8 +733,11 @@ else
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
-            teamLogin tl = new teamLogin(); //create new instance of teamLogin form
+            teamLogin tl = new teamLogin(); //create new instance of teamLogin 
             tl.ShowDialog(); //show it as a dialog not window
+            //set new variables
+            username = tl.username;
+            password = tl.password;
             if (tl.stayLoggedIn == true)
             {
                 //write username and password to temp file if stayLoggedIn == true
@@ -753,6 +758,13 @@ else
                 logOutBtn.Enabled = true;
                 loginBtn.Enabled = false;
             }
+            else
+            {
+                //just enable new features and disable login
+                connectBtn.Enabled = true;
+                logOutBtn.Enabled = true;
+                loginBtn.Enabled = false;
+            }
 
 
         }
@@ -760,10 +772,13 @@ else
         //team services
         private void connectBtn_Click(object sender, EventArgs e)
         {
-           //todo: generates new pin code for team 
-           //add new member to the team if accepted
-           //or join a team
-           
+            //todo: generates new pin code for team 
+            //add new member to the team if accepted
+            //or join a team
+            connectToTeam ct = new connectToTeam();
+            ct.username = username;
+            ct.password = password;
+            ct.ShowDialog();
            
         }
 

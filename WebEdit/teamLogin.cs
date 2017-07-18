@@ -301,6 +301,7 @@ namespace htmlEditor
             {
                 MessageBox.Show(@"Make sure you have a working internet connection.
 If you do then please contact the developer for isseus.", "You cannot sign up right now");
+                Console.WriteLine(e.ToString());
                 return connection;
             }
         }
@@ -368,11 +369,8 @@ If you do then please contact the developer for isseus.", "You cannot sign up ri
                     // if username and password are both correct
                     MessageBox.Show("Login Successful");
                     loggedIn = true;
-                    if (staySignedIn.Checked == true)
-                    {
-                        userSender = username;
-                        passSender = password;
-                    }
+                    userSender = username;
+                    passSender = password;
                     Close();
                 }
             }
@@ -405,6 +403,47 @@ If you do then please contact the developer for isseus.", "You cannot sign up ri
                 }
                 //closes connection as not needed for this execution of code
                 emailConn.Close();
+
+                //setup mail client with details
+                SmtpClient client = new SmtpClient();
+                client.Port = 587;
+                client.Host = "smtp.gmail.com";
+                client.EnableSsl = true;
+                client.Timeout = 10000;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new System.Net.NetworkCredential("no.reply.webedit@gmail.com", "gangolli");
+                //create email with confirmation code
+                Random rnd = new Random();
+                int conCode = rnd.Next(1, 999999); //generate confirmation code
+                int conCodeLen = conCode.ToString().Length;
+                int conCodeFinal = 0;
+                switch (conCodeLen)
+                {
+                    case 1:
+                        conCodeFinal = Convert.ToInt32(conCode.ToString("D5"));
+                        break;
+                    case 2:
+                        conCodeFinal = Convert.ToInt32(conCode.ToString("D4"));
+                        break;
+                    case 3:
+                        conCodeFinal = Convert.ToInt32(conCode.ToString("D3"));
+                        break;
+                    case 4:
+                        conCodeFinal = Convert.ToInt32(conCode.ToString("D2"));
+                        break;
+                    case 5:
+                        conCodeFinal = Convert.ToInt32(conCode.ToString("D1"));
+                        break;
+                    case 6:
+                        conCodeFinal = conCode;
+                        break;
+                }
+                MailMessage mm = new MailMessage("no.reply.webedit@gmail.com", email, "Webedit password reset code", "Here is the password reset code required to reset your password within WebEdit: " + conCodeFinal + "\n Sorry about the email address, this application is still in development, Thank you for downloading it and trying it out.");
+                mm.BodyEncoding = UTF8Encoding.UTF8;
+                mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+                //send email
+                client.Send(mm);
 
             }
             catch (Exception)

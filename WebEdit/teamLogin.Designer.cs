@@ -85,6 +85,7 @@
             this.label18 = new System.Windows.Forms.Label();
             this.rpCode = new System.Windows.Forms.TextBox();
             this.passHelp = new System.Windows.Forms.ToolTip(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.mainControl.SuspendLayout();
@@ -553,6 +554,7 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage4.Controls.Add(this.button1);
             this.tabPage4.Controls.Add(this.rCodeErr);
             this.tabPage4.Controls.Add(this.rePassRTxt);
             this.tabPage4.Controls.Add(this.passwordRText);
@@ -667,6 +669,15 @@
             this.passHelp.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.passHelp.ToolTipTitle = "Password complexity";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(172, 187);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(102, 24);
+            this.button1.TabIndex = 36;
+            this.button1.Text = "Reset";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // teamLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -752,5 +763,6 @@
         private System.Windows.Forms.Label usernameLogin;
         private System.Windows.Forms.Label passwordLogin;
         private System.Windows.Forms.CheckBox staySignedIn;
+        private System.Windows.Forms.Button button1;
     }
 }
