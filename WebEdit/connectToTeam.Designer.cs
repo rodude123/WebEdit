@@ -31,6 +31,7 @@
             this.getCode = new System.Windows.Forms.Button();
             this.rtbCode = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.greetMessage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // getCode
@@ -51,6 +52,7 @@
             this.rtbCode.Location = new System.Drawing.Point(175, 58);
             this.rtbCode.Multiline = false;
             this.rtbCode.Name = "rtbCode";
+            this.rtbCode.ReadOnly = true;
             this.rtbCode.Size = new System.Drawing.Size(185, 30);
             this.rtbCode.TabIndex = 6;
             this.rtbCode.Text = "";
@@ -66,11 +68,21 @@
             this.label1.Text = "Your Team Code";
             this.label1.UseWaitCursor = true;
             // 
+            // greetMessage
+            // 
+            this.greetMessage.AutoSize = true;
+            this.greetMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.greetMessage.Location = new System.Drawing.Point(172, 102);
+            this.greetMessage.Name = "greetMessage";
+            this.greetMessage.Size = new System.Drawing.Size(0, 16);
+            this.greetMessage.TabIndex = 8;
+            // 
             // connectToTeam
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(492, 321);
+            this.Controls.Add(this.greetMessage);
             this.Controls.Add(this.getCode);
             this.Controls.Add(this.rtbCode);
             this.Controls.Add(this.label1);
@@ -86,5 +98,6 @@
         private System.Windows.Forms.Button getCode;
         private System.Windows.Forms.RichTextBox rtbCode;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label greetMessage;
     }
 }

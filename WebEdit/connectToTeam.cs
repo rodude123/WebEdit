@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using MySql.Data.MySqlClient;
+using MsgBox;
 namespace htmlEditor
 {
     public partial class connectToTeam : Form
@@ -15,6 +16,11 @@ namespace htmlEditor
         //defining global variables
         string user = "";
         string pass = "";
+        MySqlConnection connection;
+        string server;
+        string database;
+        string uid;
+        string dbPassword;
 
         public connectToTeam()
         {
@@ -38,19 +44,94 @@ namespace htmlEditor
             }
         }
 
+        MySqlConnection makeConnection()
+        {
+            try
+            {
+                //connection information
+                server = "webedit.heliohost.org";
+                database = "webedit_WebEdit";
+                uid = "webedit_webEdit";
+                dbPassword = "Gangolli123";
+                string connectionString = "SERVER=" + server + ";" + "DATABASE=" +
+                database + ";" + "UID=" + uid + ";" + "PASSWORD=" + dbPassword + ";";
+                //connect to the database
+                connection = new MySqlConnection();
+                connection.ConnectionString = connectionString;
+                connection.Open();
+                return connection;
+            }
+            catch (MySqlException e)
+            {
+                //if anything goes wrong
+                MessageBox.Show(@"Make sure you have a working internet connection.
+If you do then please contact the developer for isseus.", "You cannot sign up right now");
+                Console.WriteLine(e.ToString());
+                return connection;
+            }
+        }
+
         private void getCode_Click(object sender, EventArgs e)
         {
-            //defining variables
-            Random rnd = new Random();
-            bool notInTable = false;
-            int teamCode = 0;
+            try
+            { 
+                //defining variables
+                Random rnd = new Random();
+                bool inTable = false;
+                int teamCode = 0;
 
-            //checking if it is in the table
-            while (notInTable == false)
+                //loop until correct one is in the table
+                while (inTable == false)
+                {
+                    //get random code
+                    teamCode = rnd.Next(100000, 999999);
+                    //check current code in database
+                    MySqlConnection conn = makeConnection();
+                    string checkUserResult = @"SELECT teamCode from webEditUsers WHERE username = '" + user + "' LIMIT 1";
+                    MySqlCommand checkCode = new MySqlCommand(checkUserResult, conn);
+                    string userResult = checkCode.ExecuteScalar().ToString();
+                    //check if it is not equal to 0
+                    if (userResult != "0")
+                    {
+                        rtbCode.Text = userResult;
+                        string getTeamNameQuery = @"SELECT teamName from webEditUsers WHERE username = '" + user + "' ";
+                        MySqlCommand getTeamName = new MySqlCommand(getTeamNameQuery, conn);
+                        string teamName = getTeamName.ExecuteScalar().ToString();
+                        greetMessage.Text = "Hello again, " + user + " and " + teamName;
+                        inTable = true;
+                    }
+                    else
+                    {
+                        string codeQuery = @"SELECT count(teamCode) from webEditUsers WHERE teamCode = '" + teamCode + "' LIMIT 1";
+                        MySqlCommand code = new MySqlCommand(codeQuery, conn);
+                        string codeResult = code.ExecuteScalar().ToString();
+                        if (codeResult == "0")
+                        {
+                            string updateCodeQuery = @"UPDATE webEditUsers SET teamCode = '" + teamCode + "' WHERE username = '" + user + "'";
+                            MySqlCommand updateCode = new MySqlCommand(updateCodeQuery, conn);
+                            updateCode.ExecuteNonQuery();
+                            rtbCode.Text = teamCode.ToString();
+                            inTable = true;
+                            while (true)
+                            {
+                                InputBoxResult teamName = InputBox.Show("Please type a team name to use for your team. (This can be change later)", "Team Name", "", null);
+                                if (teamName.OK && !string.IsNullOrWhiteSpace(teamName.Text))
+                                {
+                                    string updateTNameQuery = @"UPDATE webEditUsers SET teamName = '" + teamName.Text + "' WHERE username = '" + user + "'";
+                                    MySqlCommand updateTName = new MySqlCommand(updateTNameQuery, conn);
+                                    updateTName.ExecuteNonQuery();
+                                    greetMessage.Text = "Hello, " + user + " and " + teamName.Text;
+                                    inTable = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch
             {
-                teamCode = rnd.Next(100000, 999999);
-                rtbCode.Text = teamCode.ToString();
-                notInTable = true;
+
             }
         }
     }
