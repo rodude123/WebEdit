@@ -134,5 +134,36 @@ If you do then please contact the developer for isseus.", "You cannot sign up ri
 
             }
         }
+
+        private void connectToTeam_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void connectTeam_Click(object sender, EventArgs e)
+        {
+            //define pre-variables
+            string teamCode = rtbTeamCode.Text;
+
+            if (string.IsNullOrEmpty(teamCode))
+            {
+                //if nothing was entered in text box
+                teamCodeErr.Text = "Please type a team code";
+            }
+            else
+            {
+                //makes connection to database
+                MySqlConnection conn = makeConnection();
+                
+                string codeCheckQuery = "SELECT count(teamCode) FROM webEditUsers WHERE username = '" + user + "' LIMIT 1";
+                MySqlCommand codeCheck = new MySqlCommand(codeCheckQuery, conn);
+                string codeResult = codeCheck.ExecuteScalar().ToString();
+                if(codeResult == "1")
+                {
+                	teamCodeErr.Text = "Please leave previous team before joining a new one";
+                }
+
+            }
+        }
     }
 }
