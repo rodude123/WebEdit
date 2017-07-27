@@ -154,15 +154,50 @@ If you do then please contact the developer for isseus.", "You cannot sign up ri
             {
                 //makes connection to database
                 MySqlConnection conn = makeConnection();
-                
-                string codeCheckQuery = "SELECT count(teamCode) FROM webEditUsers WHERE username = '" + user + "' LIMIT 1";
+                //checks if there is a team code asociated with the user
+                string codeCheckQuery = "SELECT teamCode FROM webEditUsers WHERE username = '" + user + "' LIMIT 1";
                 MySqlCommand codeCheck = new MySqlCommand(codeCheckQuery, conn);
                 string codeResult = codeCheck.ExecuteScalar().ToString();
-                if(codeResult == "1")
+                if (codeResult != "0")
                 {
-                	teamCodeErr.Text = "Please leave previous team before joining a new one";
+                    // if so aks them to leave perevious team
+                    teamCodeErr.Text = "Please leave previous team before joining a new one";
                 }
+                else if(codeResult == "0")
+                {
+                    teamCodeErr.Text = "team code is incorrect try again";
+                }
+                else
+                {
+                    /*string updateCodeQuery = @"UPDATE webEditUsers SET teamCode = '" + teamCode + "' WHERE username = '" + user + "'";
+                    MySqlCommand updateCode = new MySqlCommand(updateCodeQuery, conn);
+                    updateCode.ExecuteNonQuery();
+                    string getTeamNameQuery = "SELECT teamName FROM webEditUsers WHERE teamCode = '123456' LIMIT 1";
+                    MySqlCommand getTeamName = new MySqlCommand(getTeamNameQuery, conn);
+                    string teamName = getTeamName.ExecuteScalar().ToString();
+                    string updateTeamNameQuery = "UPDATE webEditUsers SET teamName = '" + teamName + "' WHERE username = '" + user + "'";
+                    MySqlCommand updateTeamName = new MySqlCommand(updateTeamNameQuery, conn);
+                    updateTeamName.ExecuteNonQuery();*/
 
+                    //checks if users in team to connect to have notifications that have not been seen
+                    string checkNotiTypeQuery = "SELECT COUNT(VALUES(`notificationType`)) FROM `webEditUsers` WHERE teamCode='" + teamCode + "'";
+                    MySqlCommand checkNotiType = new MySqlCommand(checkNotiTypeQuery, conn);
+                    string checkNotiTypeResult = checkNotiType.ExecuteScalar().ToString();
+                    if (checkNotiTypeResult == "0")
+                    {
+                        //if not just set as normal
+                        string updateNotiQuery = "UPDATE webEditUsers SET notificationType = 'newUser', notification='" + user + "' WHERE teamCode='" + teamCode + "' ";
+                        MySqlCommand updateNoti = new MySqlCommand(updateNotiQuery, conn);
+                        updateNoti.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        //if so add new after previous with [,] as the definer to make easier later to get the notifications
+                        string updateNotiQuery = "UPDATE webEditUsers SET notificationType = concat(notificationType, ', new user'), notification = concat(notification, ', " + user + "') WHERE teamCode='" + teamCode + "' ";
+                        MySqlCommand updateNoti = new MySqlCommand(updateNotiQuery, conn);
+                        updateNoti.ExecuteNonQuery();
+                    }
+                }
             }
         }
     }

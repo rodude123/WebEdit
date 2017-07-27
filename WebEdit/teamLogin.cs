@@ -93,7 +93,7 @@ namespace htmlEditor
                 {
                     //connects to database
                     MySqlConnection usernameConn = makeConnection();
-                    string usernameQuery = @"SELECT count(username) from webEditUsers WHERE username = '" + username + "' LIMIT 1";
+                    string usernameQuery = @"SELECT COUNT(username) from webEditUsers WHERE username = '" + username + "' LIMIT 1";
                     MySqlCommand usernameComand = new MySqlCommand(usernameQuery, usernameConn);
                     //executes SQL code getting single string answer
                     string usernameResult = usernameComand.ExecuteScalar().ToString();
@@ -131,7 +131,7 @@ namespace htmlEditor
                 {
                     //connects to database
                     MySqlConnection emailConn = makeConnection();
-                    string emailQuery = @"SELECT count(email) from webEditUsers WHERE email = '" + email + "' LIMIT 1";
+                    string emailQuery = @"SELECT COUNT(email) from webEditUsers WHERE email = '" + email + "' LIMIT 1";
                     MySqlCommand emailComand = new MySqlCommand(emailQuery, emailConn);
                     //executes SQL code getting single string answer
                     string emailResult = emailComand.ExecuteScalar().ToString();
@@ -327,7 +327,7 @@ If you do then please contact the developer for isseus.", "You cannot sign up ri
                 string password = passwordTxt.Text;
                 //connects to database
                 MySqlConnection usernameConn = makeConnection();
-                string usernameQuery = @"SELECT count(username) from webEditUsers WHERE username = '" + username + "' LIMIT 1";
+                string usernameQuery = @"SELECT COUNT(username) from webEditUsers WHERE username = '" + username + "' LIMIT 1";
                 MySqlCommand usernameComand = new MySqlCommand(usernameQuery, usernameConn);
                 //executes SQL code getting single string answer
                 string usernameResult = usernameComand.ExecuteScalar().ToString();
@@ -344,7 +344,7 @@ If you do then please contact the developer for isseus.", "You cannot sign up ri
 
                 //connects to database
                 MySqlConnection passwordConn = makeConnection();
-                string passwordQuery = @"SELECT count(username) from webEditUsers WHERE username = '" + username + "' and password = '" + password + "' LIMIT 1";
+                string passwordQuery = @"SELECT COUNT(username) from webEditUsers WHERE username = '" + username + "' and password = '" + password + "' LIMIT 1";
                 MySqlCommand passwordComand = new MySqlCommand(passwordQuery, passwordConn);
                 //executes SQL code getting single string answer
                 string passwordResult = passwordComand.ExecuteScalar().ToString();
@@ -387,7 +387,7 @@ If you do then please contact the developer for isseus.", "You cannot sign up ri
                 string email = fpEmail.Text;
                 //connects to database
                 MySqlConnection emailConn = makeConnection();
-                string emailQuery = @"SELECT count(email) from webEditUsers WHERE email = '" + email + "' LIMIT 1";
+                string emailQuery = @"SELECT COUNT(email) from webEditUsers WHERE email = '" + email + "' LIMIT 1";
                 MySqlCommand emailComand = new MySqlCommand(emailQuery, emailConn);
                 //executes SQL code getting single string answer
                 string emailResult = emailComand.ExecuteScalar().ToString();

@@ -738,34 +738,36 @@ else
             //set new variables
             username = tl.username;
             password = tl.password;
-            if (tl.stayLoggedIn == true)
+            if (tl.isLoggedIn == true)
             {
-                //write username and password to temp file if stayLoggedIn == true
-                using (StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + @"\settings.wei", false))
+                if (tl.stayLoggedIn == true)
                 {
-                    sw.WriteLine("username = " + tl.username); //username
-                    sw.WriteLine("\n"); // new line (gap)
-                    sw.WriteLine("password = " + tl.password); //password
+                    //write username and password to temp file if stayLoggedIn == true
+                    using (StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + @"\settings.wei", false))
+                    {
+                        sw.WriteLine("username = " + tl.username); //username
+                        sw.WriteLine("\n"); // new line (gap)
+                        sw.WriteLine("password = " + tl.password); //password
+                    }
+
+                    //encrypt file
+                    encDecFile.EncryptFile("jKBuGvXJ", AppDomain.CurrentDomain.BaseDirectory + @"\settings.wei", AppDomain.CurrentDomain.BaseDirectory + @"\settings.we");
+                    //deletes temp file
+                    File.Delete(AppDomain.CurrentDomain.BaseDirectory + @"\settings.wei");
+
+                    //enable new features and disable login
+                    connectBtn.Enabled = true;
+                    logOutBtn.Enabled = true;
+                    loginBtn.Enabled = false;
                 }
-
-                //encrypt file
-                encDecFile.EncryptFile("jKBuGvXJ", AppDomain.CurrentDomain.BaseDirectory + @"\settings.wei", AppDomain.CurrentDomain.BaseDirectory + @"\settings.we");
-                //deletes temp file
-                File.Delete(AppDomain.CurrentDomain.BaseDirectory + @"\settings.wei");
-
-                //enable new features and disable login
-                connectBtn.Enabled = true;
-                logOutBtn.Enabled = true;
-                loginBtn.Enabled = false;
+                else
+                {
+                    //just enable new features and disable login
+                    connectBtn.Enabled = true;
+                    logOutBtn.Enabled = true;
+                    loginBtn.Enabled = false;
+                }
             }
-            else
-            {
-                //just enable new features and disable login
-                connectBtn.Enabled = true;
-                logOutBtn.Enabled = true;
-                loginBtn.Enabled = false;
-            }
-
 
         }
 
