@@ -7,11 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
+using WinSCP;
 
 namespace htmlEditor
 {
     public partial class syncToTeam : Form
     {
+        public SessionOptions SO;
         public syncToTeam()
         {
             InitializeComponent();
@@ -35,6 +38,26 @@ namespace htmlEditor
         private void deleteFiles_MouseHover(object sender, EventArgs e)
         {
             deleteTip.Show("Delete unwanted files from the project but changes have to be aproved by another team member", deleteFiles);
+        }
+
+        private void sync_Click(object sender, EventArgs e)
+        {
+            using (Session session = new Session())
+            {
+                // Connect
+                session.Open(SO);
+            }
+        }
+
+        private void syncToTeam_Load(object sender, EventArgs e)
+        {
+            SO = new SessionOptions
+            {
+                Protocol = Protocol.Ftp,
+                HostName = "example.com",
+                UserName = "user",
+                Password = "password"
+            };
         }
     }
 }
