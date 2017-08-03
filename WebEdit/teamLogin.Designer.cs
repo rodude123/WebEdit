@@ -74,6 +74,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.fpEmail = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.rCodeErr = new System.Windows.Forms.Label();
             this.rePassRTxt = new System.Windows.Forms.MaskedTextBox();
             this.passwordRText = new System.Windows.Forms.MaskedTextBox();
@@ -85,7 +86,6 @@
             this.label18 = new System.Windows.Forms.Label();
             this.rpCode = new System.Windows.Forms.TextBox();
             this.passHelp = new System.Windows.Forms.ToolTip(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.mainControl.SuspendLayout();
@@ -572,6 +572,15 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Reset Password";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(172, 187);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(102, 24);
+            this.button1.TabIndex = 36;
+            this.button1.Text = "Reset";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // rCodeErr
             // 
             this.rCodeErr.AutoSize = true;
@@ -669,15 +678,6 @@
             this.passHelp.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.passHelp.ToolTipTitle = "Password complexity";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(172, 187);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(102, 24);
-            this.button1.TabIndex = 36;
-            this.button1.Text = "Reset";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // teamLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -688,7 +688,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "teamLogin";
-            this.Text = "teamLogin";
+            this.Text = "Team Login";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

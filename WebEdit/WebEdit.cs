@@ -55,7 +55,7 @@ namespace htmlEditor
 
         }
 
-        
+
         //creats a new rich text box element to per new tab to be used in this code like an rtb element placed in the form
         private RichTextBox GetRichTextBox()
         {
@@ -522,7 +522,7 @@ else
                     tabControl1.SelectedTab.Text = fileName;
                     sw.Write(GetRichTextBox().Text);
                     sw.Close();
-                }                
+                }
             }
 
         }
@@ -653,7 +653,7 @@ else
                         }
 
                     }
-                    
+
                     using (StreamWriter tempFileRe = new StreamWriter(tempLoc + @"temp\" + tempFile.Last() + ".temp", false))
                     {
                         tempFileRe.WriteLine("");
@@ -731,6 +731,7 @@ else
 
         }
 
+        //team services
         private void loginBtn_Click(object sender, EventArgs e)
         {
             teamLogin tl = new teamLogin(); //create new instance of teamLogin 
@@ -756,22 +757,27 @@ else
                     File.Delete(AppDomain.CurrentDomain.BaseDirectory + @"\settings.wei");
 
                     //enable new features and disable login
-                    connectBtn.Enabled = true;
-                    logOutBtn.Enabled = true;
-                    loginBtn.Enabled = false;
                 }
-                else
-                {
-                    //just enable new features and disable login
-                    connectBtn.Enabled = true;
-                    logOutBtn.Enabled = true;
-                    loginBtn.Enabled = false;
-                }
+
+                connectBtn.Enabled = true;
+                logOutBtn.Enabled = true;
+                notifcationsBtn.Enabled = true;
+                loginBtn.Enabled = false;
             }
 
         }
 
-        //team services
+        private void logOutBtn_Click(object sender, EventArgs e)
+        {
+            //allows user to logout of the team
+            //enables login again and disables features required for login
+            connectBtn.Enabled = false;
+            logOutBtn.Enabled = false;
+            loginBtn.Enabled = true;
+            //deleting settings file which contains the login information to log back in again
+            File.Delete(AppDomain.CurrentDomain.BaseDirectory + @"\settings.we");
+        }
+
         private void connectBtn_Click(object sender, EventArgs e)
         {
             //todo: generates new pin code for team 
@@ -781,7 +787,20 @@ else
             ct.username = username;
             ct.password = password;
             ct.ShowDialog();
-           
+
+        }
+
+        private void notifcationsBtn_Click(object sender, EventArgs e)
+        {
+            notifications noti = new notifications();
+            noti.username = username;
+            noti.password = password;
+            noti.Show();
+        }
+
+        private void syncBtn_Click(object sender, EventArgs e)
+        {
+            
         }
 
         void openFile(string file)
@@ -807,7 +826,7 @@ else
             string textToSearch = GetRichTextBox().Text;
             string findT = findText.Text;
             string replaceT = replaceText.Text;
-            
+
             //makes all text black
             GetRichTextBox().SelectionStart = 0;
             GetRichTextBox().SelectionLength = GetRichTextBox().Text.Length;
@@ -1360,14 +1379,17 @@ else
         }
 
         private void WebEdit_Load(object sender, EventArgs e)
-        { 
+        {
 
         }
 
+        //for shortcut keys
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
+            //switches keys
             switch (keyData)
             {
+                //checks which key is pressed and then performs action
                 case (Keys.Control | Keys.S):
                     saveToolStripButton.PerformClick();
                     break;
@@ -1410,12 +1432,8 @@ else
 
         private void WebEdit_Resize(object sender, EventArgs e)
         {
+            //resizes folder viewer based on height of form
             treeView1.Height = Height;
-        }
-
-        private void flowLayoutPanel3_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

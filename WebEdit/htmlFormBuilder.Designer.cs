@@ -255,7 +255,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "htmlFormBuilder";
-            this.Text = "htmlFormBuilder";
+            this.Text = "HTML Form Builder";
             this.Load += new System.EventHandler(this.htmlFormBuilder_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

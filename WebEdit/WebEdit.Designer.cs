@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WebEditForm));
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Folder");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Folder");
             this.sendMessageBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -72,6 +72,7 @@
             this.connectBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.syncBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.notifcationsBtn = new System.Windows.Forms.ToolStripMenuItem();
+            this.teamSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logOutBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -109,7 +110,6 @@
             this.extScriptHelp = new System.Windows.Forms.ToolTip(this.components);
             this.flowLayoutPanel2 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.teamSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -547,6 +547,7 @@
             this.syncBtn.Size = new System.Drawing.Size(163, 22);
             this.syncBtn.Text = "Sync with team";
             this.syncBtn.ToolTipText = "Sync with your team";
+            this.syncBtn.Click += new System.EventHandler(this.syncBtn_Click);
             // 
             // notifcationsBtn
             // 
@@ -555,6 +556,15 @@
             this.notifcationsBtn.Size = new System.Drawing.Size(163, 22);
             this.notifcationsBtn.Text = "Notifications";
             this.notifcationsBtn.ToolTipText = "Notifications";
+            this.notifcationsBtn.Click += new System.EventHandler(this.notifcationsBtn_Click);
+            // 
+            // teamSettingsToolStripMenuItem
+            // 
+            this.teamSettingsToolStripMenuItem.Enabled = false;
+            this.teamSettingsToolStripMenuItem.Name = "teamSettingsToolStripMenuItem";
+            this.teamSettingsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.teamSettingsToolStripMenuItem.Text = "Team settings";
+            this.teamSettingsToolStripMenuItem.ToolTipText = "Team settings e.g. team name";
             // 
             // logOutBtn
             // 
@@ -563,6 +573,7 @@
             this.logOutBtn.Size = new System.Drawing.Size(163, 22);
             this.logOutBtn.Text = "Log out";
             this.logOutBtn.ToolTipText = "Log out";
+            this.logOutBtn.Click += new System.EventHandler(this.logOutBtn_Click);
             // 
             // toolStripTextBox1
             // 
@@ -625,11 +636,11 @@
             this.treeView1.ImageList = this.imageList1;
             this.treeView1.Location = new System.Drawing.Point(3, 3);
             this.treeView1.Name = "treeView1";
-            treeNode2.ImageIndex = 0;
-            treeNode2.Name = "nodeProject";
-            treeNode2.Text = "Folder";
+            treeNode1.ImageIndex = 0;
+            treeNode1.Name = "nodeProject";
+            treeNode1.Text = "Folder";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode1});
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(194, 734);
             this.treeView1.TabIndex = 0;
@@ -656,7 +667,6 @@
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(420, 732);
             this.flowLayoutPanel3.TabIndex = 8;
-            this.flowLayoutPanel3.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel3_Paint);
             // 
             // panel2
             // 
@@ -926,14 +936,6 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(727, 732);
             this.tabControl1.TabIndex = 0;
-            // 
-            // teamSettingsToolStripMenuItem
-            // 
-            this.teamSettingsToolStripMenuItem.Enabled = false;
-            this.teamSettingsToolStripMenuItem.Name = "teamSettingsToolStripMenuItem";
-            this.teamSettingsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.teamSettingsToolStripMenuItem.Text = "Team settings";
-            this.teamSettingsToolStripMenuItem.ToolTipText = "Team settings e.g. team name";
             // 
             // WebEditForm
             // 
