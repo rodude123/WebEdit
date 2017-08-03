@@ -87,6 +87,12 @@
     <Compile Include="notifications.Designer.cs">
       <DependentUpon>notifications.cs</DependentUpon>
     </Compile>
+    <Compile Include="syncToTeam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="syncToTeam.Designer.cs">
+      <DependentUpon>syncToTeam.cs</DependentUpon>
+    </Compile>
     <Compile Include="teamLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="notifications.resx">
       <DependentUpon>notifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="syncToTeam.resx">
+      <DependentUpon>syncToTeam.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="teamLogin.resx">
       <DependentUpon>teamLogin.cs</DependentUpon>
