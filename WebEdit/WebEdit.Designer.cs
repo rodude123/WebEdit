@@ -914,11 +914,6 @@
             this.phpWhileState.UseVisualStyleBackColor = true;
             this.phpWhileState.Click += new System.EventHandler(this.phpWhileState_Click);
             // 
-            // extScriptHelp
-            // 
-            this.extScriptHelp.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.extScriptHelp.ToolTipTitle = "External Scripts";
-            // 
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.Controls.Add(this.tabControl1);
