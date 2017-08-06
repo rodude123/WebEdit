@@ -72,7 +72,7 @@
             this.connectBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.syncBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.notifcationsBtn = new System.Windows.Forms.ToolStripMenuItem();
-            this.teamSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.teamSettingsBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.logOutBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -169,7 +169,7 @@
             this.standardHTML.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.standardHTML.Location = new System.Drawing.Point(6, 356);
             this.standardHTML.Name = "standardHTML";
-            this.standardHTML.Size = new System.Drawing.Size(140, 29);
+            this.standardHTML.Size = new System.Drawing.Size(114, 29);
             this.standardHTML.TabIndex = 2;
             this.standardHTML.Text = "stadard html layout";
             this.standardHTML.UseVisualStyleBackColor = true;
@@ -285,7 +285,7 @@
             this.mediaQuery.Location = new System.Drawing.Point(4, 448);
             this.mediaQuery.Margin = new System.Windows.Forms.Padding(2);
             this.mediaQuery.Name = "mediaQuery";
-            this.mediaQuery.Size = new System.Drawing.Size(120, 32);
+            this.mediaQuery.Size = new System.Drawing.Size(123, 32);
             this.mediaQuery.TabIndex = 11;
             this.mediaQuery.Text = "Standard media query";
             this.mediaQuery.UseVisualStyleBackColor = true;
@@ -515,7 +515,7 @@
             this.syncBtn,
             this.sendMessageBtn,
             this.notifcationsBtn,
-            this.teamSettingsToolStripMenuItem,
+            this.teamSettingsBtn,
             this.logOutBtn});
             this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -558,13 +558,14 @@
             this.notifcationsBtn.ToolTipText = "Notifications";
             this.notifcationsBtn.Click += new System.EventHandler(this.notifcationsBtn_Click);
             // 
-            // teamSettingsToolStripMenuItem
+            // teamSettingsBtn
             // 
-            this.teamSettingsToolStripMenuItem.Enabled = false;
-            this.teamSettingsToolStripMenuItem.Name = "teamSettingsToolStripMenuItem";
-            this.teamSettingsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.teamSettingsToolStripMenuItem.Text = "Team settings";
-            this.teamSettingsToolStripMenuItem.ToolTipText = "Team settings e.g. team name";
+            this.teamSettingsBtn.Enabled = false;
+            this.teamSettingsBtn.Name = "teamSettingsBtn";
+            this.teamSettingsBtn.Size = new System.Drawing.Size(163, 22);
+            this.teamSettingsBtn.Text = "Team settings";
+            this.teamSettingsBtn.ToolTipText = "Team settings e.g. team name";
+            this.teamSettingsBtn.Click += new System.EventHandler(this.teamSettingsBtn_Click);
             // 
             // logOutBtn
             // 
@@ -1042,7 +1043,7 @@
         private System.Windows.Forms.ToolStripMenuItem logOutBtn;
         private System.Windows.Forms.ToolStripMenuItem sendMessageBtn;
         private System.Windows.Forms.ToolStripMenuItem notifcationsBtn;
-        private System.Windows.Forms.ToolStripMenuItem teamSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem teamSettingsBtn;
     }
 }
 

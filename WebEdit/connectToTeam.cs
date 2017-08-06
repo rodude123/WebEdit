@@ -21,6 +21,7 @@ namespace htmlEditor
         string database;
         string uid;
         string dbPassword;
+        string teamNameSender;
 
         public connectToTeam()
         {
@@ -41,6 +42,13 @@ namespace htmlEditor
             set
             {
                 pass = value.ToString();
+            }
+        }
+        public string teamName
+        {
+            get
+            {
+                return teamNameSender;
             }
         }
 
@@ -65,7 +73,7 @@ namespace htmlEditor
             {
                 //if anything goes wrong
                 MessageBox.Show(@"Make sure you have a working internet connection.
-If you do then please contact the developer for isseus.", "You cannot sign up right now");
+If you do then please contact the developer for isseus.", "You cannot connect to a team");
                 Console.WriteLine(e.ToString());
                 return connection;
             }
@@ -87,14 +95,14 @@ If you do then please contact the developer for isseus.", "You cannot sign up ri
                     teamCode = rnd.Next(100000, 999999);
                     //check current code in database
                     MySqlConnection conn = makeConnection();
-                    string checkUserResult = @"SELECT teamCode from webEditUsers WHERE username = '" + user + "' LIMIT 1";
+                    string checkUserResult = @"SELECT teamCode FROM webEditUsers WHERE username = '" + user + "' LIMIT 1";
                     MySqlCommand checkCode = new MySqlCommand(checkUserResult, conn);
                     string userResult = checkCode.ExecuteScalar().ToString();
                     //check if it is not equal to 0
                     if (userResult != "0")
                     {
                         rtbCode.Text = userResult;
-                        string getTeamNameQuery = @"SELECT teamName from webEditUsers WHERE username = '" + user + "' ";
+                        string getTeamNameQuery = @"SELECT teamName FROM webEditUsers WHERE username = '" + user + "' ";
                         MySqlCommand getTeamName = new MySqlCommand(getTeamNameQuery, conn);
                         string teamName = getTeamName.ExecuteScalar().ToString();
                         greetMessage.Text = "Hello again, " + user + " and " + teamName;
@@ -102,7 +110,7 @@ If you do then please contact the developer for isseus.", "You cannot sign up ri
                     }
                     else
                     {
-                        string codeQuery = @"SELECT count(teamCode) from webEditUsers WHERE teamCode = '" + teamCode + "' LIMIT 1";
+                        string codeQuery = @"SELECT count(teamCode) FROM webEditUsers WHERE teamCode = '" + teamCode + "' LIMIT 1";
                         MySqlCommand code = new MySqlCommand(codeQuery, conn);
                         string codeResult = code.ExecuteScalar().ToString();
                         if (codeResult == "0")
@@ -114,15 +122,28 @@ If you do then please contact the developer for isseus.", "You cannot sign up ri
                             inTable = true;
                             while (true)
                             {
-                                InputBoxResult teamName = InputBox.Show("Please type a team name to use for your team. (This can be change later)", "Team Name", "", null);
-                                if (teamName.OK && !string.IsNullOrWhiteSpace(teamName.Text))
+                                InputBoxResult getTeamName = InputBox.Show("Please type a team name to use for your team. (This can be change later)", "Team Name", "", null);
+                                if (getTeamName.OK && !string.IsNullOrWhiteSpace(getTeamName.Text))
                                 {
-                                    string updateTNameQuery = @"UPDATE webEditUsers SET teamName = '" + teamName.Text + "' WHERE username = '" + user + "'";
-                                    MySqlCommand updateTName = new MySqlCommand(updateTNameQuery, conn);
-                                    updateTName.ExecuteNonQuery();
-                                    greetMessage.Text = "Hello, " + user + " and " + teamName.Text;
-                                    inTable = true;
-                                    break;
+                                    string selectTNameQuery = "SELECT COUNT(teamName) FROM webEditUsers WHERE teamName = '" + getTeamName.Text.Trim() + "'";
+                                    MySqlCommand selectTname = new MySqlCommand(selectTNameQuery, conn);
+                                    string checkTeamName = selectTname.ExecuteScalar().ToString();
+                                    if (checkTeamName != "0")
+                                    {
+                                        MessageBox.Show("This team name is already taken, please chose another one","Team name already taken");
+                                    }
+                                    else
+                                    {
+                                        string updateTNameQuery = @"UPDATE webEditUsers SET getTeamName = '" + getTeamName.Text + "' WHERE username = '" + user + "'";
+                                        MySqlCommand updateTName = new MySqlCommand(updateTNameQuery, conn);
+                                        updateTName.ExecuteNonQuery();
+                                        greetMessage.Text = "Hello, " + user + " and " + getTeamName.Text;
+                                        teamNameSender = getTeamName.Text;
+                                        teamNameSender = teamName;
+                                        inTable = true;
+                                        break;
+                                    }
+                                    
                                 }
                             }
                         }
@@ -168,7 +189,7 @@ If you do then please contact the developer for isseus.", "You cannot sign up ri
                     }
                     else
                     {
-                        //checks if there is a team code asociated with the user
+                        //checks if teamCode is correct i.e. exists in the database
                         string codeCorrectQuery = "SELECT COUNT(teamCode) FROM webEditUsers WHERE teamCode = '" + teamCode + "' LIMIT 1";
                         MySqlCommand codeCorrect = new MySqlCommand(codeCorrectQuery, conn);
                         string ccResult = codeCorrect.ExecuteScalar().ToString();

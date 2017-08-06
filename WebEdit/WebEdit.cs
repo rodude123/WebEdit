@@ -34,8 +34,10 @@ namespace htmlEditor
         int DL = 0;
         int nfCount = 0;
         string lang = "";
-        public string username;
-        public string password;
+        public string username = "";
+        public string password = "";
+        public string teamName = "";
+        public string projPath = "";
         string[] pathSplit;
         string[] toSplit = new string[] { @"\" }; // split string
         Dictionary<int, string> openSaveDict = new Dictionary<int, string>();
@@ -486,6 +488,7 @@ else
             {
                 //sets path and runs openFolder function
                 path = fbd.SelectedPath;
+                projPath = path;
                 openFolder();
             }
         }
@@ -634,7 +637,8 @@ else
                             equalSplit = decFileSplit[i].Split('=');
                             if (equalSplit[0].Trim() == "path")
                             {
-                                path = equalSplit.Last();
+                                path = equalSplit.Last().Trim();
+                                projPath = path;
                                 openFolder();
                             }
                             if (equalSplit[0].Trim() == "tab")
@@ -734,11 +738,18 @@ else
         //team services
         private void loginBtn_Click(object sender, EventArgs e)
         {
+            //What it does
+            //allows user to:
+            //login
+            //sign up
+            //reset password
             teamLogin tl = new teamLogin(); //create new instance of teamLogin 
             tl.ShowDialog(); //show it as a dialog not window
             //set new variables
             username = tl.username;
             password = tl.password;
+            teamName = tl.teamName;
+            Console.WriteLine(teamName);
             if (tl.isLoggedIn == true)
             {
                 if (tl.stayLoggedIn == true)
@@ -758,6 +769,12 @@ else
 
                     //enable new features and disable login
                 }
+                if (!string.IsNullOrWhiteSpace(teamName))
+                {
+                    syncBtn.Enabled = true;
+                    sendMessageBtn.Enabled = true;
+                    teamSettingsBtn.Enabled = true;
+                }
 
                 connectBtn.Enabled = true;
                 logOutBtn.Enabled = true;
@@ -771,6 +788,9 @@ else
         {
             //allows user to logout of the team
             //enables login again and disables features required for login
+            syncBtn.Enabled = false;
+            sendMessageBtn.Enabled = false;
+            teamSettingsBtn.Enabled = false;
             connectBtn.Enabled = false;
             logOutBtn.Enabled = false;
             loginBtn.Enabled = true;
@@ -780,18 +800,27 @@ else
 
         private void connectBtn_Click(object sender, EventArgs e)
         {
-            //todo: generates new pin code for team 
-            //add new member to the team if accepted
-            //or join a team
+            //What it does
+            //generates new pin code for team and user 
+            //asks to join a team with notification support
             connectToTeam ct = new connectToTeam();
             ct.username = username;
             ct.password = password;
             ct.ShowDialog();
+            teamName = ct.teamName;
+            if (!string.IsNullOrWhiteSpace(teamName))
+            {
+                syncBtn.Enabled = true;
+                sendMessageBtn.Enabled = true;
+                teamSettingsBtn.Enabled = true;
+            }
 
         }
 
         private void notifcationsBtn_Click(object sender, EventArgs e)
         {
+            //What it does
+            //shows current notifications for each user
             notifications noti = new notifications();
             noti.username = username;
             noti.password = password;
@@ -800,23 +829,43 @@ else
 
         private void syncBtn_Click(object sender, EventArgs e)
         {
-            
+            syncToTeam sync = new syncToTeam();
+            sync.teamName = teamName;
+            if (string.IsNullOrWhiteSpace(projPath))
+            {
+                MessageBox.Show("To sync with the team open the project folder. \n (Idealy save your workspace as a project file)", "Open a folder");
+            }
+            else
+            {
+                sync.projPath = projPath;
+                sync.Show();
+            }
         }
 
         void openFile(string file)
         {
-            StreamReader sr = new StreamReader(file);
+            //new working condition
+            string text;
+            //makes filestream to open and read the file
+            var fileStream = new FileStream(file, FileMode.Open, FileAccess.Read);
+
+            using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
+            {
+                //uses a stream reader to read to the end of the file
+                text = streamReader.ReadToEnd();
+            }
+            
+            //gets the file e.g. "index.html"
             string fileName = Path.GetFileName(file);
+
+            //adds a new tabpage with the rtb
             TabPage newTP = new TabPage(fileName);
             RichTextBox rtb = new RichTextBox();
             rtb.Dock = DockStyle.Fill;
             newTP.Controls.Add(rtb);
             tabControl1.TabPages.Add(newTP);
-            string text = "";
+            //adds the text to that selected rtb
             rtb.Text = rtb.Text.Insert(rtb.SelectionStart, text);
-            GetRichTextBox().Text = sr.ReadToEnd();
-            openSaveDict[tabControl1.SelectedIndex] = file;
-            sr.Close();
         }
 
         //find and replace
@@ -847,8 +896,10 @@ else
 
         void openFolder()
         {
+            //creates amd indexed list
             IList<TreeNode> nodesWithChildren = new List<TreeNode>();
             pathSplit = path.Split(toSplit, StringSplitOptions.None); // splitted path
+
             foreach (TreeNode node in treeView1.Nodes)
             {
                 node.Text = pathSplit.Last();
@@ -925,6 +976,7 @@ else
         private void rtb_TextChanged(object sender, EventArgs e)
         {
             RichTextBox rtb = (RichTextBox)sender;
+            //checks which language has been selected and highlights based on that
             if (lang == "HTML")
             {
                 HTML_syntax(sender, e);
@@ -1354,6 +1406,7 @@ else
             string parentNode = treeView1.SelectedNode.Parent.Text;
             string nPath = "";
             string[] pathSplit = path.Split(toSplit, StringSplitOptions.None); // splitted path
+            //checks if the selected path is in the root folder or in a sub folder
             if (parentNode != pathSplit.Last())
             {
                 nPath = path + @"\" + parentNode + @"\" + treeView1.SelectedNode.Text;
@@ -1363,6 +1416,7 @@ else
                 nPath = path + @"\" + treeView1.SelectedNode.Text;
             }
 
+            //works the same as in open file but with differnet variables
             var fileStream = new FileStream(nPath, FileMode.Open, FileAccess.Read);
             using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
             {
@@ -1434,6 +1488,11 @@ else
         {
             //resizes folder viewer based on height of form
             treeView1.Height = Height;
+        }
+
+        private void teamSettingsBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

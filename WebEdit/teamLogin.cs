@@ -24,6 +24,7 @@ namespace htmlEditor
         string dbPassword;
         string userSender;
         string passSender;
+        string teamNameSender;
         bool conResult;
         bool loggedIn;
 
@@ -64,6 +65,15 @@ namespace htmlEditor
                 return passSender;
             }
         }
+        //getting teamName
+        public string teamName
+        {
+            get
+            {
+                return teamNameSender;
+            }
+        }
+
         private void signUpBtn_Click(object sender, EventArgs e)
         {
             // grab the user input and store in respective variables
@@ -368,7 +378,11 @@ If you do then please contact the developer for isseus.", "You cannot sign up ri
                 {
                     // if username and password are both correct
                     MessageBox.Show("Login Successful");
+                    string getTeamNameQuery = "SELECT teamName from webEditUsers WHERE username = '" + username + "'";
+                    MySqlCommand getTeamName = new MySqlCommand(getTeamNameQuery, passwordConn);
+                    teamNameSender = getTeamName.ExecuteScalar().ToString();
                     loggedIn = true;
+                    teamNameSender = teamName;
                     userSender = username;
                     passSender = password;
                     Close();

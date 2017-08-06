@@ -70,7 +70,7 @@ namespace htmlEditor
             catch (MySqlException e)
             {
                 MessageBox.Show(@"Make sure you have a working internet connection.
-If you do then please contact the developer for isseus.", "You cannot sign up right now");
+If you do then please contact the developer for isseus.", "You cannot see your notifications right now");
                 Console.WriteLine(e.ToString());
                 return connection;
             }
@@ -90,13 +90,13 @@ If you do then please contact the developer for isseus.", "You cannot sign up ri
                 //get notification type
                 string getNotiTypesQuery = @"SELECT notificationType FROM webEditUsers WHERE username = '" + user + "'";
                 MySqlCommand getNotiTypes = new MySqlCommand(getNotiTypesQuery, conn);
-                //string notificationTypes = getNotiTypes.ExecuteScalar().ToString();
-                string notificationTypes = "teamRejected"; //just for testing
+                string notificationTypes = getNotiTypes.ExecuteScalar().ToString();
+                //string notificationTypes = "teamRejected"; //just for testing
                 //get the notification itself
                 string getNotiQuery = @"SELECT notification FROM webEditUsers WHERE username = '" + user + "'";
                 MySqlCommand getNoti = new MySqlCommand(getNotiQuery, conn);
-                //string notifications = getNoti.ExecuteScalar().ToString();
-                string notifications = "rodude123"; //just for testing
+                string notifications = getNoti.ExecuteScalar().ToString();
+                //string notifications = "rodude123"; //just for testing
                 //getting each value by splitting by the deliminater [,]
                 notificationType = notificationTypes.Split(new string[] { ", " }, StringSplitOptions.None);
                 notification = notifications.Split(new string[] { ", " }, StringSplitOptions.None);
@@ -232,13 +232,13 @@ If you do then please contact the developer for isseus.", "You cannot sign up ri
             }
         }
 
+        //removes the panel from the controls and from the list so that it cannot accedently try to be removed again later which may give an error
+        //also helps with memory issues
         private void remove_Click(object sender, EventArgs e)
         {
-            //removes the panel from the controls and from the list so that it cannot accedently try to be removed again later which may give an error
-            //also helps with memory issues
-            //adds one to the remove count showing how many have been remnoved
+            //gets control
             Control control = (Control)sender;
-            Console.WriteLine(control.Parent.Name);
+            Console.WriteLine(control.Parent.Name); //for testing
             try
             { 
                 //to remove control by Name
@@ -252,11 +252,18 @@ If you do then please contact the developer for isseus.", "You cannot sign up ri
                 string notiTypeQuery = "SELECT notificationType WHERE username = '" + user + "'";
                 MySqlCommand notiType = new MySqlCommand(notiTypeQuery, conn);
                 string notiTypes = notiType.ExecuteScalar().ToString();
+                //puts the notification types in a list 
                 List<string> notificationTypes = new List<string>(notiTypes.Split(new string[] { ", " }, StringSplitOptions.None));
+                //splits the control name in to two separate items i.e. string and int (for now a )
                 string[] ctrlName = control.Name.Split(new char[] { ',' });
+                //converts the string number from the control to number.
+                //the number at the end of the control name corosponds to the number in the notificationType and notification list
                 int num = Convert.ToInt32(ctrlName[1]);
+                //removes the notificaionType from the list
                 notificationTypes.RemoveAt(num);
+                //creates string to hold removed notificationType
                 string notificationType = "";
+                //loops through the list of notificationTypes and adds them to the string
                 for (int i = 0; i < notificationTypes.Count; i++)
                 {
                     if (i != notificationTypes.Count-1)
@@ -269,6 +276,7 @@ If you do then please contact the developer for isseus.", "You cannot sign up ri
                     }
                 }
                 //get particular notification
+                //repeats as above i.e. same as above but with different variables 
                 string notiQuery = "SELECT notification WHERE username = '" + user + "'";
                 MySqlCommand notiCom = new MySqlCommand(notiQuery, conn);
                 string noti = notiCom.ExecuteScalar().ToString();
@@ -286,7 +294,13 @@ If you do then please contact the developer for isseus.", "You cannot sign up ri
                         notification += notifications[i];
                     }
                 }
-                string updateNotiQuery = "UPDATE webEditUsers SET notificationTypes = '" + notificationType + "', notification = '" + notification + "'";
+
+                //get teamCode
+                string getTeamCodeQuery = "SELECT teamCode FROM webEditUsers WHERE username = '" + user + "'";
+                MySqlCommand getTeamCode = new MySqlCommand(getTeamCodeQuery, conn);
+                string teamCode = getTeamCode.ExecuteScalar().ToString();
+                //update team notifications
+                string updateNotiQuery = "UPDATE webEditUsers SET notificationTypes = '" + notificationType + "', notification = '" + notification + "' WHERE teamCode = '" + teamCode + "'";
                 MySqlCommand updateNoti = new MySqlCommand(updateNotiQuery, conn);
                 updateNoti.ExecuteNonQuery();
 
