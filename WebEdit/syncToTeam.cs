@@ -7,15 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Net;
+using System.IO;
 using WinSCP;
 
 namespace htmlEditor
 {
     public partial class syncToTeam : Form
     {
+        //predefined variables 
         string teamname = "";
         string projectPath = "";
+        public DirectoryInfo[] directories;
+
         public syncToTeam()
         {
             InitializeComponent();
@@ -40,6 +43,7 @@ namespace htmlEditor
                 teamname = value.ToString(); 
             }
         }
+
         public string projPath
         {
            set
@@ -85,23 +89,29 @@ namespace htmlEditor
                     if (session.FileExists(teamname))
                     {
                         Console.WriteLine("Folder found"); //for testing
-                        if (session.FileExists(teamname + @"\" + remotePath1))
+                        if (session.FileExists(teamname + @"/" + remotePath1 + @"/"))
                         {
-                            //do something
+                            Console.WriteLine("Folder found"); //for testing
                         }
                         else
                         {
-                            session.CreateDirectory(remotePath1);
+                            session.CreateDirectory(teamname + @"/" + remotePath1);
                         }
                     }
                     else
                     {
                         //Console.WriteLine("Folder not found"); //for testing
                         session.CreateDirectory(teamname);
-                        session.CreateDirectory(teamname + @"\" + remotePath1);
-                        
+                        session.CreateDirectory(teamname + @"/" + remotePath1);
                     }
                     //TransferOperationResult TR = session.PutFiles(@"localFiles", "", false, TO);
+                    DirectoryInfo directoryInfo = new DirectoryInfo(projectPath);
+                    directories = directoryInfo.GetDirectories();
+                    foreach (FileInfo file in directoryInfo.GetFiles())
+                    {
+                        string fileName = file.Name;
+                        Console.WriteLine(fileName);
+                    }
 
                 }
             }
