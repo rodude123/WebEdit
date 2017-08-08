@@ -40,7 +40,6 @@ namespace htmlEditor
         {
             set
             {
-                teamname = value.ToString(); 
             }
         }
 
@@ -105,14 +104,32 @@ namespace htmlEditor
                         session.CreateDirectory(teamname + @"/" + remotePath1);
                     }
                     //TransferOperationResult TR = session.PutFiles(@"localFiles", "", false, TO);
-                    DirectoryInfo directoryInfo = new DirectoryInfo(projectPath);
+
+                    /*DirectoryInfo directoryInfo = new DirectoryInfo(projectPath);
                     directories = directoryInfo.GetDirectories();
                     foreach (FileInfo file in directoryInfo.GetFiles())
                     {
                         string fileName = file.Name;
                         Console.WriteLine(fileName);
                     }
+                    for (int i = 0; i < directories.Length; i++)
+                    {
+                        DirectoryInfo subDirectoryInfo = new DirectoryInfo(projectPath + @"\" + directories[i]);
+                        foreach (FileInfo file in subDirectoryInfo.GetFiles())
+                        {
+                            string fileName = file.Name;
+                            Console.WriteLine(fileName);
+                        }
+                    }*/
 
+                    string[] allFiles = Directory.GetFiles(projectPath, "*.*", SearchOption.AllDirectories);
+
+                    for (int i = 0; i < allFiles.Length; i++)
+                    {
+                        Console.WriteLine(allFiles[i]);
+                        string result = allFiles[i].Replace(projectPath, "");
+                        Console.WriteLine(result);
+                    }
                 }
             }
             catch(Exception ex)

@@ -451,16 +451,7 @@ else
             RichTextBox rtb = new RichTextBox();
             rtb.Dock = DockStyle.Fill;
             newTP.Controls.Add(rtb);
-            if (nfCount > 0)
-            {
-                //oponed project with new files inside it
-                tabControl1.TabPages.Insert(0, newTP);
-            }
-            else
-            {
-                //just open a new file as normal
-                tabControl1.TabPages.Add(newTP);
-            }
+            tabControl1.TabPages.Insert(tabControl1.SelectedIndex + 1, newTP);
             //inserts blank just to make sure there is a new file opened and no errors
             string text = "";
             rtb.Text = rtb.Text.Insert(rtb.SelectionStart, text);
@@ -560,8 +551,9 @@ else
 
         private void saveProj_Click(object sender, EventArgs e)
         {
+
             string[] pathSplit = path.Split(toSplit, StringSplitOptions.None); // splitted path
-            if (pathSplit.Last() == "" || pathSplit.Last() == null)
+            if (path == "" || path == null)
             {
                 //if no folder is open
                 MessageBox.Show("To get started open a folder and then save project", "Open a folder");
@@ -571,29 +563,40 @@ else
                 try
                 {
                     //tries to write to the new temp file
-                    using (StreamWriter file = new StreamWriter(path + @"\" + pathSplit.Last() + ".weproji", false)) //making new file with folder name as file name
-                    {
-                        string ePath = "path = " + path;
-                        file.WriteLine(ePath);
-
+                    using (StreamWriter file = new StreamWriter(path + @"\" + pathSplit[pathSplit.Length-2] + ".weproji", false)) //making new file with folder name as file name
+                    { 
                         //gets the tab count i.e. the number of tabs open
                         if (tabControl1.TabCount != 0)
                         {
                             // iterates till the last tab
                             for (int i = 0; i < tabControl1.TabCount; i++)
                             {
-                                //writes the tab name to the file
-                                string eTab = "tab = " + tabControl1.TabPages[i].Text.ToString();
-                                file.Write(eTab + "\n");
+                                if (tabControl1.TabPages[i].Text.ToString().Trim() == "new file")
+                                {
+                                    //writes the tab name to the file
+                                    string eTab = "tab = " + tabControl1.TabPages[i].Text.ToString();
+                                    file.Write(eTab + "\n");
+                                    //writes the content from the new file
+                                    string eNew = "new file = \n {" + tabControl1.TabPages[i].Controls[0].Text + "}";
+                                    Console.WriteLine(eNew);
+                                    //get the content from new file and save temporarly 
+                                    file.WriteLine(eNew);
+                                }
+                                else
+                                {
+                                    //writes the tab name to the file
+                                    string eTab = "tab = " + tabControl1.TabPages[i].Text.ToString();
+                                    file.Write(eTab + "\n");
+                                }
                             }
                         }
                         //shows message that project is saved
                         MessageBox.Show("Project Saved");
                     }
                     //encrypts file with the desired password for security reasons
-                    encDecFile.EncryptFile("jKBuGvXJ", path + @"\" + pathSplit.Last() + ".weproji", path + @"\" + pathSplit.Last() + ".weproj");
+                    encDecFile.EncryptFile("jKBuGvXJ", path + @"\" + pathSplit[pathSplit.Length - 2] + ".weproji", path + @"\" + pathSplit[pathSplit.Length - 2] + ".weproj");
                     //deletes temp file for security reasons
-                    File.Delete(path + @"\" + pathSplit.Last() + ".weproji");
+                    //File.Delete(path + @"\" + pathSplit[pathSplit.Length - 2] + ".weproji");
                 }
                 catch (Exception n)
                 {
@@ -634,33 +637,47 @@ else
                             decFileLine = decFile.ReadLine();
                             decFileSplit[i] = decFileLine;
                             equalSplit = decFileSplit[i].Split('=');
-                            if (equalSplit[0].Trim() == "path")
-                            {
-                                path = equalSplit.Last().Trim();
-                                projPath = path;
-                                openFolder();
-                            }
                             if (equalSplit[0].Trim() == "tab")
                             {
                                 if (equalSplit[1].Trim() != "new file")
                                 {
-                                    openFile(path + @"\" + equalSplit.Last().Trim());
+                                    openFile(tempLoc + equalSplit.Last().Trim());
                                 }
                                 else
                                 {
                                     nfCount++;
                                     newToolStripButton_Click(sender, e);
+                                    
                                 }
                             }
-                            i++;
-                        }
+                            if (equalSplit[0].Trim() == "new file")
+                            {
+                                using (StreamReader decFile2 = new StreamReader(tempLoc + @"temp\" + tempFile.Last() + ".temp"))
+                                {
+                                    Console.WriteLine(nfCount);
+                                    string tags = @"[^}\]*{[^}]*}";
+                                    tagMatches = Regex.Matches(decFile2.ReadToEnd(), tags, RegexOptions.Multiline);
+                                    Match m = tagMatches[nfCount - 1];
+                                    string m1 = m.Value.Replace("{", null);
+                                    string m2 = m1.Replace("}", null);
+                                    Console.WriteLine(m2);
+                                    tabControl1.TabPages[tabControl1.TabCount-1].Controls[0].Text = m2;
 
+                                }
+                            }
+                            Console.WriteLine(decFile.Peek());
+                        }
+                        decFile.Close();
                     }
+                    path = tempLoc;
+                    openFolder();
+                    sr.Close();
 
                     using (StreamWriter tempFileRe = new StreamWriter(tempLoc + @"temp\" + tempFile.Last() + ".temp", false))
                     {
                         tempFileRe.WriteLine("");
                     }
+                    nfCount = 0;
                 }
             }
             catch (Exception ex)
@@ -759,6 +776,15 @@ else
                         sw.WriteLine("username = " + tl.username); //username
                         sw.WriteLine("\n"); // new line (gap)
                         sw.WriteLine("password = " + tl.password); //password
+                        sw.WriteLine("\n"); // new line (gap)
+                        if (tl.teamName == "")
+                        {
+                            sw.WriteLine("teamName = N/A");
+                        }
+                        else
+                        {
+                            sw.WriteLine("teamName = " + tl.teamName); //teamName
+                        }
                     }
 
                     //encrypt file
@@ -780,6 +806,22 @@ else
                 notifcationsBtn.Enabled = true;
                 loginBtn.Enabled = false;
             }
+            else
+            {
+                using (StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + @"\settings.wei", false))
+                {
+                    sw.WriteLine("username = N/A"); //username
+                    sw.WriteLine("\n"); // new line (gap)
+                    sw.WriteLine("password = N/A"); //password
+                    sw.WriteLine("\n"); // new line (gap)
+                    sw.WriteLine("teamName = N/A"); //teamName
+                }
+
+                //encrypt file
+                encDecFile.EncryptFile("jKBuGvXJ", AppDomain.CurrentDomain.BaseDirectory + @"\settings.wei", AppDomain.CurrentDomain.BaseDirectory + @"\settings.we");
+                //deletes temp file
+                File.Delete(AppDomain.CurrentDomain.BaseDirectory + @"\settings.wei");
+            }
 
         }
 
@@ -792,9 +834,23 @@ else
             teamSettingsBtn.Enabled = false;
             connectBtn.Enabled = false;
             logOutBtn.Enabled = false;
+            notifcationsBtn.Enabled = false;
             loginBtn.Enabled = true;
             //deleting settings file which contains the login information to log back in again
             File.Delete(AppDomain.CurrentDomain.BaseDirectory + @"\settings.we");
+            using (StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + @"\settings.wei", false))
+            {
+                sw.WriteLine("username = N/A"); //username
+                sw.WriteLine("\n"); // new line (gap)
+                sw.WriteLine("password = N/A"); //password
+                sw.WriteLine("\n"); // new line (gap)
+                sw.WriteLine("teamName = N/A"); //teamName
+            }
+
+            //encrypt file
+            encDecFile.EncryptFile("jKBuGvXJ", AppDomain.CurrentDomain.BaseDirectory + @"\settings.wei", AppDomain.CurrentDomain.BaseDirectory + @"\settings.we");
+            //deletes temp file
+            File.Delete(AppDomain.CurrentDomain.BaseDirectory + @"\settings.wei");
         }
 
         private void connectBtn_Click(object sender, EventArgs e)
@@ -901,7 +957,7 @@ else
 
             foreach (TreeNode node in treeView1.Nodes)
             {
-                node.Text = pathSplit.Last();
+                node.Text = pathSplit[pathSplit.Length-2];
 
                 if (node.Nodes.Count > 0)
                 {
@@ -1406,7 +1462,7 @@ else
             string nPath = "";
             string[] pathSplit = path.Split(toSplit, StringSplitOptions.None); // splitted path
             //checks if the selected path is in the root folder or in a sub folder
-            if (parentNode != pathSplit.Last())
+            if (parentNode != pathSplit[pathSplit.Length-2])
             {
                 nPath = path + @"\" + parentNode + @"\" + treeView1.SelectedNode.Text;
             }
@@ -1433,7 +1489,65 @@ else
 
         private void WebEdit_Load(object sender, EventArgs e)
         {
+            try
+            {
+                Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\temp");
+                encDecFile.DecryptFile("jKBuGvXJ", AppDomain.CurrentDomain.BaseDirectory + @"\settings.we", AppDomain.CurrentDomain.BaseDirectory + @"\temp\settings.temp");
 
+                var decFileSplit = new Dictionary<int, string>();
+                string[] equalSplit;
+                string decFileLine;
+                int i = 0;
+                using (StreamReader decFile = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + @"\temp\settings.temp"))
+                {
+                    while (decFile.Peek() >= 0)
+                    {
+                        decFileLine = decFile.ReadLine();
+                        decFileSplit[i] = decFileLine;
+                        equalSplit = decFileSplit[i].Split('=');
+                        if (equalSplit[0].Trim() == "username")
+                        {
+                            if (equalSplit[1].Trim() != "N/A")
+                            {
+                                username = equalSplit[1].Trim();
+                                connectBtn.Enabled = true;
+                                logOutBtn.Enabled = true;
+                                notifcationsBtn.Enabled = true;
+                                loginBtn.Enabled = false;
+                            }
+                        }
+                        if (equalSplit[0].Trim() == "password")
+                        {
+                            if (equalSplit[1].Trim() != "N/A")
+                            {
+                                password = equalSplit[1].Trim();
+                            }
+                        }
+                        if (equalSplit[0].Trim() == "teamName")
+                        {
+                            if (equalSplit[1].Trim() != "N/A")
+                            {
+                                teamName = equalSplit[1].Trim();
+                                syncBtn.Enabled = true;
+                                sendMessageBtn.Enabled = true;
+                                teamSettingsBtn.Enabled = true;
+                            }
+                        }
+                        i++;
+                    }
+
+                }
+
+                using (StreamWriter tempFileRe = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + @"\temp\settings.temp", false))
+                {
+                    tempFileRe.WriteLine("");
+                }
+
+            }
+            catch (Exception)
+            {
+                
+            }
         }
 
         //for shortcut keys
@@ -1466,9 +1580,6 @@ else
                     break;
                 case (Keys.Control | Keys.C):
                     copyToolStripButton.PerformClick();
-                    break;
-                case (Keys.Control | Keys.V):
-                    pasteToolStripButton.PerformClick();
                     break;
                 case (Keys.Control | Keys.Z):
                     GetRichTextBox().Undo();
