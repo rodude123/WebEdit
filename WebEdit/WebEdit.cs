@@ -15,6 +15,7 @@ namespace htmlEditor
     {
         string filepath = null;
         public string path = @"";
+        #region Syntax Variables
         public MatchCollection tagMatches;
         public MatchCollection attributeMatches;
         public MatchCollection commentMatches;
@@ -30,6 +31,7 @@ namespace htmlEditor
         public MatchCollection specialMatches;
         public MatchCollection variableMatches;
         public MatchCollection conditionMatches;
+        #endregion
         public DirectoryInfo[] directories;
         int DL = 0;
         int nfCount = 0;
@@ -465,8 +467,26 @@ else
             ofd.Filter = "HTML (*.html)|*.html|CSS (*.css)|*.css|JS (*.js)|*.js|PHP (*.php)|*.php|Plain Text (*.txt)|*.txt";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
+                bool tabOpen = true;
+                for (int i = 0; i < tabControl1.TabCount; i++)
+                {
+                    string tabText = tabControl1.TabPages[i].Text;
+                    if (Path.GetFileName(ofd.FileName) == tabText)
+                    {
+                        tabControl1.SelectTab(i);
+                        tabOpen = true;
+                        break;
+                    }
+                    else
+                    {
+                        tabOpen = false;
+                    }
+                }
                 //shows it and if the result is ok go to openFile with the path
-                openFile(ofd.FileName);
+                if (tabOpen == false)
+                {
+                    openFile(ofd.FileName);
+                }
             }
         }
 
@@ -489,9 +509,9 @@ else
             {
                 //tries to save file if file is already saved. 
                 //creates new stream writer for writing to
-                StreamWriter sw = new StreamWriter(openSaveDict[tabControl1.SelectedIndex]);
+                StreamWriter sw = new StreamWriter(projPath + @"\" + tabControl1.SelectedTab.Text);
                 //gets file name
-                string fileName = Path.GetFileName(openSaveDict[tabControl1.SelectedIndex]);
+                string fileName = Path.GetFileName(projPath + @"\" + tabControl1.SelectedTab.Text);
                 //sets tab name to the file name
                 tabControl1.SelectedTab.Text = fileName;
                 //writes the current text to the file
@@ -540,7 +560,14 @@ else
             try
             {
                 //tries to close selected tab
+                int tabIndex = tabControl1.SelectedIndex;
+                int newIndex = tabIndex - 1;
+                if (newIndex == -1)
+                {
+                    newIndex = 0;
+                }
                 tabControl1.TabPages.Remove(tabControl1.SelectedTab);
+                tabControl1.SelectTab(newIndex);
             }
             catch (Exception)
             {
@@ -596,7 +623,7 @@ else
                     //encrypts file with the desired password for security reasons
                     encDecFile.EncryptFile("jKBuGvXJ", path + @"\" + pathSplit[pathSplit.Length - 2] + ".weproji", path + @"\" + pathSplit[pathSplit.Length - 2] + ".weproj");
                     //deletes temp file for security reasons
-                    //File.Delete(path + @"\" + pathSplit[pathSplit.Length - 2] + ".weproji");
+                    File.Delete(path + @"\" + pathSplit[pathSplit.Length - 2] + ".weproji");
                 }
                 catch (Exception n)
                 {
@@ -670,6 +697,7 @@ else
                         decFile.Close();
                     }
                     path = tempLoc;
+                    projPath = path;
                     openFolder();
                     sr.Close();
 
@@ -678,6 +706,8 @@ else
                         tempFileRe.WriteLine("");
                     }
                     nfCount = 0;
+                    File.Delete(tempLoc + @"temp\" + tempFile.Last() + ".temp");
+                    Directory.Delete(tempLoc + @"temp\");
                 }
             }
             catch (Exception ex)
@@ -879,6 +909,8 @@ else
             notifications noti = new notifications();
             noti.username = username;
             noti.password = password;
+            noti.projectPath = projPath;
+            noti.teamName = teamName;
             noti.Show();
         }
 
@@ -886,6 +918,7 @@ else
         {
             syncToTeam sync = new syncToTeam();
             sync.teamName = teamName;
+            sync.username = username;
             if (string.IsNullOrWhiteSpace(projPath))
             {
                 MessageBox.Show("To sync with the team open the project folder. \n (Idealy save your workspace as a project file)", "Open a folder");
@@ -918,7 +951,7 @@ else
             RichTextBox rtb = new RichTextBox();
             rtb.Dock = DockStyle.Fill;
             newTP.Controls.Add(rtb);
-            tabControl1.TabPages.Add(newTP);
+            tabControl1.TabPages.Insert(tabControl1.SelectedIndex + 1, newTP);
             //adds the text to that selected rtb
             rtb.Text = rtb.Text.Insert(rtb.SelectionStart, text);
         }
@@ -968,7 +1001,7 @@ else
             if (nodesWithChildren.Count != 0)
             {
                 treeView1.Nodes.Clear();
-                treeView1.Nodes.Add(pathSplit.Last());
+                treeView1.Nodes.Add(pathSplit[pathSplit.Length - 2]);
             }
             Console.WriteLine("path is found");
             Console.WriteLine(path.ToString());
@@ -1457,34 +1490,55 @@ else
 
         private void treeView1_NodeDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            string text;
-            string parentNode = treeView1.SelectedNode.Parent.Text;
-            string nPath = "";
-            string[] pathSplit = path.Split(toSplit, StringSplitOptions.None); // splitted path
-            //checks if the selected path is in the root folder or in a sub folder
-            if (parentNode != pathSplit[pathSplit.Length-2])
+            bool tabOpen = true;
+            for (int i = 0; i < tabControl1.TabCount; i++)
             {
-                nPath = path + @"\" + parentNode + @"\" + treeView1.SelectedNode.Text;
-            }
-            else
-            {
-                nPath = path + @"\" + treeView1.SelectedNode.Text;
-            }
-
-            //works the same as in open file but with differnet variables
-            var fileStream = new FileStream(nPath, FileMode.Open, FileAccess.Read);
-            using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
-            {
-                text = streamReader.ReadToEnd();
+                string tabText = tabControl1.TabPages[i].Text;
+                if (treeView1.SelectedNode.Text == tabText)
+                {
+                    tabControl1.SelectTab(i);
+                    tabOpen = true;
+                    break;
+                }
+                else
+                {
+                    tabOpen = false;
+                }
             }
 
-            TabPage newTP = new TabPage(treeView1.SelectedNode.Text);
-            RichTextBox rtb = new RichTextBox();
-            rtb.Dock = DockStyle.Fill;
-            newTP.Controls.Add(rtb);
-            tabControl1.TabPages.Add(newTP);
+            if (tabOpen == false)
+            {
+                string text;
+                string parentNode = treeView1.SelectedNode.Parent.Text;
+                string nPath = "";
+                string[] pathSplit = path.Split(toSplit, StringSplitOptions.None); // splitted path
+                                                                                   //checks if the selected path is in the root folder or in a sub folder
+                if (parentNode != pathSplit[pathSplit.Length - 2])
+                {
+                    nPath = path + @"\" + parentNode + @"\" + treeView1.SelectedNode.Text;
+                }
+                else
+                {
+                    nPath = path + @"\" + treeView1.SelectedNode.Text;
+                }
 
-            rtb.Text = rtb.Text.Insert(rtb.SelectionStart, text);
+                //works the same as in open file but with differnet variables
+                var fileStream = new FileStream(nPath, FileMode.Open, FileAccess.Read);
+                using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
+                {
+                    text = streamReader.ReadToEnd();
+                }
+
+                TabPage newTP = new TabPage(treeView1.SelectedNode.Text);
+                RichTextBox rtb = new RichTextBox();
+                rtb.Dock = DockStyle.Fill;
+                newTP.Controls.Add(rtb);
+                tabControl1.TabPages.Insert(tabControl1.SelectedIndex + 1, newTP);
+
+                rtb.Text = rtb.Text.Insert(rtb.SelectionStart, text);
+
+                openSaveDict[tabControl1.SelectedIndex + 1] = nPath;
+            }
         }
 
         private void WebEdit_Load(object sender, EventArgs e)
@@ -1603,6 +1657,16 @@ else
         private void teamSettingsBtn_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void sendMessageBtn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Send a message, Send a message!!!");
+        }
+
+        private void WebEditForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

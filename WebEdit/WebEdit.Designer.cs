@@ -121,12 +121,12 @@
             // 
             // sendMessageBtn
             // 
-            this.sendMessageBtn.CheckOnClick = true;
             this.sendMessageBtn.Enabled = false;
             this.sendMessageBtn.Name = "sendMessageBtn";
             this.sendMessageBtn.Size = new System.Drawing.Size(163, 22);
             this.sendMessageBtn.Text = "Send a message";
             this.sendMessageBtn.ToolTipText = "Send a message to your team";
+            this.sendMessageBtn.Click += new System.EventHandler(this.sendMessageBtn_Click);
             // 
             // openFileDialog1
             // 
@@ -945,6 +945,7 @@
             this.MinimumSize = new System.Drawing.Size(1163, 45);
             this.Name = "WebEditForm";
             this.Text = "WebEdit";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.WebEditForm_FormClosed);
             this.Load += new System.EventHandler(this.WebEdit_Load);
             this.Resize += new System.EventHandler(this.WebEdit_Resize);
             this.panel1.ResumeLayout(false);

@@ -48,6 +48,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FastColoredTextBox, Version=2.16.21.0, Culture=neutral, PublicKeyToken=fb8aa12b994ef61b, processorArchitecture=MSIL">
+      <HintPath>packages\FCTB.2.16.21.0\lib\FastColoredTextBox.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
     </Reference>
@@ -75,6 +78,12 @@
       <DependentUpon>connectToTeam.cs</DependentUpon>
     </Compile>
     <Compile Include="encDec.cs" />
+    <Compile Include="seeChanges.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="seeChanges.Designer.cs">
+      <DependentUpon>seeChanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="htmlFormBuilder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +121,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="connectToTeam.resx">
       <DependentUpon>connectToTeam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="seeChanges.resx">
+      <DependentUpon>seeChanges.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="htmlFormBuilder.resx">
       <DependentUpon>htmlFormBuilder.cs</DependentUpon>

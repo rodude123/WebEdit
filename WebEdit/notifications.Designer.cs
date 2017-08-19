@@ -28,19 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainPanel = new System.Windows.Forms.Panel();
             this.titlePanel = new System.Windows.Forms.Panel();
             this.notiLable = new System.Windows.Forms.Label();
+            this.mainPanel = new System.Windows.Forms.Panel();
             this.titlePanel.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // mainPanel
-            // 
-            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainPanel.Location = new System.Drawing.Point(0, 0);
-            this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(418, 383);
-            this.mainPanel.TabIndex = 0;
             // 
             // titlePanel
             // 
@@ -61,6 +53,14 @@
             this.notiLable.TabIndex = 0;
             this.notiLable.Text = "Notifications";
             // 
+            // mainPanel
+            // 
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPanel.Location = new System.Drawing.Point(0, 0);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(418, 383);
+            this.mainPanel.TabIndex = 0;
+            // 
             // notifications
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -80,9 +80,8 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.Panel titlePanel;
         private System.Windows.Forms.Label notiLable;
+        private System.Windows.Forms.Panel mainPanel;
     }
 }

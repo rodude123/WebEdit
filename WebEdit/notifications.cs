@@ -17,12 +17,14 @@ namespace htmlEditor
         string user = "";
         string pass = "";
         string user2Add = "";
-        string teamName = "";
+        string teamname = "";
         MySqlConnection connection;
         string server;
         string database;
         string uid;
         string dbPassword;
+        string changedFiles;
+        string projPath;
         int count = 0;
         int yPos;
         string[] notificationType;
@@ -47,6 +49,23 @@ namespace htmlEditor
             set
             {
                 pass = value.ToString();
+            }
+        }
+
+        public string teamName
+        {
+            set
+            {
+                teamname = value.ToString();
+            }
+        }
+
+        //getting project path
+        public string projectPath
+        {
+            set
+            {
+                projPath = value.ToString(); 
             }
         }
 
@@ -140,7 +159,7 @@ If you do then please contact the developer for isseus.", "You cannot see your n
                         b1.Name = "rb" + i;
                         b1.Text = "Reject";
                         b1.FlatStyle = FlatStyle.Flat;
-                        b1.Click += reject_Click;
+                        b1.Click += rejectUser_Click;
                         p1.Controls.Add(b1);
 
                         //Accept button
@@ -150,7 +169,7 @@ If you do then please contact the developer for isseus.", "You cannot see your n
                         b2.Name = "ab" + i;
                         b2.Text = "Accept";
                         b2.FlatStyle = FlatStyle.Flat;
-                        b2.Click += accept_Click;
+                        b2.Click += acceptUser_Click;
                         p1.Controls.Add(b2);
 
                         //Remove Button
@@ -175,7 +194,7 @@ If you do then please contact the developer for isseus.", "You cannot see your n
                     }
                     else if (notificationType[i] == "teamRejected")
                     {
-                        teamName = notification[i];
+                        teamname = notification[i];
                         Panel p1 = new Panel();
                         p1.Location = new Point(49, 66 + yPos);
                         p1.Name = "p," + i;
@@ -199,7 +218,7 @@ If you do then please contact the developer for isseus.", "You cannot see your n
                         l2.Location = new Point(16, 24);
                         l2.Size = new Size(175, 39);
                         l2.Name = "infoText" + i;
-                        l2.Text = "You have not been accepted into the team: " + teamName;
+                        l2.Text = "You have not been accepted into the team: " + teamname;
                         p1.Controls.Add(l2);
 
                         //Remove Button
@@ -207,6 +226,66 @@ If you do then please contact the developer for isseus.", "You cannot see your n
                         b3.Location = new Point(270, -1);
                         b3.Size = new Size(23, 28);
                         b3.Name = "remove" + i;
+                        b3.Text = "X";
+                        b3.FlatStyle = FlatStyle.Flat;
+                        b3.FlatAppearance.BorderSize = 0;
+                        b3.FlatAppearance.MouseDownBackColor = Color.Transparent;
+                        b3.FlatAppearance.MouseOverBackColor = Color.Transparent;
+                        b3.BackColor = Color.Transparent;
+                        b3.BackgroundImageLayout = ImageLayout.Center;
+                        b3.Cursor = Cursors.Hand;
+                        b3.Click += remove_Click;
+                        p1.Controls.Add(b3);
+
+                        count = count + i;
+                        //making sure it fits in after each notification
+                        yPos = yPos + 100;
+                    }
+                    else if (notificationType[i] == "newUpload")
+                    {
+                        changedFiles = notification[i];
+                        //Back panel to group controls
+                        Panel p1 = new Panel();
+                        p1.Location = new Point(49, 66 + yPos);
+                        p1.Name = "p," + i;
+                        p1.Size = new Size(294, 117);
+                        p1.BorderStyle = BorderStyle.FixedSingle;
+                        //adds the panel to a lits to be removed when clicked
+                        panels[count] = p1;
+                        //adds the control to the panel
+                        mainPanel.Controls.Add(p1);
+
+                        //Label for title
+                        Label l1 = new Label();
+                        l1.Location = new Point(100, 8);
+                        l1.Size = new Size(54, 13);
+                        l1.Name = "title" + i;
+                        l1.Text = "Project Updated";
+                        p1.Controls.Add(l1);
+
+                        //Info text
+                        Label l2 = new Label();
+                        l2.Location = new Point(16, 24);
+                        l2.Size = new Size(175, 39);
+                        l2.Name = "infoText" + i;
+                        l2.Text = notification[i] + "Do you want to see the changes.";
+                        p1.Controls.Add(l2);
+
+                        //See changes button
+                        Button b2 = new Button();
+                        b2.Location = new Point(195, 82);
+                        b2.Size = new Size(91, 21);
+                        b2.Name = "ab" + i;
+                        b2.Text = "See Chnages";
+                        b2.FlatStyle = FlatStyle.Flat;
+                        b2.Click += seeChanges_Click;
+                        p1.Controls.Add(b2);
+
+                        //Remove Button
+                        Button b3 = new Button();
+                        b3.Location = new Point(270, -1);
+                        b3.Size = new Size(23, 28);
+                        b3.Name = "newUpload" + i;
                         b3.Text = "X";
                         b3.FlatStyle = FlatStyle.Flat;
                         b3.FlatAppearance.BorderSize = 0;
@@ -249,7 +328,7 @@ If you do then please contact the developer for isseus.", "You cannot see your n
                 }
                 MySqlConnection conn = makeConnection();
                 //get particular notificationType
-                string notiTypeQuery = "SELECT notificationType WHERE username = '" + user + "'";
+                string notiTypeQuery = "SELECT notificationType FROM webEditUsers WHERE username = '" + user + "'";
                 MySqlCommand notiType = new MySqlCommand(notiTypeQuery, conn);
                 string notiTypes = notiType.ExecuteScalar().ToString();
                 //puts the notification types in a list 
@@ -277,7 +356,7 @@ If you do then please contact the developer for isseus.", "You cannot see your n
                 }
                 //get particular notification
                 //repeats as above i.e. same as above but with different variables 
-                string notiQuery = "SELECT notification WHERE username = '" + user + "'";
+                string notiQuery = "SELECT notification FROM webEditUsers WHERE username = '" + user + "'";
                 MySqlCommand notiCom = new MySqlCommand(notiQuery, conn);
                 string noti = notiCom.ExecuteScalar().ToString();
                 List<string> notifications = new List<string>(noti.Split(new string[] { ", " }, StringSplitOptions.None));
@@ -312,7 +391,7 @@ If you do then please contact the developer for isseus.", "You cannot see your n
             }
         }
 
-        private void reject_Click(object sender, EventArgs e)
+        private void rejectUser_Click(object sender, EventArgs e)
         {
             try
             {
@@ -339,7 +418,7 @@ If you do then please contact the developer for isseus.", "You cannot see your n
             }
         }
 
-        private void accept_Click(object sender, EventArgs e)
+        private void acceptUser_Click(object sender, EventArgs e)
         {
             try
             {
@@ -367,6 +446,24 @@ If you do then please contact the developer for isseus.", "You cannot see your n
             {
 
             }
+        }
+
+        private void seeChanges_Click(object sender, EventArgs e)
+        {
+            seeChanges SC = new seeChanges();
+            SC.changedFiles = changedFiles;
+            if (string.IsNullOrWhiteSpace(projPath))
+            {
+                MessageBox.Show("Make sure that the project folder is open before seeing the changes", "Open a project Folder");
+            }
+            else
+            {
+                SC.teamName = teamname;
+                SC.projPath = projPath;
+                SC.username = user;
+                SC.Show();
+            }
+            remove_Click(sender, e);
         }
     }
 }
