@@ -124,7 +124,7 @@
             this.sendMessageBtn.Enabled = false;
             this.sendMessageBtn.Name = "sendMessageBtn";
             this.sendMessageBtn.Size = new System.Drawing.Size(163, 22);
-            this.sendMessageBtn.Text = "Send a message";
+            this.sendMessageBtn.Text = "Messages";
             this.sendMessageBtn.ToolTipText = "Send a message to your team";
             this.sendMessageBtn.Click += new System.EventHandler(this.sendMessageBtn_Click);
             // 

@@ -340,10 +340,13 @@ If you do then please contact the developer for isseus.", "You cannot see your n
             string updateNotiQuery = "UPDATE webEditUsers SET notificationTypes = '" + notificationType + "', notification = '" + notification + "' WHERE teamCode = '" + teamCode + "'";
             MySqlCommand updateNoti = new MySqlCommand(updateNotiQuery, conn);
             updateNoti.ExecuteNonQuery();
+
+
         }
 
         private void rejectChanges_Click(object sender, EventArgs e)
         {
+            //copies old files
             using (Session session = new Session())
             {
                 TransferOptions TO = new TransferOptions();
@@ -356,6 +359,7 @@ If you do then please contact the developer for isseus.", "You cannot see your n
             fCount++;
             if (fCount >= fileSplit.Count)
             {
+                //when all files have been seen 
                 MessageBox.Show("All Changes have been accepted or rejected", "Changes Accepted or rejected");
                 removeNoti();
                 this.Close();

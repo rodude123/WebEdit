@@ -74,6 +74,7 @@
             this.localRtb.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.localRtb.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.localRtb.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.localRtb.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.localRtb.IsReplaceMode = false;
             this.localRtb.Location = new System.Drawing.Point(0, 0);
             this.localRtb.Name = "localRtb";
@@ -106,6 +107,7 @@
             this.remoteRtb.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.remoteRtb.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.remoteRtb.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.remoteRtb.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.remoteRtb.IsReplaceMode = false;
             this.remoteRtb.Location = new System.Drawing.Point(0, 0);
             this.remoteRtb.Name = "remoteRtb";

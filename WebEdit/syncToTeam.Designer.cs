@@ -33,11 +33,9 @@
             this.sync = new System.Windows.Forms.Button();
             this.revs = new System.Windows.Forms.Button();
             this.dLProj = new System.Windows.Forms.Button();
-            this.deleteFiles = new System.Windows.Forms.Button();
             this.syncTip = new System.Windows.Forms.ToolTip(this.components);
             this.revsTip = new System.Windows.Forms.ToolTip(this.components);
             this.dLTip = new System.Windows.Forms.ToolTip(this.components);
-            this.deleteTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // label1
@@ -69,34 +67,25 @@
             this.revs.TabIndex = 2;
             this.revs.Text = "Revisions";
             this.revs.UseVisualStyleBackColor = true;
+            this.revs.Click += new System.EventHandler(this.revs_Click);
             this.revs.MouseHover += new System.EventHandler(this.revs_MouseHover);
             // 
             // dLProj
             // 
-            this.dLProj.Location = new System.Drawing.Point(62, 130);
+            this.dLProj.Location = new System.Drawing.Point(133, 124);
             this.dLProj.Name = "dLProj";
             this.dLProj.Size = new System.Drawing.Size(102, 27);
             this.dLProj.TabIndex = 3;
             this.dLProj.Text = "Download project";
             this.dLProj.UseVisualStyleBackColor = true;
+            this.dLProj.Click += new System.EventHandler(this.dLProj_Click);
             this.dLProj.MouseHover += new System.EventHandler(this.dLProj_MouseHover);
-            // 
-            // deleteFiles
-            // 
-            this.deleteFiles.Location = new System.Drawing.Point(206, 130);
-            this.deleteFiles.Name = "deleteFiles";
-            this.deleteFiles.Size = new System.Drawing.Size(102, 27);
-            this.deleteFiles.TabIndex = 4;
-            this.deleteFiles.Text = "Delete Files";
-            this.deleteFiles.UseVisualStyleBackColor = true;
-            this.deleteFiles.MouseHover += new System.EventHandler(this.deleteFiles_MouseHover);
             // 
             // syncToTeam
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(407, 347);
-            this.Controls.Add(this.deleteFiles);
             this.Controls.Add(this.dLProj);
             this.Controls.Add(this.revs);
             this.Controls.Add(this.sync);
@@ -117,10 +106,8 @@
         private System.Windows.Forms.Button sync;
         private System.Windows.Forms.Button revs;
         private System.Windows.Forms.Button dLProj;
-        private System.Windows.Forms.Button deleteFiles;
         private System.Windows.Forms.ToolTip syncTip;
         private System.Windows.Forms.ToolTip revsTip;
         private System.Windows.Forms.ToolTip dLTip;
-        private System.Windows.Forms.ToolTip deleteTip;
     }
 }

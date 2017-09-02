@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
+
 namespace htmlEditor
 {
     public partial class WebEditForm : Form
@@ -33,6 +34,7 @@ namespace htmlEditor
         public MatchCollection conditionMatches;
         #endregion
         public DirectoryInfo[] directories;
+        int maxLC = 1;
         int DL = 0;
         int nfCount = 0;
         string lang = "";
@@ -450,8 +452,32 @@ else
             }
             // creates new tabpage with title then adds rtb to it with its properties 
             TabPage newTP = new TabPage(title);
-            RichTextBox rtb = new RichTextBox();
-            rtb.Dock = DockStyle.Fill;
+            //line numbers
+            rtbSync rtb = new rtbSync();
+            rtb.Dock = DockStyle.Left;
+            rtb.BackColor = Color.WhiteSmoke;
+            rtb.BorderStyle = BorderStyle.None;
+            rtb.Font = new Font("Lucida Console", 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            rtb.ForeColor = Color.Teal;
+            rtb.Location = new Point(3, 3);
+            rtb.Name = "rtb2";
+            rtb.Size = new Size(50, 700);
+            rtb.TabIndex = 0;
+            rtb.Text = "1";
+            rtb.ReadOnly = true;
+            //rtb regular
+            rtbSync rtb2 = new rtbSync();
+            rtb2.BorderStyle = BorderStyle.None;
+            rtb2.Dock = DockStyle.Fill;
+            rtb2.Location = new Point(26, 3);
+            rtb2.Name = "rtb";
+            rtb2.Size = new Size(690, 700);
+            rtb2.TabIndex = 1;
+            rtb2.Text = "";
+            rtb2.KeyUp += new KeyEventHandler(this.richTextBox1_KeyUp);
+            rtb.Parent = rtb2.Parent = this;
+            rtb.BindScroll(rtb2);
+            newTP.Controls.Add(rtb2);
             newTP.Controls.Add(rtb);
             tabControl1.TabPages.Insert(tabControl1.SelectedIndex + 1, newTP);
             //inserts blank just to make sure there is a new file opened and no errors
@@ -467,7 +493,7 @@ else
             ofd.Filter = "HTML (*.html)|*.html|CSS (*.css)|*.css|JS (*.js)|*.js|PHP (*.php)|*.php|Plain Text (*.txt)|*.txt";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                bool tabOpen = true;
+                bool tabOpen = false;
                 for (int i = 0; i < tabControl1.TabCount; i++)
                 {
                     string tabText = tabControl1.TabPages[i].Text;
@@ -948,12 +974,35 @@ else
 
             //adds a new tabpage with the rtb
             TabPage newTP = new TabPage(fileName);
-            RichTextBox rtb = new RichTextBox();
-            rtb.Dock = DockStyle.Fill;
+            rtbSync rtb = new rtbSync();
+            rtb.Dock = DockStyle.Left;
+            rtb.BackColor = Color.WhiteSmoke;
+            rtb.BorderStyle = BorderStyle.None;
+            rtb.Font = new Font("Lucida Console", 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            rtb.ForeColor = Color.Teal;
+            rtb.Location = new Point(3, 3);
+            rtb.Name = "rtb2";
+            rtb.Size = new Size(50, 700);
+            rtb.TabIndex = 0;
+            rtb.Text = "1";
+            rtb.ReadOnly = true;
+            //rtb regular
+            rtbSync rtb2 = new rtbSync();
+            rtb2.BorderStyle = BorderStyle.None;
+            rtb2.Dock = DockStyle.Fill;
+            rtb2.Location = new Point(26, 3);
+            rtb2.Name = "rtb";
+            rtb2.Size = new Size(690, 700);
+            rtb2.TabIndex = 1;
+            rtb2.Text = "";
+            rtb2.KeyUp += new KeyEventHandler(this.richTextBox1_KeyUp);
+            rtb.Parent = rtb2.Parent = this;
+            rtb.BindScroll(rtb2);
+            newTP.Controls.Add(rtb2);
             newTP.Controls.Add(rtb);
             tabControl1.TabPages.Insert(tabControl1.SelectedIndex + 1, newTP);
             //adds the text to that selected rtb
-            rtb.Text = rtb.Text.Insert(rtb.SelectionStart, text);
+            rtb2.Text = rtb2.Text.Insert(rtb2.SelectionStart, text);
         }
 
         //find and replace
@@ -1080,6 +1129,18 @@ else
             if (lang == "PHP")
             {
                 PHP_syntax(sender, e);
+            }
+
+            int linecount = rtb.GetLineFromCharIndex(rtb.TextLength) + 1;
+            if (linecount != maxLC)
+            {
+                RichTextBox rtb2 = (RichTextBox)tabControl1.SelectedTab.Controls[1];
+                rtb2.Clear();
+                for (int i = 1; i < linecount + 1; i++)
+                {
+                    rtb2.AppendText(Convert.ToString(i) + "\n");
+                }
+                maxLC = linecount;
             }
         }
 
@@ -1530,12 +1591,35 @@ else
                 }
 
                 TabPage newTP = new TabPage(treeView1.SelectedNode.Text);
-                RichTextBox rtb = new RichTextBox();
-                rtb.Dock = DockStyle.Fill;
+                rtbSync rtb = new rtbSync();
+                rtb.Dock = DockStyle.Left;
+                rtb.BackColor = Color.WhiteSmoke;
+                rtb.BorderStyle = BorderStyle.None;
+                rtb.Font = new Font("Lucida Console", 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+                rtb.ForeColor = Color.Teal;
+                rtb.Location = new Point(3, 3);
+                rtb.Name = "rtb2";
+                rtb.Size = new Size(50, 700);
+                rtb.TabIndex = 0;
+                rtb.Text = "1";
+                rtb.ReadOnly = true;
+                //rtb regular
+                rtbSync rtb2 = new rtbSync();
+                rtb2.BorderStyle = BorderStyle.None;
+                rtb2.Dock = DockStyle.Fill;
+                rtb2.Location = new Point(26, 3);
+                rtb2.Name = "rtb";
+                rtb2.Size = new Size(690, 700);
+                rtb2.TabIndex = 1;
+                rtb2.Text = "";
+                rtb2.KeyUp += new KeyEventHandler(this.richTextBox1_KeyUp);
+                rtb.Parent = rtb2.Parent = this;
+                rtb.BindScroll(rtb2);
+                newTP.Controls.Add(rtb2);
                 newTP.Controls.Add(rtb);
                 tabControl1.TabPages.Insert(tabControl1.SelectedIndex + 1, newTP);
 
-                rtb.Text = rtb.Text.Insert(rtb.SelectionStart, text);
+                rtb2.Text = rtb2.Text.Insert(rtb2.SelectionStart, text);
 
                 openSaveDict[tabControl1.SelectedIndex + 1] = nPath;
             }
@@ -1667,6 +1751,63 @@ else
         private void WebEditForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Dispose();
+        }
+
+        private void richTextBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            RichTextBox rtb = (RichTextBox)sender;
+
+            int linecount = rtb.GetLineFromCharIndex(rtb.TextLength) + 1;
+            if (linecount != maxLC)
+            {
+                RichTextBox rtb2 = (RichTextBox)tabControl1.SelectedTab.Controls[1];
+                rtb2.Clear();
+                for (int i = 1; i < linecount + 1; i++)
+                {
+                    rtb2.AppendText(Convert.ToString(i) + "\n");
+                }
+                maxLC = linecount;
+            }
+        }
+    }
+
+    public class rtbSync : RichTextBox
+    {
+
+        private const int WM_VSCROLL = 0x115;
+        private const int WM_HSCROLL = 0x114;
+        private const int WM_MOUSEWHEEL = 0x20a;
+
+        private List<rtbSync> peers = new List<rtbSync>();
+
+        /// <summary>
+        /// Establish a 2-way binding between RTBs for scrolling.
+        /// </summary>
+        /// <param name="arg">Another RTB</param>
+        public void BindScroll(rtbSync arg)
+        {
+            if (peers.Contains(arg) || arg == this) { return; }
+            peers.Add(arg);
+            arg.BindScroll(this);
+        }
+
+        private void DirectWndProc(ref Message m)
+        {
+            base.WndProc(ref m);
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == WM_VSCROLL || m.Msg == WM_HSCROLL || m.Msg == WM_MOUSEWHEEL)
+            {
+                foreach (rtbSync peer in this.peers)
+                {
+                    Message peerMessage = Message.Create(peer.Handle, m.Msg, m.WParam, m.LParam);
+                    peer.DirectWndProc(ref peerMessage);
+                }
+            }
+
+            base.WndProc(ref m);
         }
     }
 }

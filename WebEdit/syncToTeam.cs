@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
 using WinSCP;
 using MySql.Data.MySqlClient;
 
@@ -24,6 +25,7 @@ namespace htmlEditor
         string uid;
         string dbPassword;
         string user;
+        string url;
         public DirectoryInfo[] directories;
 
         public syncToTeam()
@@ -111,11 +113,6 @@ If you do then please contact the developer for isseus.", "You cannot connect to
         {
             dLTip.Show("Download the latest revision of the project", dLProj);
         }
-
-        private void deleteFiles_MouseHover(object sender, EventArgs e)
-        {
-            deleteTip.Show("Delete unwanted files from the project but changes have to be aproved by another team member", deleteFiles);
-        }
         #endregion
 
         public static void deleteDirectory(string target_dir)
@@ -169,6 +166,18 @@ If you do then please contact the developer for isseus.", "You cannot connect to
                         string remotePath3 = teamname + "3";
                         string remotePath4 = teamname + "4";
                         string remotePath5 = teamname + "5";
+                        //adding lables so user can see their website online
+                        Label l1 = new Label();
+                        l1.Text = "You can see the website here: ";
+                        l1.Size = new Size(186, 13);
+                        l1.Location = new Point(60, 190);
+                        this.Controls.Add(l1);
+                        LinkLabel ll1 = new LinkLabel();
+                        url = "http://webedit.heliohost.org/webEditTeams/" + teamname + "/" + remotePath1;
+                        ll1.Text = "Click Here";
+                        ll1.Location = new Point(240,190);
+                        ll1.LinkClicked += Ll1_LinkClicked;
+                        this.Controls.Add(ll1);
                         bool synced = false;
                         string[] uploadedFiles = new string[] { };
                         string[] downloadedFiles = new string[] { };
@@ -342,9 +351,42 @@ If you do then please contact the developer for issues.","Cannot sync with the t
             }
         }
 
+        private void Ll1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(url);
+        }
+
         private void syncToTeam_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void dLProj_Click(object sender, EventArgs e)
+        {
+            using (Session session = new Session())
+            {
+                session.Open(SO());
+                //set transfer options i.e. whether imgaes/text files/both 
+                TransferOptions TO = new TransferOptions();
+                TO.TransferMode = TransferMode.Automatic;
+                //downloads files
+                TransferOperationResult dl1 =  session.GetFiles(teamname + "/" +  teamname + "1", projectPath);
+                if (dl1.IsSuccess)
+                {
+                    MessageBox.Show("Porject downloaded");
+                }
+                else
+                {
+                    MessageBox.Show("Try agauin with a different location or try again later. If nothing works please contact the developer for information");
+                }
+            }
+        }
+
+        private void revs_Click(object sender, EventArgs e)
+        {
+            revisions rev = new revisions();
+            rev.teamName = teamname;
+            rev.Show();
         }
     }
 }

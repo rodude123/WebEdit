@@ -71,6 +71,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="rtbSync.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="connectToTeam.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +81,12 @@
       <DependentUpon>connectToTeam.cs</DependentUpon>
     </Compile>
     <Compile Include="encDec.cs" />
+    <Compile Include="revisions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="revisions.Designer.cs">
+      <DependentUpon>revisions.cs</DependentUpon>
+    </Compile>
     <Compile Include="seeChanges.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +130,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="connectToTeam.resx">
       <DependentUpon>connectToTeam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="revisions.resx">
+      <DependentUpon>revisions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="seeChanges.resx">
       <DependentUpon>seeChanges.cs</DependentUpon>
