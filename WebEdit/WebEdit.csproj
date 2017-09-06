@@ -71,8 +71,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="rtbSync.cs">
-      <SubType>Component</SubType>
+    <Compile Include="messages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="messages.Designer.cs">
+      <DependentUpon>messages.cs</DependentUpon>
     </Compile>
     <Compile Include="connectToTeam.cs">
       <SubType>Form</SubType>
@@ -130,6 +133,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="connectToTeam.resx">
       <DependentUpon>connectToTeam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="messages.resx">
+      <DependentUpon>messages.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="revisions.resx">
       <DependentUpon>revisions.cs</DependentUpon>

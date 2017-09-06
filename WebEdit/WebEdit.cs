@@ -1745,7 +1745,9 @@ else
 
         private void sendMessageBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Send a message, Send a message!!!");
+            messages m = new messages();
+            m.username = username;
+            m.Show();
         }
 
         private void WebEditForm_FormClosed(object sender, FormClosedEventArgs e)

@@ -74,7 +74,6 @@
             this.notifcationsBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.teamSettingsBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.logOutBtn = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.findText = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -110,6 +109,7 @@
             this.extScriptHelp = new System.Windows.Forms.ToolTip(this.components);
             this.flowLayoutPanel2 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripLabel();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -576,12 +576,6 @@
             this.logOutBtn.ToolTipText = "Log out";
             this.logOutBtn.Click += new System.EventHandler(this.logOutBtn_Click);
             // 
-            // toolStripTextBox1
-            // 
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(97, 24);
-            this.toolStripTextBox1.Text = "Find and Replace";
-            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
@@ -933,6 +927,12 @@
             this.tabControl1.Size = new System.Drawing.Size(727, 732);
             this.tabControl1.TabIndex = 0;
             // 
+            // toolStripTextBox1
+            // 
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
+            this.toolStripTextBox1.Size = new System.Drawing.Size(97, 24);
+            this.toolStripTextBox1.Text = "Find and Replace";
+            // 
             // WebEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -987,7 +987,6 @@
         private System.Windows.Forms.ToolStripButton copyToolStripButton;
         private System.Windows.Forms.ToolStripButton pasteToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripLabel toolStripTextBox1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton findReplaceBtn;
         private System.Windows.Forms.ToolStripTextBox findText;
@@ -1045,6 +1044,7 @@
         private System.Windows.Forms.ToolStripMenuItem sendMessageBtn;
         private System.Windows.Forms.ToolStripMenuItem notifcationsBtn;
         private System.Windows.Forms.ToolStripMenuItem teamSettingsBtn;
+        private System.Windows.Forms.ToolStripLabel toolStripTextBox1;
     }
 }
 
