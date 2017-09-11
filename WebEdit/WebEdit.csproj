@@ -123,6 +123,12 @@
     <Compile Include="teamLogin.Designer.cs">
       <DependentUpon>teamLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="teamSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="teamSettings.Designer.cs">
+      <DependentUpon>teamSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="WebEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="teamLogin.resx">
       <DependentUpon>teamLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="teamSettings.resx">
+      <DependentUpon>teamSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WebEdit.resx">
       <DependentUpon>WebEdit.cs</DependentUpon>

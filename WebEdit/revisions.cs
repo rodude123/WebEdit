@@ -19,6 +19,7 @@ namespace htmlEditor
             InitializeComponent();
         }
 
+        //gets teamName
         public string teamName
         {
             set
@@ -58,9 +59,11 @@ namespace htmlEditor
                 //set transfer options i.e. whether imgaes/text files/both 
                 TransferOptions TO = new TransferOptions();
                 TO.TransferMode = TransferMode.Automatic;
-                TransferOperationResult dl1 = session.GetFiles(teamname + "/" + teamname + revNo, path);
-                if (dl1.IsSuccess)
+                //downloads project 
+                TransferOperationResult dl = session.GetFiles(teamname + "/" + teamname + revNo, path);
+                if (dl.IsSuccess)
                 {
+                    //project downloaded 
                     MessageBox.Show("Porject downloaded");
                 }
                 else
@@ -72,21 +75,25 @@ namespace htmlEditor
 
         private void rev1_Click(object sender, EventArgs e)
         {
+            //downloads revision 1 project
             saveRev("1");
         }
 
         private void rev2_Click(object sender, EventArgs e)
         {
-            saveRev("1");
+            //downloads revision 2 project
+            saveRev("2");
         }
 
         private void rev3_Click(object sender, EventArgs e)
         {
+            //downloads revision 3 project
             saveRev("3");
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //downloads last revision project
             saveRev("4");
         }
     }

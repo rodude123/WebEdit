@@ -1740,13 +1740,24 @@ else
 
         private void teamSettingsBtn_Click(object sender, EventArgs e)
         {
+            teamSettings ts = new teamSettings();
+            ts.Show();
 
+            /*if(ts.leftTeam == true)
+            {
+                syncBtn.Enabled = false;
+                sendMessageBtn.Enabled = false;
+                teamSettingsBtn.Enabled = false;
+                connectBtn.Enabled = false;
+                logOutBtn.Enabled = false;
+            }*/
         }
 
         private void sendMessageBtn_Click(object sender, EventArgs e)
         {
             messages m = new messages();
             m.username = username;
+            m.teamName = teamName;
             m.Show();
         }
 
