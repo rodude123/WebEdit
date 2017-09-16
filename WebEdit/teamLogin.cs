@@ -310,7 +310,7 @@ namespace htmlEditor
             catch (MySqlException e)
             {
                 MessageBox.Show(@"Make sure you have a working internet connection.
-If you do then please contact the developer for isseus.", "You cannot sign up right now");
+If you do then please contact the developer for isseus.", "You cannot sign up or login right now");
                 Console.WriteLine(e.ToString());
                 return connection;
             }

@@ -105,7 +105,7 @@ namespace htmlEditor
             catch (MySqlException e)
             {
                 MessageBox.Show(@"Make sure you have a working internet connection.
-If you do then please contact the developer for isseus.", "You cannot see your notifications right now");
+If you do then please contact the developer for isseus.", "You cannot see the changes right now");
                 Console.WriteLine(e.ToString());
                 return connection;
             }

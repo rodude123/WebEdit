@@ -853,7 +853,6 @@ else
                 if (!string.IsNullOrWhiteSpace(teamName))
                 {
                     syncBtn.Enabled = true;
-                    sendMessageBtn.Enabled = true;
                     teamSettingsBtn.Enabled = true;
                 }
 
@@ -886,7 +885,6 @@ else
             //allows user to logout of the team
             //enables login again and disables features required for login
             syncBtn.Enabled = false;
-            sendMessageBtn.Enabled = false;
             teamSettingsBtn.Enabled = false;
             connectBtn.Enabled = false;
             logOutBtn.Enabled = false;
@@ -922,7 +920,6 @@ else
             if (!string.IsNullOrWhiteSpace(teamName))
             {
                 syncBtn.Enabled = true;
-                sendMessageBtn.Enabled = true;
                 teamSettingsBtn.Enabled = true;
             }
 
@@ -1667,7 +1664,6 @@ else
                             {
                                 teamName = equalSplit[1].Trim();
                                 syncBtn.Enabled = true;
-                                sendMessageBtn.Enabled = true;
                                 teamSettingsBtn.Enabled = true;
                             }
                         }
@@ -1742,23 +1738,13 @@ else
         {
             teamSettings ts = new teamSettings();
             ts.Show();
-
-            /*if(ts.leftTeam == true)
+            if(ts.leftTeam == true)
             {
                 syncBtn.Enabled = false;
-                sendMessageBtn.Enabled = false;
                 teamSettingsBtn.Enabled = false;
                 connectBtn.Enabled = false;
                 logOutBtn.Enabled = false;
-            }*/
-        }
-
-        private void sendMessageBtn_Click(object sender, EventArgs e)
-        {
-            messages m = new messages();
-            m.username = username;
-            m.teamName = teamName;
-            m.Show();
+            }
         }
 
         private void WebEditForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -1781,6 +1767,11 @@ else
                 }
                 maxLC = linecount;
             }
+        }
+
+        private void toolStripDropDownButton2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

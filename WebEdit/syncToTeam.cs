@@ -67,7 +67,7 @@ namespace htmlEditor
             {
                 //if anything goes wrong
                 MessageBox.Show(@"Make sure you have a working internet connection.
-If you do then please contact the developer for isseus.", "You cannot connect to a team");
+If you do then please contact the developer for isseus.", "You cannot sync to a team");
                 Console.WriteLine(e.ToString());
                 return connection;
             }
