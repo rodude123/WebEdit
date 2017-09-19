@@ -60,7 +60,6 @@ namespace htmlEditor
             }
         }
 
-
         //creats a new rich text box element to per new tab to be used in this code like an rtb element placed in the form
         private RichTextBox GetRichTextBox()
         {
@@ -1737,6 +1736,8 @@ else
         private void teamSettingsBtn_Click(object sender, EventArgs e)
         {
             teamSettings ts = new teamSettings();
+            ts.username = username;
+            ts.teamName = teamName;
             ts.Show();
             if(ts.leftTeam == true)
             {

@@ -37,7 +37,7 @@
             // 
             this.leaveTeam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leaveTeam.Location = new System.Drawing.Point(109, 138);
-            this.leaveTeam.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.leaveTeam.Margin = new System.Windows.Forms.Padding(4);
             this.leaveTeam.Name = "leaveTeam";
             this.leaveTeam.Size = new System.Drawing.Size(159, 34);
             this.leaveTeam.TabIndex = 0;
@@ -61,7 +61,7 @@
             // 
             this.renameTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.renameTN.Location = new System.Drawing.Point(109, 80);
-            this.renameTN.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.renameTN.Margin = new System.Windows.Forms.Padding(4);
             this.renameTN.Name = "renameTN";
             this.renameTN.Size = new System.Drawing.Size(159, 28);
             this.renameTN.TabIndex = 2;
@@ -77,9 +77,11 @@
             this.Controls.Add(this.renameTN);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.leaveTeam);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "teamSettings";
             this.Text = "teamSettings";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.teamSettings_FormClosed);
+            this.Load += new System.EventHandler(this.teamSettings_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

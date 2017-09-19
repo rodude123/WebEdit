@@ -134,7 +134,7 @@ If you do then please contact the developer for isseus.", "You cannot connect to
                                     }
                                     else
                                     {
-                                        string updateTNameQuery = @"UPDATE webEditUsers SET getTeamName = '" + getTeamName.Text + "' WHERE username = '" + user + "'";
+                                        string updateTNameQuery = @"UPDATE webEditUsers SET teamName = '" + getTeamName.Text + "' WHERE username = '" + user + "'";
                                         MySqlCommand updateTName = new MySqlCommand(updateTNameQuery, conn);
                                         updateTName.ExecuteNonQuery();
                                         greetMessage.Text = "Hello, " + user + " and " + getTeamName.Text;

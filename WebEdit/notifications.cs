@@ -29,6 +29,7 @@ namespace htmlEditor
         int yPos;
         string[] notificationType;
         string[] notification;
+        string[] message;
         Dictionary<int, Panel> panels = new Dictionary<int, Panel>();
         public notifications()
         {
@@ -301,6 +302,125 @@ If you do then please contact the developer for isseus.", "You cannot see your n
                         //making sure it fits in after each notification
                         yPos = yPos + 100;
                     }
+                    else if (notificationType[i] == "newTN")
+                    {
+                        string[] message = notification[i].Split(';');
+                        //Back panel to group controls
+                        Panel p1 = new Panel();
+                        p1.Location = new Point(49, 66 + yPos);
+                        p1.Name = "p," + i;
+                        p1.Size = new Size(294, 117);
+                        p1.BorderStyle = BorderStyle.FixedSingle;
+                        //adds the panel to a lits to be removed when clicked
+                        panels[count] = p1;
+                        //adds the control to the panel
+                        mainPanel.Controls.Add(p1);
+
+                        //Label for title
+                        Label l1 = new Label();
+                        l1.Location = new Point(100, 8);
+                        l1.Size = new Size(54, 13);
+                        l1.Name = "title" + i;
+                        l1.Text = "New Team Name";
+                        p1.Controls.Add(l1);
+
+                        //Info text
+                        Label l2 = new Label();
+                        l2.Location = new Point(16, 24);
+                        l2.Size = new Size(175, 39);
+                        l2.Name = "infoText" + i;
+                        l2.Text = message[0] + "Do you Accept or Reject the new Team Name";
+                        p1.Controls.Add(l2);
+
+                        //Reject button
+                        Button b1 = new Button();
+                        b1.Location = new Point(19, 82);
+                        b1.Size = new Size(71, 21);
+                        b1.Name = "rb" + i;
+                        b1.Text = "Reject";
+                        b1.FlatStyle = FlatStyle.Flat;
+                        b1.Click += remove_Click;
+                        p1.Controls.Add(b1);
+
+                        //Accept button
+                        Button b2 = new Button();
+                        b2.Location = new Point(207, 82);
+                        b2.Size = new Size(71, 21);
+                        b2.Name = "ab" + i;
+                        b2.Text = "Accept";
+                        b2.FlatStyle = FlatStyle.Flat;
+                        b2.Click += acceptTeam_Click;
+                        p1.Controls.Add(b2);
+
+                        //Remove Button
+                        Button b3 = new Button();
+                        b3.Location = new Point(270, -1);
+                        b3.Size = new Size(23, 28);
+                        b3.Name = "newTN" + i;
+                        b3.Text = "X";
+                        b3.FlatStyle = FlatStyle.Flat;
+                        b3.FlatAppearance.BorderSize = 0;
+                        b3.FlatAppearance.MouseDownBackColor = Color.Transparent;
+                        b3.FlatAppearance.MouseOverBackColor = Color.Transparent;
+                        b3.BackColor = Color.Transparent;
+                        b3.BackgroundImageLayout = ImageLayout.Center;
+                        b3.Cursor = Cursors.Hand;
+                        b3.Click += remove_Click;
+                        p1.Controls.Add(b3);
+
+                        count = count + i;
+                        //making sure it fits in after each notification
+                        yPos = yPos + 100;
+                    }
+                    else if(notificationType[i] == "leftTeam")
+                    {
+                        string user = notification[i];
+                        Panel p1 = new Panel();
+                        p1.Location = new Point(49, 66 + yPos);
+                        p1.Name = "p," + i;
+                        p1.Size = new Size(294, 75);
+                        p1.BorderStyle = BorderStyle.FixedSingle;
+                        //adds the panel to a lits to be removed when clicked
+                        panels[count] = p1;
+                        //adds the control to the panel
+                        mainPanel.Controls.Add(p1);
+
+                        //Label for title
+                        Label l1 = new Label();
+                        l1.Location = new Point(65, 8);
+                        l1.Size = new Size(175, 13);
+                        l1.Name = "title" + i;
+                        l1.Text = "A member has left the team";
+                        p1.Controls.Add(l1);
+
+                        //Info text
+                        Label l2 = new Label();
+                        l2.Location = new Point(16, 24);
+                        l2.Size = new Size(175, 39);
+                        l2.Name = "infoText" + i;
+                        l2.Text = "Ther team member:" + user + " has left the team";
+                        p1.Controls.Add(l2);
+
+                        //Remove Button
+                        Button b3 = new Button();
+                        b3.Location = new Point(270, -1);
+                        b3.Size = new Size(23, 28);
+                        b3.Name = "remove" + i;
+                        b3.Text = "X";
+                        b3.FlatStyle = FlatStyle.Flat;
+                        b3.FlatAppearance.BorderSize = 0;
+                        b3.FlatAppearance.MouseDownBackColor = Color.Transparent;
+                        b3.FlatAppearance.MouseOverBackColor = Color.Transparent;
+                        b3.BackColor = Color.Transparent;
+                        b3.BackgroundImageLayout = ImageLayout.Center;
+                        b3.Cursor = Cursors.Hand;
+                        b3.Click += remove_Click;
+                        p1.Controls.Add(b3);
+
+                        count = count + i;
+                        //making sure it fits in after each notification
+                        yPos = yPos + 100;
+                    }
                 }
                 //close connection as not needed
                 conn.Close();
@@ -465,5 +585,16 @@ If you do then please contact the developer for isseus.", "You cannot see your n
             }
             remove_Click(sender, e);
         }
+
+        private void acceptTeam_Click(object sender, EventArgs e)
+        {
+            string teamName = message[1];
+            MySqlConnection conn = makeConnection();
+            string updateTNameQuery = @"UPDATE webEditUsers SET teamName = '" + teamName + "' WHERE username = '" + user + "'";
+            MySqlCommand updateTName = new MySqlCommand(updateTNameQuery, conn);
+            updateTName.ExecuteNonQuery();
+            conn.Close();
+        }
+
     }
 }

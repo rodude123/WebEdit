@@ -14,10 +14,10 @@ namespace htmlEditor
 {
     public partial class teamSettings : Form
     {
-        public bool leftteam;
-        public string teamcode;
-        public string teamname;
-        public string user;
+        bool leftteam;
+        string teamcode;
+        string teamname;
+        string user;
         MySqlConnection connection;
         string server;
         string database;
@@ -42,15 +42,7 @@ namespace htmlEditor
             {
                 teamname = value.ToString();
             }
-        }
-
-        public string teamCode
-        {
-            set
-            {
-                teamcode = value.ToString();
-            }
-        }
+        } 
 
         public string username
         {
@@ -102,14 +94,14 @@ If you do then please contact the developer for isseus.", "You cannot leave a te
             if (checkNotiTypeResult != "0")
             {
                 //if not just set as normal
-                string updateNotiQuery = "UPDATE webEditUsers SET notificationType = 'newTN', notification='" + user + "' WHERE teamCode='" + teamcode + "' ";
+                string updateNotiQuery = "UPDATE webEditUsers SET notificationType = 'leftTeam', notification='" + user + "' WHERE teamCode='" + teamcode + "' ";
                 MySqlCommand updateNoti = new MySqlCommand(updateNotiQuery, conn);
                 updateNoti.ExecuteNonQuery();
             }
             else
             {
                 //if so add new after previous with [,] as the definer to make easier later to get the notifications
-                string updateNotiQuery = "UPDATE webEditUsers SET notificationType = concat(notificationType, ', newTN'), notification = concat(notification, ', " + user + "') WHERE teamCode='" + teamcode + "' ";
+                string updateNotiQuery = "UPDATE webEditUsers SET notificationType = concat(notificationType, ', leftTeam'), notification = concat(notification, ', " + user + "') WHERE teamCode='" + teamcode + "'";
                 MySqlCommand updateNoti = new MySqlCommand(updateNotiQuery, conn);
                 updateNoti.ExecuteNonQuery();
             }
@@ -132,20 +124,35 @@ If you do then please contact the developer for isseus.", "You cannot leave a te
                     if (checkNotiTypeResult != "0")
                     {
                         //if not just set as normal
-                        string updateNotiQuery = "UPDATE webEditUsers SET notificationType = 'newTN', notification='The user: " + user + " wants to change the the Team Name to " +  result.Text + "' WHERE teamCode='" + teamcode + "' ";
+                        string updateNotiQuery = "UPDATE webEditUsers SET notificationType = 'newTN', notification='The user: " + user + " wants to change the the Team Name to " +  result.Text + ";" + result.Text + "' WHERE teamCode='" + teamcode + "' ";
                         MySqlCommand updateNoti = new MySqlCommand(updateNotiQuery, conn);
                         updateNoti.ExecuteNonQuery();
                     }
                     else
                     {
                         //if so add new after previous with [,] as the definer to make easier later to get the notifications
-                        string updateNotiQuery = "UPDATE webEditUsers SET notificationType = concat(notificationType, ', newTN'), notification = concat(notification, ', The user: " + user + " wants to change the the Team Name to " + result.Text + "') WHERE teamCode='" + teamcode + "' ";
+                        string updateNotiQuery = "UPDATE webEditUsers SET notificationType = concat(notificationType, ', newTN'), notification = concat(notification, ', The user: " + user + " wants to change the the Team Name to " + result.Text + ";" + result.Text + "') WHERE teamCode='" + teamcode + "' ";
                         MySqlCommand updateNoti = new MySqlCommand(updateNotiQuery, conn);
                         updateNoti.ExecuteNonQuery();
                     }
                     break;
                 }
             }
+        }
+
+        private void teamSettings_Load(object sender, EventArgs e)
+        {
+            //make connection
+            MySqlConnection conn = makeConnection();
+            //gets teamCode
+            string teamCodeQuery = "SELECT teamCode FROM WebEditUsers WHERE teamName ='" + teamname + "' LIMIT 1";
+            MySqlCommand getTeamCode = new MySqlCommand(teamCodeQuery, conn);
+            teamcode = getTeamCode.ExecuteScalar().ToString();
+        }
+
+        private void teamSettings_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
         }
     }
 }
