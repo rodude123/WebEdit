@@ -1035,7 +1035,7 @@ else
 
             foreach (TreeNode node in treeView1.Nodes)
             {
-                node.Text = pathSplit[pathSplit.Length-2];
+                node.Text = pathSplit[pathSplit.Length-1];
 
                 if (node.Nodes.Count > 0)
                 {
